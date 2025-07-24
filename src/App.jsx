@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshThunk } from "./redux/auth/operations";
 import { Routes } from "react-router-dom";
+import Header from "./components/Header/Header";
 
 
 const App = () => {
@@ -15,7 +16,8 @@ const App = () => {
 
   return isRefreshing ? null : (
     <div>
-      <Routes></Routes>
+     <Routes>
+     </Routes>
     </div>
   );
 };

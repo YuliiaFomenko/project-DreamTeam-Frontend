@@ -1,0 +1,9 @@
+.header {
+  background-color: var(--);
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #343a40;
+  font-family: var(--third-family);
+}
