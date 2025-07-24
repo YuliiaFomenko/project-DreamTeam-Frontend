@@ -1,0 +1,24 @@
+.contact {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact li p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact button {
+  color: black;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  height: 100%;
+}

@@ -1,0 +1,15 @@
+.searchBox {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.searchBox input {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+.searchBox input:focus {
+  outline: none;
+  border-color: blue;
+}

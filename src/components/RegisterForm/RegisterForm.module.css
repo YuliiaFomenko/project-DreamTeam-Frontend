@@ -1,0 +1,48 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.fieldset {
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.fieldset legend {
+  font-weight: bold;
+}
+.fieldset label {
+  display: block;
+  margin-top: 0.5rem;
+}
+.fieldset input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.fieldset input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.fieldset button {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.fieldset button:hover {
+  background-color: #0056b3;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.875rem;
+}
