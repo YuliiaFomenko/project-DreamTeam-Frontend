@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshThunk } from "./redux/auth/operations";
-import { Routes } from "react-router-dom";
-import Header from "./components/Header/Header";
+import Routes from "./components/Routes/RouterSet.jsx";
 
 
 const App = () => {
@@ -14,11 +13,6 @@ const App = () => {
     dispatch(refreshThunk());
   }, [dispatch]);
 
-  return isRefreshing ? null : (
-    <div>
-     <Routes>
-     </Routes>
-    </div>
-  );
+  return isRefreshing ? null : <Routes />
 };
 export default App;
