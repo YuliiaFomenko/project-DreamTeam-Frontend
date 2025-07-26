@@ -1,8 +1,15 @@
 import React from 'react'
+import Creators from '../../components/Creators/Creators';
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+     <main>
+      {/* Інші секції, наприклад <Hero />, <PopularArticles /> */}
+      
+      <Creators />
+
+      {/* Інші секції */}
+    </main>
   )
 }
 

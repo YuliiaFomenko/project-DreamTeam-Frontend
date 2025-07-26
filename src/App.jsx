@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshThunk } from "./redux/auth/operations";
-import { Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"; // 🔧 Додали Route
 import Header from "./components/Header/Header";
-
+import HomePage from './pages/HomePage/HomePage';
+// import CreatorsPage from './pages/CreatorsPage/CreatorsPage'; // ← якщо існує
 
 const App = () => {
   const dispatch = useDispatch();
@@ -16,9 +17,13 @@ const App = () => {
 
   return isRefreshing ? null : (
     <div>
-     <Routes>
-     </Routes>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/creators" element={<CreatorsPage />} /> */}
+      </Routes>
     </div>
   );
 };
+
 export default App;
