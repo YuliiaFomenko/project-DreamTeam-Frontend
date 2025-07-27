@@ -46,7 +46,7 @@ const creators = [
 const Creators = () => {
   return (
         <section className={css.section}>
-          <div className={css.header}>
+          <div className={css.titleline}>
             <h2 className={css.title}>Top Creators</h2>
               <Link to="/creators" className={css.link}>
                           Go to all Creators

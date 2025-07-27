@@ -2,72 +2,110 @@
   padding: 24px 16px;
 }
 
-.header {
+.titleline {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 8px;
   margin-bottom: 16px;
-  text-align: center;
 }
 
 .title {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.link {
-  font-size: 14px;
-  color: #6c47ff;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
+  color: var(--black);
+  font-size: 32px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  word-wrap: break-word;
 }
 
 .list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 16px;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   list-style: none;
+  max-width: 100%;
 }
 
 .card {
+  flex: 1 1 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 .img {
-  width: 100px;
-  height: 100px;
+  width: 148px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
+  margin-bottom: 16px;
 }
 
 .name {
-  margin-top: 8px;
+  color: var(--black);
+  font-size: 24px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.link {
+  color: var(--green-darker);
   font-size: 16px;
-  font-weight: 500;
+  font-family: var(--font-family);
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+@media screen and (max-width: 330px) {
+  .card {
+    flex-basis: 100%;
+  }
 }
 
 @media screen and (min-width: 393px) {
-  .list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
   .card {
-    width: 100%;
+    flex: 1 1 calc(50% - 16px);
+    max-width: calc(50% - 16px);
   }
 
-  .header {
+  .img {
+    width: 148px;
+    height: 148px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    flex: 1 1 calc(33.333% - 16px);
+    max-width: calc(33.333% - 16px);
+  }
+
+  .img {
+    width: 160px;
+    height: auto;
+  }
+
+  .titleline {
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    text-align: left;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card {
+    flex: 1 1 calc(16.666% - 16px);
+    max-width: calc(16.666% - 16px);
+  }
+
+  .link {
+    align-self: center;
   }
 }
