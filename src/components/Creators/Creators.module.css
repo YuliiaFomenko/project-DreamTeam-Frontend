@@ -61,6 +61,19 @@
   font-family: var(--font-family);
   font-weight: 700;
   word-wrap: break-word;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  text-decoration: none;
+  color: var(--green);
+  outline: none;
+}
+
+.link:active {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
 }
 
 @media screen and (max-width: 330px) {
@@ -72,7 +85,7 @@
 @media screen and (min-width: 393px) {
   .card {
     flex: 1 1 calc(50% - 16px);
-    max-width: calc(50% - 16px);
+    /* max-width: calc(50% - 16px); */
   }
 
   .img {
@@ -99,7 +112,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1440px) {
   .card {
     flex: 1 1 calc(16.666% - 16px);
     max-width: calc(16.666% - 16px);

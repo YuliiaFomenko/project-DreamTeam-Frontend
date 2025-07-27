@@ -16,7 +16,19 @@
   font-weight: 700;
   font-family: var(--font-family);
   color: var(--green);
+  transition: filter 0.3s ease, transform 0.2s ease;
 }
+
+/* .logo:hover,
+.logo:focus-visible {
+  opacity: 0.9;
+  filter: brightness(1.1);
+  outline: none;
+}
+
+.logo:active {
+  transform: scale(0.98);
+} */
 
 .copyright {
   font-size: 14px;
@@ -35,14 +47,27 @@
   font-family: var(--font-family);
   font-weight: 700;
   word-wrap: break-word;
-  color: var(--green-darker);
+  color: var(--green);
 }
 
 .nav li a {
-  color: var(--green);
+  color: var(--green-darker);
   font-size: 18px;
   font-weight: 700;
   text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.nav li a:hover,
+.nav li a:focus-visible {
+  text-decoration: none;
+  color: var(--green);
+  outline: none;
+}
+
+.nav li a:active {
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
 }
 
 @media screen and (min-width: 768px) {
@@ -67,7 +92,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1440px) {
   .inner {
     flex-direction: row;
     max-width: 1280px;

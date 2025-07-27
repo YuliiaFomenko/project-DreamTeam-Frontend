@@ -45,7 +45,8 @@ const creators = [
 
 const Creators = () => {
   return (
-        <section className={css.section}>
+    <section className={css.section}>
+      <div className='container'>
           <div className={css.titleline}>
             <h2 className={css.title}>Top Creators</h2>
               <Link to="/creators" className={css.link}>
@@ -68,9 +69,10 @@ const Creators = () => {
       </li>
     ))}
   </ul>
+  </div>
 </section>
   );
 };
 
 
-export default Creators
+export default Creators;

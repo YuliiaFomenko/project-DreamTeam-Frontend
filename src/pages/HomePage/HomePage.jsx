@@ -5,12 +5,12 @@ import Footer from '../../components/Footer/Footer';
 const HomePage = () => {
   return (
      <main>
-      {/* Інші секції, наприклад <Hero />, <PopularArticles /> */}
+
       
       <Creators />
       <Footer />
 
-      {/* Інші секції */}
+
     </main>
   )
 }
