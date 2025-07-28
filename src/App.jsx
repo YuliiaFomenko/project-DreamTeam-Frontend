@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshThunk } from "./redux/auth/operations";
-import { Routes } from "react-router-dom";
+import { Routes, Route  } from "react-router-dom";
 import Header from "./components/Header/Header";
+import AuthorsPage from "./pages/AuthorsPage/AuthorsPage";
 
 
 const App = () => {
@@ -16,7 +17,11 @@ const App = () => {
 
   return isRefreshing ? null : (
     <div>
-     <Routes>
+      <Routes>
+        <Route path='authors' element={
+          <PrivateRoute>
+            <AuthorsPage />
+        </PrivateRoute>} />
      </Routes>
     </div>
   );
