@@ -26,7 +26,7 @@ export const UploadPhoto = ({ onClose, onSave }) => {
   };
 
   return (
-    <div className={css.form}>
+    <div className={css.formAuth }>
       <button className={css.close} onClick={onClose}>×</button>
       <h1 className={css.title}>Upload your photo</h1>
       <div className={css.photoCircle} onClick={handleCircleClick}>

@@ -3,6 +3,7 @@ import { logInThunk } from "../../redux/auth/operations";
 import { Formik, Form, Field, ErrorMessage } from "formik"; 
 import * as Yup from "yup";
 import css from "./LoginForm.module.css";
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -27,34 +28,39 @@ export const LoginForm = () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <Form className={css.form}>
+      <Form className={css.formAuth }>
         <h1>Login</h1>
-        <div className={css.field}>
-          <p className={css.description}>Enter your email address</p>
+        <div className={css.fieldAuth }>
+          <p className={css.descriptionAuth }>Enter your email address</p>
           <Field
             type="email"
             name="email"
             placeholder="email@gmail.com"
-            className={css.input}
+            className={css.inputAuth }
           />
-          <ErrorMessage name="email" component="div" className={css.error} />
+          <ErrorMessage name="email" component="div" className={css.errorAuth } />
         </div>
 
-        <div className={css.field}>
-          <p className={css.description}>Enter a password</p>
+        <div className={css.fieldAuth }>
+          <p className={css.descriptionAuth }>Enter a password</p>
           <Field
             type="password"
             name="password"
             placeholder="*********"
-            className={css.input}
+            className={css.inputAuth }
           />
-          <ErrorMessage name="password" component="div" className={css.error} />
+          <ErrorMessage name="password" component="div" className={css.errorAuth } />
         </div>
 
-        <button type="submit" className={css.button}>
+        <button type="submit" className={css.buttonAuth }>
           Login
         </button>
-        <h3 className={css.descriptionRegister}>Don’t have an account? <span href="../RegisterForm/RegisterForm.jsx" className={css.spanRegister}>Register</span></h3>
+        <h3 className={css.descriptionRegister}>
+          Don’t have an account?{" "}
+          <Link to="/register" className={css.spanRegister}>
+            Register
+          </Link>
+        </h3>
       </Form>
     </Formik>
   );
