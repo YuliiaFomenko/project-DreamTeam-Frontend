@@ -4,6 +4,7 @@ import {Routes, Route} from "react-router-dom";
 import PrivateRoute from "./PrivateRoute.jsx";
 import RestrictedRoute from "./RestrictedRoute.jsx";
 import Layout from "../Layout/Layout.jsx";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage.jsx";
 
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
@@ -25,7 +26,7 @@ const RouterSet = () => {
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<HomePage/>}/>
-                    <Route path="create" element={<PrivateRoute component={<CreateArticlePage/>} />} />
+                    <Route path="create" element={<PrivateRoute ><CreateArticlePage/></PrivateRoute>} />
                     <Route path="register" element={<RestrictedRoute component={<RegisterPage/>} redirectTo='/'/>}/>
                     <Route path="login" element={<RestrictedRoute component={<LoginPage/>} redirectTo='/'/>}/>
                     <Route path="photo" element={<RestrictedRoute component={<UploadPhoto/>} redirectTo="/login"/>}/>
@@ -34,6 +35,7 @@ const RouterSet = () => {
                     <Route path="authors" element={<AuthorsPage/>}/>
                     <Route path="authors/:id" element={<AuthorsProfilePage/>}/>
                 </Route>
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Suspense>
     )
