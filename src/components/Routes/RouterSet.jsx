@@ -25,14 +25,14 @@ const RouterSet = () => {
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<HomePage/>}/>
-                    <Route path="/create" element={<PrivateRoute component={<CreateArticlePage/>} redirectTo="/login"/>}/>
-                    <Route path="/register" element={<RestrictedRoute component={<RegisterPage/>} redirectTo='/'/>}/>
-                    <Route path="/login" element={<RestrictedRoute component={<LoginPage/>} redirectTo='/'/>}/>
-                    <Route path="/photo" element={<RestrictedRoute component={<UploadPhoto/>} redirectTo="/login"/>}/>
-                    <Route path="/articles" element={<ArticlesPage/>}/>
-                    <Route path="/articles/:id" element={<ArticlePage/>}/>
-                    <Route path="/authors" element={<AuthorsPage/>}/>
-                    <Route path="/authors/:id" element={<AuthorsProfilePage/>}/>
+                    <Route path="create" element={<PrivateRoute component={<CreateArticlePage/>} />} />
+                    <Route path="register" element={<RestrictedRoute component={<RegisterPage/>} redirectTo='/'/>}/>
+                    <Route path="login" element={<RestrictedRoute component={<LoginPage/>} redirectTo='/'/>}/>
+                    <Route path="photo" element={<RestrictedRoute component={<UploadPhoto/>} redirectTo="/login"/>}/>
+                    <Route path="articles" element={<ArticlesPage/>}/>
+                    <Route path="articles/:id" element={<ArticlePage/>}/>
+                    <Route path="authors" element={<AuthorsPage/>}/>
+                    <Route path="authors/:id" element={<AuthorsProfilePage/>}/>
                 </Route>
             </Routes>
         </Suspense>
