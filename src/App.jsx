@@ -2,10 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshThunk } from "./redux/auth/operations";
-import { Routes, Route  } from "react-router-dom";
-import Header from "./components/Header/Header";
-import AuthorsPage from "./pages/AuthorsPage/AuthorsPage";
-
+import Routes from "./components/Routes/RouterSet.jsx";
+import Loader from "./components/Loader/Loader.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -15,15 +13,5 @@ const App = () => {
     dispatch(refreshThunk());
   }, [dispatch]);
 
-  return isRefreshing ? null : (
-    <div>
-      <Routes>
-        <Route path='authors' element={
-          <PrivateRoute>
-            <AuthorsPage />
-        </PrivateRoute>} />
-     </Routes>
-    </div>
-  );
-};
+  return isRefreshing ? <Loader />: <Routes />};
 export default App;
