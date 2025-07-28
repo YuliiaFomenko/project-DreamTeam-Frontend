@@ -43,7 +43,6 @@
 @media only screen and (min-width: 768px) {
  .modal {
   max-width: 435px;
-  padding-bottom: 69px;
  }
  .compact {
   padding: 56px 32px 32px 32px !important;
