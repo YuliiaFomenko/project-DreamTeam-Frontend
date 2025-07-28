@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { logInThunk } from "../../redux/auth/operations";
+import {Link} from "react-router-dom"
 import { Formik, Form, Field, ErrorMessage } from "formik"; 
 import * as Yup from "yup";
 import css from "./RegisterForm.module.css";
