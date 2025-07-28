@@ -54,21 +54,21 @@ const Creators = () => {
               </Link>
           </div>
 
-  <ul className={css.list}>
-    {creators.map((creator) => (
-      <li key={creator.id} className={css.card}>
-        <Link to={`/creators/${creator.id}`}>
-          <img
-            className={css.img}
-            src={creator.img1x}
-            srcSet={`${creator.img1x} 1x, ${creator.img2x} 2x`}
-            alt={creator.name}
-          />
-          <span className={css.name}>{creator.name}</span>
-        </Link>
-      </li>
-    ))}
-  </ul>
+          <ul className={css.list}>
+            {creators.map((creator) => (
+              <li key={creator.id} className={css.card}>
+                <Link to={`/creators/${creator.id}`}>
+                  <img
+                    className={css.img}
+                    src={creator.img1x}
+                    srcSet={`${creator.img1x} 1x, ${creator.img2x} 2x`}
+                    alt={creator.name}
+                  />
+                  <span className={css.name}>{creator.name}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
   </div>
 </section>
   );
