@@ -4,15 +4,15 @@ import {selectLoggedIn} from "../../redux/auth/selectors.js";
 import {Navigate} from "react-router-dom";
 import toast from "react-hot-toast";
 
-const PrivateRoute = ({ component, redirectTo = "/login" }) => {
+const PrivateRoute = ({ children}) => {
     const isLoggedUser = useSelector(selectLoggedIn);
 
     if(!isLoggedUser) {
         toast.error("You must be logged in to access this page.");
-        return <Navigate to={redirectTo} />
+        return <Navigate to="/login" />
     }
 
-    return component
+    return children;
 };
 
 export default PrivateRoute;
