@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logInThunk } from "../../redux/auth/operations";
 import {Link} from "react-router-dom"
@@ -21,6 +22,11 @@ const validationSchema = Yup.object({
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const toggleShowPassword = () => setShowPassword((prev) => !prev);
+  const toggleShowConfirmPassword = () => setShowConfirmPassword((prev) => !prev);
+
 
   const handleSubmit = (values, { resetForm }) => {
     const { email, password } = values;
@@ -60,22 +66,68 @@ export const RegisterForm = () => {
 
         <div className={css.fieldAuth}>
           <p className={css.descriptionAuth}>Create a strong password</p>
-          <Field
-            type="password"
-            name="password"
-            placeholder="*********"
-            className={css.inputAuth}
-          />
-          <ErrorMessage name="password" component="div" className={css.error} />
+         <Field name="password" className={css.inputAuth}>
+            {({ field }) => (
+              <div className={css.passwordWrapper}>
+                <input
+                  {...field}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="*********"
+                  className={css.inputAuth }
+                />
+                <button
+                  type="button"
+                  className={css.eyeButton}
+                  onClick={toggleShowPassword}
+                  tabIndex={-1}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  <svg width="30px" height="30px" stroke="black">
+                    <use
+                      href={
+                        showPassword
+                          ? "/src/assets/img/sprite.svg#icon-eye"
+                          : "/src/assets/img/sprite.svg#icon-eye-crossed"
+                      }
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </Field>
+          <ErrorMessage name="password" component="div" className={css.errorAuth} />
           </div>
           <div className={css.fieldAuth}>
           <p className={css.descriptionAuth}>Repeat your password</p>
-          <Field
-            type="password"
-            name="confirmPassword"
-            placeholder="*********"
-            className={css.inputAuth}
-          />
+          <Field name="confirmPassword" className={css.inputAuth}>
+            {({ field }) => (
+              <div className={css.passwordWrapper}>
+                <input
+                  {...field}
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="*********"
+                  className={css.inputAuth }
+                />
+                <button
+                  type="button"
+                  className={css.eyeButton}
+                  onClick={toggleShowConfirmPassword}
+                  tabIndex={-1}
+                  aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                >
+                  <svg width="30px" height="30px" stroke="black">
+                    <use
+                      href={
+                        showConfirmPassword
+                          ? "/src/assets/img/sprite.svg#icon-eye"
+                          : "/src/assets/img/sprite.svg#icon-eye-crossed"
+                      }
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </Field>
           <ErrorMessage name="confirmPassword" component="div" className={css.errorAuth} />
         </div>
 

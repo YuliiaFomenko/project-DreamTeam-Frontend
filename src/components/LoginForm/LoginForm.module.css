@@ -34,7 +34,9 @@
     color: #d32f2f;
     font-size: 14px;
 }
-
+.eyeButton{
+    display: none;
+}
 .buttonAuth {
     border-radius: 64px;
     padding: 8px 0;
@@ -48,7 +50,32 @@
     margin-bottom: 16px;
     cursor: pointer;
 }
+.passwordWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
+.inputAuth {
+    width: 100%;
+    padding-right: 40px;
+    /* space for the eye button */
+    box-sizing: border-box;
+    /* Add your other input styles here */
+}
+
+.eyeButton {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
 .descriptionRegister{
     font-family: "Manrope", sans-serif;
     font-weight: 400;

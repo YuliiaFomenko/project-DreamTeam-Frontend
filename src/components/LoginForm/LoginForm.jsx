@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logInThunk } from "../../redux/auth/operations";
 import { Formik, Form, Field, ErrorMessage } from "formik"; 
@@ -16,6 +17,10 @@ const validationSchema = Yup.object({
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => setShowPassword((prev) => !prev);
+
+              
 
   const handleSubmit = (values, { resetForm }) => {
     dispatch(logInThunk(values));
@@ -41,14 +46,44 @@ export const LoginForm = () => {
           <ErrorMessage name="email" component="div" className={css.errorAuth } />
         </div>
 
+
         <div className={css.fieldAuth }>
           <p className={css.descriptionAuth }>Enter a password</p>
-          <Field
-            type="password"
-            name="password"
-            placeholder="*********"
-            className={css.inputAuth }
-          />
+          <Field name="password" className={css.inputAuth}>
+            {({ field }) => (
+              <div className={css.passwordWrapper}>
+                <input
+                  {...field}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="*********"
+                  className={css.inputAuth }
+                />
+                <button
+                  type="button"
+                  className={css.eyeButton}
+                  onClick={toggleShowPassword}
+                  tabIndex={-1}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  <svg width="26px" height="26px" stroke="black">
+                    <use
+                      href={
+                        showPassword
+                          ? "/src/assets/img/sprite.svg#icon-eye"
+                          : "/src/assets/img/sprite.svg#icon-eye-crossed"
+                      }
+                    />
+                  </svg>
+                </button>
+                {/* <svg width="15px" height="15px" stroke="black">
+                  <use href="/src/assets/img/sprite.svg#icon-eye-crossed"></use>
+                </svg>
+                <svg width="15px" height="15px">
+                  <use href="/src/assets/img/sprite.svg#icon-eye"></use>
+                </svg> */}
+              </div>
+            )}
+          </Field>
           <ErrorMessage name="password" component="div" className={css.errorAuth } />
         </div>
 

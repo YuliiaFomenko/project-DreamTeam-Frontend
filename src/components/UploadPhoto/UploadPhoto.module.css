@@ -65,13 +65,13 @@
 
 
 @media only screen and (min-width: 768px) {
-    .form {
+    .formAuth {
         margin: 210px 123px;
     }
 }
 
 @media only screen and (min-width: 1440px) {
-    .form {
+    .formAuth {
         margin: 263px 524px;
     }
 }

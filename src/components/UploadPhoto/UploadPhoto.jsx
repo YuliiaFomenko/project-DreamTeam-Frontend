@@ -33,7 +33,9 @@ export const UploadPhoto = ({ onClose, onSave }) => {
         {preview ? (
           <img src={preview} alt="preview" style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }} />
         ) : (
-          <span role="img" aria-label="camera">📷</span>
+            <svg>
+              <use></use>
+          </svg>
         )}
       </div>
       <input

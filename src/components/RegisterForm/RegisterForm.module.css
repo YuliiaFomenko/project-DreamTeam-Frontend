@@ -37,8 +37,9 @@
 }
 
 .errorAuth {
-    color: #d32f2f;
-    font-size: 14px;
+    color: #e74c3c;
+    font-size: 0.9em;
+    margin-top: 4px;
 }
 
 .buttonAuth {
@@ -71,6 +72,32 @@
     font-weight: 700;
     text-decoration: underline;
     text-decoration-skip-ink: none;
+}
+
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputAuth {
+  width: 100%;
+  padding-right: 40px; /* space for the eye button */
+  box-sizing: border-box;
+  /* Add your other input styles here */
+}
+
+.eyeButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 @media only screen and (min-width: 768px) {
