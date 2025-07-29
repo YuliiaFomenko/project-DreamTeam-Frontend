@@ -41,12 +41,27 @@
     width: 100%;
     font-weight: 700;
     font-size: 16px;
-    background: #649179;
     color: #f7fffb;
     border: none;
     margin-top: 16px;
     margin-bottom: 16px;
     cursor: pointer;
+    box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+    background: #649179;
+    opacity: 0.3;
+}
+.saveButtonOn {
+    border-radius: 64px;
+    padding: 8px 0;
+    width: 100%;
+    font-weight: 700;
+    font-size: 16px;
+    color: #f7fffb;
+    border: none;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    background: #649179;
 }
 .photoCircle {
     display: flex;

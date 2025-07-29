@@ -33,8 +33,8 @@ export const UploadPhoto = ({ onClose, onSave }) => {
         {preview ? (
           <img src={preview} alt="preview" style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }} />
         ) : (
-            <svg>
-              <use></use>
+            <svg width="69" height="58" stroke="black" fill="none">
+              <use href="/src/assets/img/sprite.svg#icon-photo"></use>
           </svg>
         )}
       </div>
@@ -46,7 +46,7 @@ export const UploadPhoto = ({ onClose, onSave }) => {
         className={css.UploadPhotoInput}
       />
       <button
-        className={css.saveButton}
+        className={preview ? css.saveButtonOn : css.saveButton}
         onClick={handleSave}
         disabled={!photo}
       >

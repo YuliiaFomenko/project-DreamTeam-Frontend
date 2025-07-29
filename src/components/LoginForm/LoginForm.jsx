@@ -65,7 +65,7 @@ export const LoginForm = () => {
                   tabIndex={-1}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  <svg width="26px" height="26px" stroke="black">
+                  <svg width="26px" height="26px" stroke="black" fill="none" stroke-width="1px">
                     <use
                       href={
                         showPassword

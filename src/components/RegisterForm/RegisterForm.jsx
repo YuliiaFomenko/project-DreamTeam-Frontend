@@ -82,7 +82,7 @@ export const RegisterForm = () => {
                   tabIndex={-1}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  <svg width="30px" height="30px" stroke="black">
+                  <svg width="30px" height="30px" stroke="black" fill="none" stroke-width="1px">
                     <use
                       href={
                         showPassword
@@ -115,7 +115,7 @@ export const RegisterForm = () => {
                   tabIndex={-1}
                   aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                 >
-                  <svg width="30px" height="30px" stroke="black">
+                  <svg width="30px" height="30px" stroke="black" fill="none" stroke-width="1px">
                     <use
                       href={
                         showConfirmPassword
