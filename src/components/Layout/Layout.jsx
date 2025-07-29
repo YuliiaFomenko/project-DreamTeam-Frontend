@@ -13,7 +13,7 @@ const Layout = () => {
                 <Outlet/>
             </Suspense>
             <Footer/>
-            <Toaster position='top-right' reverseOrder={false}/>)
+            <Toaster position='top-right' reverseOrder={false}/>
         </>)
 }
 
