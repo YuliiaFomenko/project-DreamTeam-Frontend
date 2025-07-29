@@ -15,3 +15,4 @@ const App = () => {
 
   return isRefreshing ? <Loader />: <Routes />};
 export default App;
+

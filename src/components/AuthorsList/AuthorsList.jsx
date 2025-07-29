@@ -1,50 +1,28 @@
 import React from 'react'
+import css from './AuthorsList.module.css'
+import { useSelector } from 'react-redux';
+import AuthorsItem from '../AuthorsItem/AuthorsItem';
+import { selectLoading, selectError, selectAuthors } from '../../redux/authors/selectors';
+import Loader from '../Loader/Loader';
 
 const AuthorsList = () => {
-  return (
-    <div>      {/* {loading && <div className={css.loading}><h3>Please wait. Loading...</h3><Loader color='blue' loading={loading}/></div>}
-      {error && <div className={css.loading}><h2>Sorry. Server is dead...</h2><Loader color='red' loading={loading} /></div>}
-       */}
-      <ul className={css.list}>
-        {contact.map((card) => {
-          return (<li key={card.id} className={css.cardItem}>
-            <div>
-              <div className={css.text}> {card.avatar} </div>
-              <p className={css.text}> {card.name} </p>
-            </div>
-          </li>);
-          })}
-      </ul>
-    </div>
-  )
-}
-
-export default AuthorsList;
-
-// import css from './ContactList.module.css'
-// import Contact from '../Contact/Contact';
-// import { useSelector } from 'react-redux';
-// import { selectLoading, selectError, selectFilteredContacts } from '../../redux/contacts/selectors';
-// import Loader from '../Loader/Loader';
-
-// const ContactList = () => {
-//     const error = useSelector(selectError);
-//     const loading = useSelector(selectLoading);
-//     const contact = useSelector(selectFilteredContacts);
+    const error = useSelector(selectError);
+    const loading = useSelector(selectLoading);
+    const authors = useSelector(selectAuthors);
     
-//     return <div>
-//         {loading && <div className={css.loading}><h3>Please wait. Loading...</h3><Loader color='blue' loading={loading}/></div>}
-//         {error && <div className={css.loading}><h2>Sorry. Server is dead...</h2><Loader color='red' loading={loading}/></div>}
-//         <ul className={css.list}>
-//             {contact.map((card) => {
-//                 return (<li key={card.id} className={css.cardItem}>
-//                     <Contact
-//                         contact={card}
-//                     />
-//                 </li>);
-//             })}
-//         </ul>
-//     </div>
-// };
-
-// export default ContactList;
+  return
+  <div>
+    {loading && <div className={css.loading}><h3>Please wait. Loading...</h3><Loader color='blue' loading={loading}/></div>}
+    {error && <div className={css.loading}><h2>Sorry. Server is dead...</h2><Loader color='red' loading={loading}/></div>}
+    <ul className={css.list}>
+      {authors.map((card) => {
+        return (<li key={card.id} className={css.cardItem}>
+                    <AuthorsItem
+                        author={card}
+                    />
+        </li>);
+      })}
+    </ul>
+  </div>
+};
+export default AuthorsList;
