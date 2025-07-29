@@ -7,7 +7,7 @@ const Hero = () => {
   // const isLogged = useSelector(selectIsLoggedIn);
   const isLogged = false;
   return (
-    <section class={clsx("container", s.hero)}>
+    <section className={clsx("container", s.hero)}>
       <div className={s.heroContainer}>
         <div className={s.content}>
           <h1 className={s.title}>
