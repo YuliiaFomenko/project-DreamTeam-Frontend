@@ -8,6 +8,7 @@
     padding: 48px 32px;
     margin: 202px 16.5px;
     background: #d1e0d8;
+    position: relative;
 }
 
 
@@ -17,7 +18,16 @@
     flex-direction: column;
     gap: 8px;
 }
-
+.close{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 2;
+}
 .input {
     border: 1.5px solid #9f9f9f;
     border-radius: 16px;

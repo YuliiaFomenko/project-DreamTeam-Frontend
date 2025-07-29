@@ -27,7 +27,12 @@ export const UploadPhoto = ({ onClose, onSave }) => {
 
   return (
     <div className={css.formAuth }>
-      <button className={css.close} onClick={onClose}>×</button>
+      <button className={css.close} onClick={onClose}>
+        <svg width="24" height="28" stroke="black" fill="none">
+          <use  href="/src/assets/img/sprite.svg#icon-close">
+          </use>
+        </svg>
+      </button>
       <h1 className={css.title}>Upload your photo</h1>
       <div className={css.photoCircle} onClick={handleCircleClick}>
         {preview ? (

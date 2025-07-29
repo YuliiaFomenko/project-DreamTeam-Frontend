@@ -15,6 +15,6 @@ const App = () => {
     dispatch(refreshThunk());
   }, [dispatch]);
 
-  return isRefreshing ? <Loader />: <Routes />
+  return isRefreshing ? <Loader />: <UploadPhoto></UploadPhoto>
 };
 export default App;
