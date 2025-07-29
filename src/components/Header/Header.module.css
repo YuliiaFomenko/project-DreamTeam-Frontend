@@ -17,6 +17,7 @@
 }
 .logo {
   max-width: 165px;
+  display: flex;
 }
 .logoImg {
   width: 100%;

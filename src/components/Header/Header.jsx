@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import s from "./Header.module.css";
-import logo from "../../assets/img/header/logo-@1x.webp";
-import logoFull from "../../assets/img/header/logo-@2x.webp";
 import Navigation from "../Navigation/Navigation";
 import clsx from "clsx";
 import UserMenu from "../UserMenu/UserMenu";
@@ -10,6 +8,7 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useBodyLock } from "../../hooks/useBodyLock/useBodyLock";
+import sprite from "../../assets/img/sprite.svg";
 
 const Header = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -20,14 +19,14 @@ const Header = () => {
     <header className={s.header}>
       <div className={clsx("container", s.headerContainer)}>
         <Link className={s.logo} to="/">
-          <img
-            src={logo}
-            srcSet={`${logo} 1x, ${logoFull} 2x`}
-            alt="Harmoniq Logo"
-            className={s.logoImg}
+          <svg
             width="165"
             height="46"
-          />
+            className={s.logoImg}
+            stroke="var(--green)"
+          >
+            <use href={`${sprite}#icon-logo`} />
+          </svg>
         </Link>
         <div className={s.headerNavigationWrapper}>
           <Navigation />
@@ -42,19 +41,8 @@ const Header = () => {
               onClick={() => setDrawerOpen(true)}
               aria-label="Burger Menu"
             >
-              <svg
-                width="20"
-                height="14"
-                viewBox="0 0 20 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.5 0.833374H18.5M1.5 12.8334H18.5M1.5 6.83337H18.5"
-                  stroke="#374F42"
-                  stroke-width="1.33333"
-                  stroke-linecap="round"
-                />
+              <svg width="32" height="32" stroke="var(--green-darker)">
+                <use href={`${sprite}#icon-burger-regular`} />
               </svg>
             </button>
           )}
@@ -64,20 +52,8 @@ const Header = () => {
               onClick={() => setDrawerOpen(false)}
               aria-label="Close Menu"
             >
-              <svg
-                width="32"
-                height="30"
-                viewBox="0 0 32 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7 4.33325L16 13.3333M16 13.3333L7 22.3333M16 13.3333L25 22.3333M16 13.3333L25 4.33325"
-                  stroke="#070721"
-                  stroke-width="1.33333"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+              <svg width="32" height="30" stroke="var(--black)">
+                <use href={`${sprite}#icon-close`} />
               </svg>
             </button>
           )}
