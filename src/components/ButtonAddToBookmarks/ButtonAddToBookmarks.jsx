@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import s from "./ButtonAddToBookmarks.module.css";
 
 const ButtonAddToBookmarks = () => {
   return (
-    <div>ButtonAddToBookmarks</div>
-  )
-}
+    <button type="button" className={s.btn}>
+      x
+    </button>
+  );
+};
 
-export default ButtonAddToBookmarks
+export default ButtonAddToBookmarks;
