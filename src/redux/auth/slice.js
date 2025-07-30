@@ -6,6 +6,7 @@ const initialState = {
     name: null,
     email: null,
   },
+  currentUserId: null,
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -23,12 +24,14 @@ const slice = createSlice({
     })
     .addCase (logInThunk.fulfilled, (state, action) => {
       state.user = action.payload.user;
-      state.token = action.payload.token;
+      state.token = action.payload.accessToken;
+      state.currentUserId = action.payload.currentUserId;
       state.isLoggedIn = true;
     })
     .addCase(logOutThunk.fulfilled, () => initialState)
     .addCase(refreshThunk.fulfilled, (state, action) => {
-      state.user =action.payload;
+      state.token =action.payload.accessToken;
+      state.currentUserId = action.payload.currentUserId;
       state.isLoggedIn = true;
       state.isRefreshing = false;
     })
