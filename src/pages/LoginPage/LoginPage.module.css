@@ -1,0 +1,94 @@
+.container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--light-green) 0%, #c3cfe2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.loginWrapper {
+    width: 100%;
+    max-width: 450px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: var(--font-family);
+}
+
+.backLink:hover {
+    background: rgba(100, 145, 121, 0.1);
+    transform: translateX(-2px);
+}
+
+.backLink svg {
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-family);
+}
+
+.subtitle {
+    color: var(--gray);
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 767px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .backLink {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Animation */
+.loginWrapper {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

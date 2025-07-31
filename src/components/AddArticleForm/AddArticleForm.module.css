@@ -1,0 +1,390 @@
+.formContainer {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-family);
+}
+
+.subtitle {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.errorMessage {
+    background: rgba(173, 106, 108, 0.1);
+    border: 1px solid var(--red);
+    color: var(--red);
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--black);
+    font-family: var(--font-family);
+}
+
+.input,
+.select {
+    padding: 0.8rem 1rem;
+    border: 2px solid rgba(100, 145, 121, 0.2);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: var(--font-family);
+    background: var(--white);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(100, 145, 121, 0.1);
+}
+
+.input:disabled,
+.select:disabled,
+.textarea:disabled {
+    background: rgba(0, 0, 0, 0.05);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.inputError {
+    border-color: var(--red);
+}
+
+.inputError:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(173, 106, 108, 0.1);
+}
+
+.fieldError {
+    color: var(--red);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.textarea {
+    padding: 0.8rem 1rem;
+    border: 2px solid rgba(100, 145, 121, 0.2);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: var(--font-family);
+    background: var(--white);
+    transition: all 0.3s ease;
+    width: 100%;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.contentTextarea {
+    min-height: 200px;
+}
+
+.select {
+    cursor: pointer;
+}
+
+.charCount {
+    align-self: flex-end;
+    font-size: 0.8rem;
+    color: var(--light-gray);
+    margin-top: 0.25rem;
+}
+
+.imageUpload {
+    position: relative;
+}
+
+.uploadArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    border: 2px dashed rgba(100, 145, 121, 0.3);
+    border-radius: 12px;
+    background: rgba(100, 145, 121, 0.05);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.uploadArea:hover {
+    border-color: var(--green);
+    background: rgba(100, 145, 121, 0.1);
+}
+
+.uploadArea svg {
+    stroke: var(--green);
+    fill: none;
+    opacity: 0.7;
+}
+
+.uploadArea span:first-of-type {
+    font-weight: 500;
+    color: var(--green);
+}
+
+.uploadHint {
+    font-size: 0.8rem;
+    color: var(--light-gray);
+}
+
+.fileInput {
+    display: none;
+}
+
+.imagePreview {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(100, 145, 121, 0.05);
+}
+
+.previewImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.removeImageBtn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.removeImageBtn:hover {
+    background: var(--white);
+    transform: scale(1.1);
+}
+
+.removeImageBtn svg {
+    stroke: var(--red);
+    fill: none;
+    stroke-width: 2;
+}
+
+.formActions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: flex-end;
+}
+
+.cancelBtn {
+    background: transparent;
+    border: 2px solid var(--light-gray);
+    color: var(--gray);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-family);
+}
+
+.cancelBtn:hover:not(:disabled) {
+    border-color: var(--gray);
+    color: var(--black);
+}
+
+.submitBtn {
+    background: var(--green);
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-family);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+}
+
+.submitBtn:hover:not(:disabled) {
+    background: var(--green-darker);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(100, 145, 121, 0.3);
+}
+
+.submitBtn:disabled {
+    background: var(--light-gray);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid var(--white);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 767px) {
+    .formContainer {
+        padding: 1.5rem;
+        border-radius: 15px;
+        max-height: 90vh;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 0.85rem;
+    }
+
+    .input,
+    .select,
+    .textarea {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .uploadArea {
+        padding: 1.5rem;
+    }
+
+    .previewImage {
+        height: 150px;
+    }
+
+    .formActions {
+        flex-direction: column;
+    }
+
+    .cancelBtn,
+    .submitBtn {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 768px) and (max-width: 1439px) {
+    .formContainer {
+        max-width: 500px;
+    }
+}
+
+/* Focus styles for accessibility */
+.cancelBtn:focus,
+.submitBtn:focus,
+.removeImageBtn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--green);
+}
+
+/* Animation for form appearance */
+.formContainer {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Custom scrollbar for form container */
+.formContainer {
+    scrollbar-width: thin;
+    scrollbar-color: var(--green) transparent;
+}
+
+.formContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.formContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.formContainer::-webkit-scrollbar-thumb {
+    background: var(--green);
+    border-radius: 3px;
+}
+
+.formContainer::-webkit-scrollbar-thumb:hover {
+    background: var(--green-darker);
+}
