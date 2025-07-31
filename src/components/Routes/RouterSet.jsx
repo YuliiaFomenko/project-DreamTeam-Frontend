@@ -26,7 +26,7 @@ const RouterSet = () => {
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<HomePage/>}/>
-                    <Route path="create" element={<PrivateRoute ><CreateArticlePage/></PrivateRoute>} />
+                    <Route path="create" element={<CreateArticlePage/>} />
                     <Route path="register" element={<RestrictedRoute component={<RegisterPage/>} redirectTo='/'/>}/>
                     <Route path="login" element={<RestrictedRoute component={<LoginPage/>} redirectTo='/'/>}/>
                     <Route path="photo" element={<RestrictedRoute component={<UploadPhoto/>} redirectTo="/login"/>}/>
