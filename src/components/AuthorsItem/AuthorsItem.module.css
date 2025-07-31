@@ -1,0 +1,11 @@
+.cardAutor {
+  border-radius: 50%;
+}
+
+.name {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  color: #070721;
+}

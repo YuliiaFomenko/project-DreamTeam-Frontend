@@ -1,16 +1,18 @@
 import React from 'react'
 import css from './AuthorsItem.module.css';
 import { useDispatch } from 'react-redux';
-import { authorItem } from '../../redux/authors/operations';
 
-const AuthorsItem = () => {
+const AuthorsItem = ({author}) => {
   const dispatch = useDispatch();
-  const handleLink = () => dispatch(authorItem(author.id));
+  const handleLink = () => dispatch();
+  const name = author.card.name;
+  console.log(name);
   return (
-    <div className={css.item}>
+    <div className={css.item} onClick={handleLink}>
       <div>
-         <p className={css.avatar}>  {contact.avatar} </p>
-         <p className={css.name}>  {contact.name} </p>
+        {/* <p className={css.avatarUrl}> {author.card.avatarUrl} </p> */}
+        <img src={author.card.avatarUrl} alt={author.card.name} className={css.cardAutor} onClick={() => {}} />
+        <p className={css.name}> {name} </p>
        </div>
      </div>
   )

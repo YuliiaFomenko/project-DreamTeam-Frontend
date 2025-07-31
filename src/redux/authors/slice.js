@@ -1,12 +1,13 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 // import { selectNameFilter } from '../redux/filtersSlice';
-import { fetchAuthors, authorItem } from "./operations";
+import { fetchAuthors, fetchAuthorById } from "./operations";
 import { logOutThunk } from "../auth/operations";
 
 const slice = createSlice({
   name: "authors",
   initialState: {
     items: [],
+    total: 0,
     loading: false,
     loadingApp: false,
     error: null,
@@ -14,9 +15,10 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchAuthors.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items = action.payload.authors;
+        state.total = action.payload.total;
       })
-      .addCase(authorItem.fulfilled, (state, action) => {
+      .addCase(fetchAuthorById.fulfilled, (state, action) => {
         state.items = state.items.filter(
           (author) => author.id !== action.payload
         );
@@ -30,19 +32,15 @@ const slice = createSlice({
       // ===================================================================
 
       .addMatcher(
-        isAnyOf(fetchAuthors.pending, authorItem.pending),
+        isAnyOf(fetchAuthors.pending, fetchAuthorById.pending),
         (state) => {
           state.loadingApp = true;
           state.error = null;
         }
       )
-      // .addMatcher(isAnyOf(authorItem.pending), (state) => {
-      //   state.loading = true;
-      //   state.error = null;
-      // })
 
       .addMatcher(
-        isAnyOf(fetchAuthors.rejected, authorItem.rejected),
+        isAnyOf(fetchAuthors.rejected, fetchAuthorById.rejected),
         (state, action) => {
           state.loading = false;
           state.loadingApp = false;
@@ -50,7 +48,7 @@ const slice = createSlice({
         }
       )
       .addMatcher(
-        isAnyOf(fetchAuthors.fulfilled, authorItem.fulfilled),
+        isAnyOf(fetchAuthors.fulfilled, fetchAuthorById.fulfilled),
         (state) => {
           state.error = null;
           state.loading = false;
