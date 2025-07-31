@@ -1,0 +1,91 @@
+.navigation {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.navLink {
+    text-decoration: none;
+    color: var(--gray);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    font-family: var(--font-family);
+}
+
+.navLink:hover {
+    color: var(--green);
+    background: rgba(100, 145, 121, 0.1);
+}
+
+.navLink.active {
+    color: var(--green);
+    font-weight: 600;
+}
+
+.navLink.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--green);
+    border-radius: 1px;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 767px) {
+    .navigation {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .navLink {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .navLink.active::after {
+        display: none;
+    }
+
+    .navLink.active {
+        background: rgba(100, 145, 121, 0.1);
+    }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 768px) and (max-width: 1439px) {
+    .navigation {
+        gap: 1.5rem;
+    }
+}
+
+/* Focus styles for accessibility */
+.navLink:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--green);
+}
+
+/* Animation for active state */
+.navLink.active::after {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 20px;
+    }
+}

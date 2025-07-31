@@ -1,4 +1,4 @@
-.bookmarkBtn {
+.removeBtn {
     background: none;
     border: none;
     color: var(--light-gray);
@@ -14,23 +14,22 @@
     position: relative;
 }
 
-.bookmarkBtn:hover {
-    background: rgba(100, 145, 121, 0.1);
-    color: var(--green);
+.removeBtn:hover {
+    background: rgba(173, 106, 108, 0.1);
+    color: var(--red);
     transform: translateY(-1px);
 }
 
-.bookmarkBtn.bookmarked {
-    color: var(--green);
-    background: rgba(100, 145, 121, 0.1);
+.removeBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
-.bookmarkBtn.bookmarked:hover {
-    color: var(--red);
-    background: rgba(173, 106, 108, 0.1);
+.removeBtn.loading {
+    pointer-events: none;
 }
 
-.bookmarkBtn svg {
+.removeBtn svg {
     width: 16px;
     height: 16px;
     stroke: currentColor;
@@ -39,25 +38,11 @@
     transition: all 0.3s ease;
 }
 
-.bookmarkBtn.bookmarked svg {
-    fill: currentColor;
-    stroke: none;
-}
-
-.bookmarkBtn:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.bookmarkBtn.loading {
-    pointer-events: none;
-}
-
 .spinner {
     width: 14px;
     height: 14px;
     border: 2px solid var(--light-gray);
-    border-top: 2px solid var(--green);
+    border-top: 2px solid var(--red);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -74,13 +59,13 @@
 
 /* Mobile Styles */
 @media only screen and (max-width: 767px) {
-    .bookmarkBtn {
+    .removeBtn {
         width: 32px;
         height: 32px;
         padding: 0.4rem;
     }
 
-    .bookmarkBtn svg {
+    .removeBtn svg {
         width: 14px;
         height: 14px;
     }
@@ -92,34 +77,33 @@
 }
 
 /* Focus styles for accessibility */
-.bookmarkBtn:focus {
+.removeBtn:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--green);
+    box-shadow: 0 0 0 2px var(--red);
 }
 
-/* Animation for bookmark state change */
-.bookmarkBtn svg {
-    transform-origin: center;
-}
-
-.bookmarkBtn:active svg {
+/* Animation for remove action */
+.removeBtn:active svg {
     transform: scale(0.9);
 }
 
-.bookmarkBtn.bookmarked svg {
-    animation: bookmarkAdded 0.3s ease-out;
+/* Hover animation */
+.removeBtn:hover svg {
+    animation: shake 0.5s ease-in-out;
 }
 
-@keyframes bookmarkAdded {
-    0% {
-        transform: scale(1);
-    }
+@keyframes shake {
 
-    50% {
-        transform: scale(1.2);
-    }
-
+    0%,
     100% {
-        transform: scale(1);
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-2px);
+    }
+
+    75% {
+        transform: translateX(2px);
     }
 }

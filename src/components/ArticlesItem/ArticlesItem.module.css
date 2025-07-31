@@ -1,0 +1,232 @@
+.articleCard {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.articleCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.articleLink {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.articleImage {
+    height: 200px;
+    background: linear-gradient(45deg, var(--green) 0%, var(--purple) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.articleImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.articleCard:hover .articleImage img {
+    transform: scale(1.05);
+}
+
+.articleContent {
+    padding: 1.5rem;
+}
+
+.articleMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.authorTag {
+    color: var(--green);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.savedDate {
+    color: var(--light-gray);
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.articleTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    font-family: var(--font-family);
+    display: -webkit-box;
+    --line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.articleExcerpt {
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    --line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.articleActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.learnMoreBtn {
+    background: transparent;
+    border: 2px solid var(--green);
+    color: var(--green);
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-family: var(--font-family);
+}
+
+.learnMoreBtn:hover {
+    background: var(--green);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+.actionButtons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.shareBtn {
+    background: none;
+    border: none;
+    color: var(--light-gray);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.shareBtn:hover {
+    background: rgba(100, 145, 121, 0.1);
+    color: var(--green);
+    transform: translateY(-1px);
+}
+
+.shareBtn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1;
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 768px) and (max-width: 1439px) {
+    .articleImage {
+        height: 180px;
+    }
+
+    .articleContent {
+        padding: 1.2rem;
+    }
+
+    .articleTitle {
+        font-size: 1.2rem;
+    }
+
+    .articleExcerpt {
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 767px) {
+    .articleCard {
+        border-radius: 15px;
+    }
+
+    .articleImage {
+        height: 150px;
+    }
+
+    .articleContent {
+        padding: 1rem;
+    }
+
+    .articleTitle {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .articleExcerpt {
+        font-size: 0.85rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .learnMoreBtn {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.85rem;
+    }
+
+    .shareBtn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .shareBtn svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Loading state */
+.articleCard.loading {
+    pointer-events: none;
+}
+
+.articleCard.loading .articleImage {
+    background: linear-gradient(90deg,
+            rgba(100, 145, 121, 0.1) 0%,
+            rgba(100, 145, 121, 0.2) 50%,
+            rgba(100, 145, 121, 0.1) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}

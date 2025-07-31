@@ -1,0 +1,119 @@
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    min-height: 400px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    margin: 2rem 0;
+}
+
+.emptyIcon {
+    margin-bottom: 2rem;
+    opacity: 0.3;
+    animation: float 3s ease-in-out infinite;
+}
+
+.emptyIcon svg {
+    width: 80px;
+    height: 80px;
+    stroke: var(--green);
+    fill: none;
+    stroke-width: 1;
+}
+
+.emptyTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 1rem;
+    font-family: var(--font-family);
+}
+
+.emptyDescription {
+    font-size: 1rem;
+    color: var(--gray);
+    line-height: 1.6;
+    max-width: 400px;
+    margin-bottom: 2rem;
+}
+
+.emptyAction {
+    background: var(--green);
+    color: var(--white);
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    font-family: var(--font-family);
+}
+
+.emptyAction:hover {
+    background: var(--green-darker);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(100, 145, 121, 0.3);
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 767px) {
+    .emptyState {
+        padding: 3rem 1.5rem;
+        min-height: 300px;
+    }
+
+    .emptyIcon svg {
+        width: 60px;
+        height: 60px;
+    }
+
+    .emptyTitle {
+        font-size: 1.3rem;
+    }
+
+    .emptyDescription {
+        font-size: 0.9rem;
+        max-width: 300px;
+    }
+
+    .emptyAction {
+        padding: 0.7rem 1.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 768px) and (max-width: 1439px) {
+    .emptyState {
+        padding: 3.5rem 2rem;
+    }
+
+    .emptyIcon svg {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* Animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Focus styles for accessibility */
+.emptyAction:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--green);
+}
