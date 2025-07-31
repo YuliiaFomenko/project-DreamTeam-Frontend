@@ -5,6 +5,7 @@ import { refreshThunk } from "./redux/auth/operations";
 import Routes from "./components/Routes/RouterSet.jsx";
 import Loader from "./components/Loader/Loader.jsx";
 import { UploadPhoto } from "./components/UploadPhoto/UploadPhoto.jsx";
+import { Route } from "react-router-dom";
 
 
 const App = () => {
@@ -15,6 +16,6 @@ const App = () => {
     dispatch(refreshThunk());
   }, [dispatch]);
 
-  return isRefreshing ? <Loader />: <UploadPhoto></UploadPhoto>
+  return isRefreshing ? <Loader />: <Route></Route>
 };
 export default App;
