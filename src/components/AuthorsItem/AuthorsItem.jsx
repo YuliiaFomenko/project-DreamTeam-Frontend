@@ -10,7 +10,6 @@ const AuthorsItem = ({author}) => {
   return (
     <div className={css.item} onClick={handleLink}>
       <div>
-        {/* <p className={css.avatarUrl}> {author.card.avatarUrl} </p> */}
         <img src={author.card.avatarUrl} alt={author.card.name} className={css.cardAutor} onClick={() => {}} />
         <p className={css.name}> {name} </p>
        </div>

@@ -19,9 +19,8 @@ const AuthorsPage = () => {
     dispatch(fetchAuthors());
   }, [dispatch]);
   return (
-    <div>
+    <div className="container"l>
       <h2 className={css.authors}>Authors</h2>
-      {/* {loadingApp && !error && <b>Request in progress...<Loader color='green' loader={loadingApp} /></b>} */}
       <AuthorsList
       />
       <button>Load more</button>
