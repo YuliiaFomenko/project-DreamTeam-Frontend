@@ -1,7 +1,10 @@
 export const selectAllArticles = (state) => state.articles.articles;
-export const selectArticleById = (state) => state.articles.selectedArticle;
+export const selectArticlesPagination = (state) =>
+  state.articles.articlesPagination;
 
-export const selectTotalArticles = (state) => state.articles.totalArticles;
+export const selectPopularArticles = (state) => state.articles.popularArticles;
+export const selectPopularArticlesPagination = (state) =>
+  state.articles.popularArticlesPagination;
 
 export const selectArticlesIsLoading = (state) => state.articles.isLoading;
 export const selectArticlesError = (state) => state.articles.error;
