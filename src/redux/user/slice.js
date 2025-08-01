@@ -55,8 +55,6 @@ const slice = createSlice({
       .addCase(fetchUserInfo.fulfilled, (state, action) => {
         const user = action.payload.data;
         state.users[user._id] = user;
-<<<<<<< HEAD
-=======
       })
       .addCase(fetchTopAuthors.fulfilled, (state, action) => {
         state.topAuthors = action.payload.data.data;
@@ -68,7 +66,6 @@ const slice = createSlice({
           hasPreviousPage: action.payload.data.hasPreviousPage,
           hasNextPage: action.payload.data.hasNextPage,
         };
->>>>>>> main
       })
       .addCase(fetchSavedArticles.fulfilled, (state, action) => {
         state.savedArticles = action.payload.data.data;
@@ -82,17 +79,6 @@ const slice = createSlice({
         };
       })
       .addCase(fetchOwnArticles.fulfilled, (state, action) => {
-<<<<<<< HEAD
-        state.ownArticles = action.payload;
-      })
-      .addCase(addToSaved.fulfilled, (state, action) => {
-        state.savedArticles.push(action.payload);
-      })
-      .addCase(removeFromSaved.fulfilled, (state, action) => {
-        state.savedArticles = state.savedArticles.filter(
-          (article) => article.id !== action.payload
-        );
-=======
         state.ownArticles = action.payload.data.data;
         state.ownArticlesPagination = {
           page: action.payload.data.page,
@@ -102,7 +88,6 @@ const slice = createSlice({
           hasPreviousPage: action.payload.data.hasPreviousPage,
           hasNextPage: action.payload.data.hasNextPage,
         };
->>>>>>> main
       })
       .addCase(createArticle.fulfilled, (state, action) => {
         state.ownArticles.unshift(action.payload);
