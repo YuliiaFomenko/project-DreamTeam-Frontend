@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import s from "./Hero.module.css";
 import clsx from "clsx";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 const Hero = () => {
-  // const isLogged = useSelector(selectIsLoggedIn);
-  const isLogged = false;
+  const isLogged = useSelector(selectIsLoggedIn);
+ 
   return (
     <section className={clsx("container", s.hero)}>
       <div className={s.heroContainer}>
