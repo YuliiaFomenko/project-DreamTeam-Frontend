@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logInThunk } from "../../redux/auth/operations";
+import { registerThunk } from "../../redux/auth/operations";
 import {Link} from "react-router-dom"
 import { Formik, Form, Field, ErrorMessage } from "formik"; 
 import * as Yup from "yup";
@@ -29,18 +29,25 @@ export const RegisterForm = () => {
 
 
   const handleSubmit = (values, { resetForm }) => {
-    const { email, password } = values;
-    dispatch(logInThunk({ email, password,name }));
+    const { email, password, name } = values;
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('name', name);
+    // if (values.avatar) formData.append('avatar', values.avatar);
+    dispatch(registerThunk(formData));
     resetForm();
   };
 
   return (
+    <div className={css.formAuthWrapper}>
     <Formik
       initialValues={{ email: "", password: "", confirmPassword: "", name: "" }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <Form className={css.formAuth}>
+      
+         <Form className={css.formAuth}>
         <h1>Register</h1>
         <p className={css.advertisementRegister}>Join our community of mindfulness and wellbeing!</p>
         <div className={css.fieldAuth}>
@@ -82,7 +89,7 @@ export const RegisterForm = () => {
                   tabIndex={-1}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  <svg width="30px" height="30px" stroke="black" fill="none" stroke-width="1px">
+                  <svg width="30px" height="30px" stroke="black" fill="none" strokeWidth="1px">
                     <use
                       href={
                         showPassword
@@ -115,7 +122,7 @@ export const RegisterForm = () => {
                   tabIndex={-1}
                   aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                 >
-                  <svg width="30px" height="30px" stroke="black" fill="none" stroke-width="1px">
+                  <svg width="30px" height="30px" stroke="black" fill="none" strokeWidth="1px">
                     <use
                       href={
                         showConfirmPassword
@@ -132,7 +139,7 @@ export const RegisterForm = () => {
         </div>
 
         <button type="submit" className={css.buttonAuth}>
-          Login
+          Register
         </button>
         <h3 className={css.descriptionRegister}>
           Already have an account?{" "}
@@ -141,6 +148,9 @@ export const RegisterForm = () => {
           </Link>
         </h3>
       </Form>
-    </Formik>
+      
+     
+      </Formik>
+      </div>
   );
 };
