@@ -1,18 +1,14 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux';
 import {RingLoader} from 'react-spinners';
-import {selectIsLoading} from "../../redux/auth/selectors.js";
+import {selectArticlesIsLoading} from "../../redux/articles/selectors.js";
 
 const Loader = () => {
-    const isLoading = useSelector(selectIsLoading);
+    const isLoading = useSelector(selectArticlesIsLoading);
     const lightGreen = getComputedStyle(document.documentElement).getPropertyValue('--green').trim();
 
-    const loaderSize = useMemo(() => {
-        const width = window.innerWidth;
-        if (width < 768) return 60;
-        if (width < 1440) return 80;
-        return 120;
-    }, []);
+    const width = window.innerWidth;
+    const loaderSize = width < 768 ? 60 : width < 1440 ? 80 : 120;
 
     if (!isLoading) return null;
 
