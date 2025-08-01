@@ -16,6 +16,6 @@ const App = () => {
     dispatch(refreshThunk());
   }, [dispatch]);
 
-  return isRefreshing ? <Loader />: <Route></Route>
+  return isRefreshing ? <Loader />: <Routes></Routes>
 };
 export default App;
