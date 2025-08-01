@@ -1,19 +1,19 @@
-import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {selectIsRefreshing} from "./redux/auth/selectors";
-import {refreshThunk} from "./redux/auth/operations";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsRefreshing } from "./redux/auth/selectors";
+import { refreshThunk } from "./redux/auth/operations";
+import Routes from "./components/Routes/RouterSet.jsx";
 import Loader from "./components/Loader/Loader.jsx";
-import {Routes} from "./components/Routes/RoutersSet.jsx";
 
 
 const App = () => {
-    const dispatch = useDispatch();
-    const isRefreshing = useSelector(selectIsRefreshing);
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
 
-    useEffect(() => {
-        dispatch(refreshThunk());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(refreshThunk());
+  }, [dispatch]);
 
-    return (isRefreshing ? <Loader/> :  <Routes/>)
+  return isRefreshing ? <Loader />: <Routes />
 };
 export default App;
