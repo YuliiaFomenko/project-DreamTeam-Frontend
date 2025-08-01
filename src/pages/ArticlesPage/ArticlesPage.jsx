@@ -6,18 +6,20 @@ import s from "./ArticlesPage.module.css";
 import { fetchArticles, fetchPopular } from "../../redux/articles/operations";
 import {
   selectAllArticles,
+  selectArticlesPagination,
   selectPopularArticles,
-  selectTotalArticles,
 } from "../../redux/articles/selectors";
 import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
 
 const ArticlesPage = () => {
   const dispatch = useDispatch();
-  const [filter, setFilter] = useState("popular");
+  const [filter, setFilter] = useState("All");
 
   const articles = useSelector(selectAllArticles);
   const popularArticles = useSelector(selectPopularArticles);
-  const totalArticles = useSelector(selectTotalArticles);
+
+  const articlesP = useSelector(selectArticlesPagination);
+
   console.log(articles);
 
   useEffect(() => {
@@ -29,13 +31,13 @@ const ArticlesPage = () => {
     <div className="container">
       <h1 className={s.articles}>Articles</h1>
       <div className={s.articles_box}>
-        <p className={s.totalArticles}>{totalArticles} articles</p>
+        <p className={s.totalArticles}>{articlesP.totalItems} articles</p>
         <CustomSelect value={filter} onChange={setFilter} />
       </div>
       <ArticlesList
         filteredArticles={filter === "popular" ? popularArticles : articles}
       />
-      <LoadMoreBtn />
+      <LoadMoreBtn  />
     </div>
   );
 };

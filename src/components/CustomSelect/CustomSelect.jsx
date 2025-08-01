@@ -15,7 +15,7 @@ const CustomSelect = ({ value, onChange }) => {
   return (
     <div className={s.wrapper}>
       <div className={s.select} onClick={toggleDropdown}>
-        <span>{value === "all" ? "All" : "Popular"}</span>
+        <span>{value === "All" ? "All" : "Popular"}</span>
         <GoChevronDown className={isOpen ? s.iconOpen : s.icon} />
       </div>
 

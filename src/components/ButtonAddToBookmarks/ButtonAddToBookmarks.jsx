@@ -4,7 +4,7 @@ import bookmark from "../../assets/img/sprite.svg";
 
 const ButtonAddToBookmarks = () => {
   return (
-    <button t className={s.btn}>
+    <button type="button" className={s.btn}>
       {/* <svg className={s.icon} width="24" height="24">
         <use href={`${bookmark}#icon-bookmark-alternative`} />
       </svg> */}
