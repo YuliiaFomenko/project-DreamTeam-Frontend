@@ -1,30 +1,37 @@
-// import React from 'react';
+import React from 'react';
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import css from './AuthorsPage.module.css';
-
-// , useSelector
-// import { selectError, selectLoadingApp } from '../../redux/authors/selectors';
+import clsx from "clsx";
+import { selectUserError, selectUserIsLoading } from '../../redux/user/selectors';
 import AuthorsList from '../../components/AuthorsList/AuthorsList';
-import { fetchAuthors } from '../../redux/authors/operations';
-// import { css } from "@emotion/react";
-// import Loader from '../../components/Loader/Loader';
+import { fetchTopAuthors } from '../../redux/user/operations';
+import Loader from '../../components/Loader/Loader';
+import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn';
 
 const AuthorsPage = () => {
   const dispatch = useDispatch();
-  // const loadingApp = useSelector(selectLoadingApp);
-  // const error = useSelector(selectError);
+  const loading = useSelector(selectUserIsLoading);
+  const error = useSelector(selectUserError);
+  // const pagination = useSelector(selectTopAuthorsPagination);
+  // const authors = useSelector(selectTopAuthors);
 
   useEffect(() => {
-    dispatch(fetchAuthors());
+    dispatch(fetchTopAuthors());
   }, [dispatch]);
   return (
-    <div className="container"l>
+    <section className={clsx("container", css.page)}>
       <h2 className={css.authors}>Authors</h2>
+      {loading && <div className={css.loading}><h3>Please wait. Loading...</h3><Loader color='blue' loading={loading}/></div>}
+      {error && <div className={css.loading}><h2>Sorry. Server is dead...</h2><Loader color='red' loading={loading}/></div>}
       <AuthorsList
       />
-      <button>Load more</button>
-    </div>
+      {/* {(result.length > 0 && !loading && page < pageMax) && */}
+        <LoadMoreBtn
+        //  nextPage={handleNextPage}
+      />
+        {/* } */}
+    </section>
   )
 };
 

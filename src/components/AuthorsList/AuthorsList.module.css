@@ -1,12 +1,33 @@
 .cardItem {
-  width: 286px;
-  height: 335px;
+  border-radius: 32px;
+  width: 172px;
   padding: 12px;
 }
 .list {
-  width: 1225px;
+  width: 361px;
   display: flex;
   flex-direction: row;
-  gap: 24px, 24px;
+  gap: 16px;
   flex-wrap: wrap;
+  background: #f7fffb;
+  justify-content: space-between;
+}
+@media only screen and (min-width: 768px) {
+  .cardItem {
+    width: 286px;
+  }
+  .list {
+    width: 704px;
+    gap: 24px;
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .cardItem {
+    width: 286px;
+  }
+  .list {
+    width: 1225px;
+    gap: 24px;
+  }
 }
