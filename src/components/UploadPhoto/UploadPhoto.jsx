@@ -18,7 +18,6 @@ export const UploadPhoto = ({ onClose, onSave }) => {
     }
   };
 
-
   const handleSave = () => {
     if (photo) {
       onSave(photo);
