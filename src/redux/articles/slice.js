@@ -39,13 +39,6 @@ const slice = createSlice({
     builder
       .addCase(fetchArticles.fulfilled, (state, action) => {
         state.articles = action.payload.data.data;
-<<<<<<< HEAD
-        state.totalArticles = action.payload.data.totalItems;
-      })
-      .addCase(fetchPopular.fulfilled, (state, action) => {
-        state.popularArticles = action.payload.data.data;
-        state.totalPopular = action.payload.data.totalItems;
-=======
         state.articlesPagination = {
           page: action.payload.data.page,
           perPage: action.payload.data.perPage,
@@ -65,7 +58,6 @@ const slice = createSlice({
           hasPreviousPage: action.payload.data.hasPreviousPage,
           hasNextPage: action.payload.data.hasNextPage,
         };
->>>>>>> main
       })
       .addCase(fetchArticleById.fulfilled, (state, action) => {
         state.selectedArticle = action.payload;
