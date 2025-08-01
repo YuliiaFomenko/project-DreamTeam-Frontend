@@ -1,11 +1,11 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {selectLoggedIn} from "../../redux/auth/selectors.js";
+import {selectIsLoggedIn} from "../../redux/auth/selectors.js";
 import {Navigate} from "react-router-dom";
 import toast from "react-hot-toast";
 
 const PrivateRoute = ({ children}) => {
-    const isLoggedUser = useSelector(selectLoggedIn);
+    const isLoggedUser = useSelector(selectIsLoggedIn);
 
     if(!isLoggedUser) {
         toast.error("You must be logged in to access this page.");
