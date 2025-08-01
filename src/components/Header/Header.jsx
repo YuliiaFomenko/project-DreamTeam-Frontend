@@ -9,12 +9,13 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useBodyLock } from "../../hooks/useBodyLock/useBodyLock";
 import sprite from "../../assets/img/sprite.svg";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 const Header = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  // const isLogged = useSelector(selectIsLoggedIn);
+  const isLogged = useSelector(selectIsLoggedIn);
   useBodyLock(isDrawerOpen);
-  const isLogged = true;
+  
   return (
     <header className={s.header}>
       <div className={clsx("container", s.headerContainer)}>
