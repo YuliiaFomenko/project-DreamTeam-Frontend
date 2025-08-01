@@ -1,17 +1,8 @@
 import React from 'react'
-import Creators from '../../components/Creators/Creators';
-import Footer from '../../components/Footer/Footer';
 
 const HomePage = () => {
   return (
-     <main>
-
-      
-      <Creators />
-      <Footer />
-
-
-    </main>
+    <div>HomePage</div>
   )
 }
 
