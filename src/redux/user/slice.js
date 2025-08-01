@@ -1,27 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToSaved, fetchOwnArticles, fetchSavedArticles, fetchUserInfo, removeFromSaved } from "./operations";
+import {
+  addToSaved,
+  fetchOwnArticles,
+  fetchSavedArticles,
+  fetchUserInfo,
+  removeFromSaved,
+} from "./operations";
 import { isAnyOf } from "@reduxjs/toolkit";
-import { createArticle, deleteArticle, updateArticle } from "../articles/operations";
+import {
+  createArticle,
+  deleteArticle,
+  updateArticle,
+} from "../articles/operations";
 
 const initialState = {
-  userInfo: {
-    id: null,
-    name: null,
-    avatarUrl: null
-  },
-  savedArticles: [],
+  users: {}, //users keyed by ID
   ownArticles: [],
   isLoading: false,
-  error: null
+  error: null,
 };
 
 const slice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserInfo.fulfilled, (state, action) => {
-        state.userInfo = action.payload;
+        const user = action.payload.data;
+        state.users[user._id] = user;
       })
       .addCase(fetchSavedArticles.fulfilled, (state, action) => {
         state.savedArticles = action.payload;
@@ -33,20 +39,26 @@ const slice = createSlice({
         state.savedArticles.push(action.payload);
       })
       .addCase(removeFromSaved.fulfilled, (state, action) => {
-        state.savedArticles = state.savedArticles.filter((article) => article.id !== action.payload);
+        state.savedArticles = state.savedArticles.filter(
+          (article) => article.id !== action.payload
+        );
       })
       .addCase(createArticle.fulfilled, (state, action) => {
         state.ownArticles.unshift(action.payload);
       })
       .addCase(updateArticle.fulfilled, (state, action) => {
         const updatedArticle = action.payload;
-        const index = state.ownArticles.findIndex((article) => article.id === updatedArticle.id);
+        const index = state.ownArticles.findIndex(
+          (article) => article.id === updatedArticle.id
+        );
         if (index !== -1) {
           state.ownArticles[index] = updatedArticle;
         }
       })
       .addCase(deleteArticle.fulfilled, (state, action) => {
-        state.ownArticles = state.ownArticles.filter((article) => article.id !== action.payload);
+        state.ownArticles = state.ownArticles.filter(
+          (article) => article.id !== action.payload
+        );
       })
       .addMatcher(
         isAnyOf(
@@ -95,7 +107,7 @@ const slice = createSlice({
           state.isLoading = false;
         }
       );
-  }
-})
+  },
+});
 
 export const userReducer = slice.reducer;

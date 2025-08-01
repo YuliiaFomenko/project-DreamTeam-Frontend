@@ -11,7 +11,7 @@
   background: #d1e0d8;
 }
 
-.img {
+.img_box {
   width: 100%;
   border-radius: 24px;
   height: 233px;
@@ -51,6 +51,13 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.img_real {
+  border-radius: 24px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .learn_more_link {

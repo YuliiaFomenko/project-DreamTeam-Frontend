@@ -20,10 +20,12 @@
 }
 
 .icon {
+  color: #070721;
   transition: transform 0.2s ease;
 }
 
 .iconOpen {
+  color: #070721;
   transform: rotate(180deg);
   transition: transform 0.2s ease;
 }
