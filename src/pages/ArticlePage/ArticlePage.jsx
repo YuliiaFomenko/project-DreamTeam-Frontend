@@ -9,6 +9,7 @@ import { selectUserInfo, selectUserIsLoading } from '../../redux/user/selectors'
 
 import styles from './ArticlePage.module.css';
 import Loader from '../../components/Loader/Loader';
+import sprite from '../../assets/img/sprite.svg';
 
 const ArticlePage = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const ArticlePage = () => {
   const isArticleLoading = useSelector(selectArticlesIsLoading);
 
   const authorResponse = useSelector(selectUserInfo);
-  const author = authorResponse?.data;  // Витягуємо саме дані автора
+  const author = authorResponse?.data;  
   const isAuthorLoading = useSelector(selectUserIsLoading);
 
   useEffect(() => {
@@ -27,7 +28,6 @@ const ArticlePage = () => {
 
   const article = articleData?.data;
 
-  // Запитуємо автора, коли є ownerId
   useEffect(() => {
     if (article?.ownerId) {
       const userId = typeof article.ownerId === 'object' && article.ownerId.$oid
@@ -50,27 +50,49 @@ const ArticlePage = () => {
     : '';
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>{article.title}</h1>
-
-      {!isAuthorLoading && author?.name && (
-        <p className={styles.author}>Author: {author.name}</p>
-      )}
-
-      {formattedDate && <p className={styles.date}>Date: {formattedDate}</p>}
+    <div className="container">
+      <div className={styles.container}>
+        <h2 className={styles.title}>{article.title}</h2>
 
       {article.img && (
         <img src={article.img} alt={article.title} className={styles.image} />
       )}
+      <div className={styles.contentWrap}>
+      <div className={styles.text}>
+      {article.article
+      .split('/n')
+      .map((paragraph, idx) => (
+      <p key={idx}>{paragraph.trim()}</p>
+      ))}
+      </div>
+      <div><div className={styles.interestedContainer}>
+          {!isAuthorLoading && author?.name && (
+          <p className={styles.author}><strong>Author:</strong> <u>{author.name}</u>
+          </p>
+          )}
 
-      <p className={styles.text}>
-        {article.article.split('\n').map((line, idx) => (
-          <span key={idx}>
-            {line}
-            <br />
-          </span>
-        ))}
-      </p>
+          {formattedDate && <p className={styles.date}><strong>Publication date:</strong> {formattedDate}</p>}
+          <div className={styles.recommendation}>
+            <h3 className={styles.recommendationTitle}>You can also interested</h3>
+            <ul className={styles.recommendationList}>
+              <li className={styles.recommendationItem}>First link<button className={styles.btnOpen}><svg className={styles.arrow}>
+            <use href={`${sprite}#icon-arrows-right`} />
+            </svg></button></li>
+              <li className={styles.recommendationItem}>Second link<button className={styles.btnOpen}><svg className={styles.arrow}>
+            <use href={`${sprite}#icon-arrows-right`} />
+            </svg></button></li>
+              <li className={styles.recommendationItem}>Third link<button className={styles.btnOpen}><svg className={styles.arrow}>
+            <use href={`${sprite}#icon-arrows-right`} />
+            </svg></button></li>
+            </ul>
+          </div>
+        </div>
+        <button className={styles.buttonSave}>Save<svg className={styles.icon}>
+            <use href={`${sprite}#icon-bookmark-alternative`} />
+            </svg></button></div>
+        
+      </div>
+    </div>
     </div>
   );
 };
