@@ -1,9 +1,9 @@
-import React from 'react'
-
 const AuthorProfilePage = () => {
   return (
-    <div>AuthorProfilePage</div>
-  )
-}
+    <div>
+      <h1>Author Profile Page</h1>
+    </div>
+  );
+};
 
-export default AuthorProfilePage
+export default AuthorProfilePage;
