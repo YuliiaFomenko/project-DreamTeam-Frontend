@@ -28,6 +28,7 @@ const initialState = {
     hasPreviousPage: false,
     hasNextPage: false,
   },
+  selectedArticle: null,
   isLoading: false,
   error: null,
 };
@@ -60,7 +61,7 @@ const slice = createSlice({
         };
       })
       .addCase(fetchArticleById.fulfilled, (state, action) => {
-        state.selectedArticle = action.payload;
+        state.selectedArticle = action.payload.data;
       })
       .addCase(createArticle.fulfilled, (state, action) => {
         state.articles.unshift(action.payload);
