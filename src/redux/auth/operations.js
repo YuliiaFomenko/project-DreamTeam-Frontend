@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const goitAPI = axios.create({
-  baseURL: "https://project-dreamteam-backend.onrender.com/",
+  baseURL: "https://project-dreamteam-backend.onrender.com",
 }); //створення індивідуального екземпляра axios, який вже налаштований з baseURL
 
 function setAuthHeader(token) {
@@ -18,7 +18,7 @@ export const registerThunk = createAsyncThunk(
   async (body, thunkAPI) => {
     try {
       const response = await goitAPI.post("/auth/register", body);
-      return response;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

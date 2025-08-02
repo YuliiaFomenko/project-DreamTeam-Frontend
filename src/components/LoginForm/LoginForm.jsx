@@ -28,12 +28,14 @@ export const LoginForm = () => {
   };
 
   return (
+    <div className={css.formAuthWrapper}>
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <Form className={css.formAuth }>
+      
+          <Form className={css.formAuth }>
         <h1>Login</h1>
         <div className={css.fieldAuth }>
           <p className={css.descriptionAuth }>Enter your email address</p>
@@ -97,6 +99,9 @@ export const LoginForm = () => {
           </Link>
         </h3>
       </Form>
+      
+      
     </Formik>
+    </div>
   );
 };
