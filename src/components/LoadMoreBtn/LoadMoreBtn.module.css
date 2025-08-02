@@ -1,0 +1,31 @@
+.loadMoreButton {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #f7fffb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 16px;
+  border: none;
+  border-radius: 64px;
+  padding: 16px;
+  width: 361px;
+  height: 57px;
+  background: #649179;
+}
+
+.loadMoreBtn_box {
+  display: flex;
+  justify-content: center;
+  padding-top: 24px;
+  padding-bottom: 48px;
+}
+
+@media only screen and (min-width: 768px) {
+  .loadMoreButton {
+    width: 390px;
+    height: 57px;
+  }
+}
