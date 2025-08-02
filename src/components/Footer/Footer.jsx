@@ -22,7 +22,7 @@ const Footer = () => {
 
         <ul className={css.nav}>
           <li><Link to="/articles">Articles</Link></li>
-          <li><Link to="/account">Account</Link></li>
+          <li><Link to="authors/:id">Account</Link></li>
         </ul>
         </div>
       </div>
