@@ -1,5 +1,5 @@
 .section {
-  padding: 24px 16px;
+  padding: 72px 0;
 }
 
 .titleline {
@@ -29,22 +29,12 @@
 }
 
 .card {
-  flex: 1 1 100%;
-  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* padding: 12px; */
-  box-sizing: border-box;
-}
-
-.img {
-  width: 148px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 16px;
+  gap: 8px;
+  min-height: 240px; /* ← або конкретна висота, щоб усі картки були рівні */
 }
 
 .name {
@@ -53,39 +43,41 @@
   font-family: var(--font-family);
   font-weight: 700;
   word-wrap: break-word;
+  min-height: 58px; /* ← резерв на 2 рядки */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 4px;
 }
 
-.link {
-  color: var(--green-darker);
-  font-size: 16px;
-  font-family: var(--font-family);
-  font-weight: 700;
-  word-wrap: break-word;
-  transition: color 0.3s ease, text-decoration 0.3s ease;
-}
+/* MOBILE: до 392px — 1 колонка */
+@media screen and (max-width: 392px) {
+  .list {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.link:hover,
-.link:focus-visible {
-  text-decoration: none;
-  color: var(--green);
-  outline: none;
-}
-
-.link:active {
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-}
-
-@media screen and (max-width: 330px) {
   .card {
-    flex-basis: 100%;
+    width: 100%;
+    max-width: 240px;
+  }
+
+  .img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .name {
+    text-align: center;
   }
 }
 
+/* МОБІЛЬНИЙ: від 393px — 2 колонки */
 @media screen and (min-width: 393px) {
   .card {
     flex: 1 1 calc(50% - 16px);
-    /* max-width: calc(50% - 16px); */
+    max-width: calc(50% - 16px);
   }
 
   .img {
@@ -94,6 +86,7 @@
   }
 }
 
+/* ПЛАНШЕТ: від 768px — 3 колонки */
 @media screen and (min-width: 768px) {
   .card {
     flex: 1 1 calc(33.333% - 16px);
@@ -112,6 +105,7 @@
   }
 }
 
+/*  ДЕСКТОП: від 1440px — 6 колонок */
 @media screen and (min-width: 1440px) {
   .card {
     flex: 1 1 calc(16.666% - 16px);
@@ -121,4 +115,66 @@
   .link {
     align-self: center;
   }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.img {
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  overflow: hidden;
+}
+
+.name {
+  color: var(--black);
+  font-size: 24px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--green-darker);
+  font-size: 16px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  word-wrap: break-word;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.icon {
+  stroke: currentColor;
+  fill: none;
+  width: 25px;
+  height: 25px;
+  transform: rotate(315deg);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.link:hover .icon,
+.link:focus-visible .icon {
+  transform: translateX(3px);
+}
+
+.link:hover,
+.link:focus-visible {
+  text-decoration: none;
+  color: var(--green);
+  outline: none;
+}
+
+.link:active {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
 }
