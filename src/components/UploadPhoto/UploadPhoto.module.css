@@ -1,14 +1,22 @@
+.formAuthWrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .formAuth {
     display: flex;
     align-items: center;
+    width: 330px;
     justify-content: flex-start;
     flex-direction: column;
     gap: 20px;
     border-radius: 32px;
     padding: 48px 32px;
-    margin: 202px 16.5px;
     background: #d1e0d8;
     position: relative;
+    margin: 0;
+    position: static;
 }
 
 
@@ -91,12 +99,11 @@
 
 @media only screen and (min-width: 768px) {
     .formAuth {
-        margin: 210px 123px;
-    }
+        width: 522px;}
 }
 
 @media only screen and (min-width: 1440px) {
     .formAuth {
-        margin: 263px 524px;
+        width: 392x;
     }
 }
