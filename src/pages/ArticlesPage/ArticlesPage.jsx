@@ -14,6 +14,7 @@ import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
 const ArticlesPage = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState("All");
+  const [page, setPage] = useState(1);
 
   const articles = useSelector(selectAllArticles);
   const popularArticles = useSelector(selectPopularArticles);
@@ -23,9 +24,13 @@ const ArticlesPage = () => {
   console.log(articles);
 
   useEffect(() => {
-    dispatch(fetchArticles());
+    dispatch(fetchArticles(page));
     dispatch(fetchPopular());
-  }, [dispatch]);
+  }, [dispatch, page]);
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+  };
 
   return (
     <div className="container">
@@ -37,7 +42,7 @@ const ArticlesPage = () => {
       <ArticlesList
         filteredArticles={filter === "popular" ? popularArticles : articles}
       />
-      <LoadMoreBtn  />
+      <LoadMoreBtn handleLoadMore={handleLoadMore} />
     </div>
   );
 };

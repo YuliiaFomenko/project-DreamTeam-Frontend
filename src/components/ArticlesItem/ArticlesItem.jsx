@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInfo } from "../../redux/user/operations";
 import { selectUserInfo } from "../../redux/user/selectors";
 
-const ArticlesItem = ({ ownerId, _id, title, article, img }) => {
+const ArticlesItem = ({ ownerId, _id, title, article, img, isPublic }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,7 +29,11 @@ const ArticlesItem = ({ ownerId, _id, title, article, img }) => {
         <Link to={`/articles/${_id}`} className={s.learn_more_link}>
           Learn more
         </Link>
-        <ButtonAddToBookmarks />
+        <ButtonAddToBookmarks
+          articleId={_id}
+          ownerId={ownerId}
+          isPublic={isPublic}
+        />
       </div>
     </li>
   );

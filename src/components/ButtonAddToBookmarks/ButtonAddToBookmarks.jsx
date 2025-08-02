@@ -1,18 +1,69 @@
-import React from "react";
 import s from "./ButtonAddToBookmarks.module.css";
-import bookmark from "../../assets/img/sprite.svg";
+import sprite from "../../assets/img/sprite.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors.js";
+import { removeFromSaved, addToSaved } from "../../redux/user/operations.js";
+import { useNavigate } from "react-router-dom";
+import { ModalErrorSave } from "../../components/ModalErrorSave/ModalErrorSave.jsx";
+import { useState } from "react";
 
-const ButtonAddToBookmarks = () => {
+export default function ButtonOfToBookmarks({ articleId, ownerId }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  //const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = true;
+  const user = useSelector(selectUser);
+  //const bookmarked = user.savedArticlesIDs.includes(articleId);
+  const bookmarked = false; // For testing purposes, assuming the article is not bookmarked
+  //const ownArticle = user.id === ownerId;
+  const ownArticle = true; // For testing purposes, assuming the user owns the article
+
+  const handleEditClick = () => {
+    navigate(`/articles/${articleId}`);
+  };
+  const handleRemoveBookmarkClick = () => {
+    dispatch(removeFromSaved(articleId));
+  };
+  const handleAddBookmarkClick = () => {
+    dispatch(addToSaved(articleId));
+  };
+  const handleOpenModalClick = () => {
+    setShowLoginModal(true);
+  };
   return (
-    <button type="button" className={s.btn}>
-      {/* <svg className={s.icon} width="24" height="24">
-        <use href={`${bookmark}#icon-bookmark-alternative`} />
-      </svg> */}
-      <svg className={s.icon} width="24" height="24">
-        <use href={`${bookmark}#icon-bookmark`} />
-      </svg>
-    </button>
+    <>
+      {!isLoggedIn && (
+        <button className={s.bookmark} onClick={handleOpenModalClick}>
+          <svg width="34" height="34">
+            <use href={`${sprite}#icon-bookmark-alternative`} />
+          </svg>
+        </button>
+      )}
+      {isLoggedIn && bookmarked && !ownArticle && (
+        <button className={s.bookmarked} onClick={handleRemoveBookmarkClick}>
+          <svg width="34" height="34">
+            <use href={`${sprite}#icon-bookmark-alternative`} />
+          </svg>
+        </button>
+      )}
+      {isLoggedIn && !bookmarked && !ownArticle && (
+        <button className={s.bookmark} onClick={handleAddBookmarkClick}>
+          <svg width="34" height="34">
+            <use href={`${sprite}#icon-bookmark-alternative`} />
+          </svg>
+        </button>
+      )}
+      {isLoggedIn && ownArticle && (
+        <button className={s.edit} onClick={handleEditClick}>
+          <svg width="34" height="34">
+            <use href={`${sprite}#icon-bookmark`} />
+          </svg>
+        </button>
+      )}
+      {showLoginModal && (
+        <ModalErrorSave onClose={() => setShowLoginModal(false)} />
+      )}
+    </>
   );
-};
-
-export default ButtonAddToBookmarks;
+}
