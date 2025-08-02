@@ -10,7 +10,7 @@ import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage.jsx";
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
 const RegisterPage = lazy(() => import("../../pages/RegisterPage/RegisterPage.jsx"));
-const UploadPhoto = lazy(() => import("../../components/UploadPhoto/UploadPhoto.jsx"));
+const UploadPhoto = lazy(() => import("../../pages/UploadPhoto/UploadPhotoPage.jsx"));
 const ArticlesPage = lazy(() => import("../../pages/ArticlesPage/ArticlesPage.jsx"));
 const ArticlePage = lazy(() => import("../../pages/ArticlePage/ArticlePage.jsx"));
 const AuthorsPage = lazy(() => import("../../pages/AuthorsPage/AuthorsPage.jsx"));
