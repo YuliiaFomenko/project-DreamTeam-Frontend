@@ -56,7 +56,7 @@ const Creators = () => {
                     />
                     <span className={css.name}>
 
-                      {creator.name}
+                      {creator.name.split(' ')[0]}
                     </span>
                   </Link>
                 </li>
