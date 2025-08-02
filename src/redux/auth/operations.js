@@ -8,22 +8,10 @@ export const goitAPI = axios.create({
 
 function setAuthHeader(token) {
   goitAPI.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  // goitAPI.interceptors.request.use(
-  //   (config) => {
-  //     if (token) {
-  //       config.headers.Authorization = `Bearer ${token}`;
-  //     }
-  //     return config;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
 }
 
 const clearAuthHeader = () => {
   goitAPI.defaults.headers.common["Authorization"] = "";
-  //delete goitAPI.defaults.headers.common["Authorization"];
 };
 
 export const registerThunk = createAsyncThunk(
