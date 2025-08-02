@@ -5,6 +5,7 @@ import {
   refreshThunk,
   registerThunk,
 } from "./operations";
+import { addToSaved, removeFromSaved } from "../user/operations.js";
 
 const initialState = {
   user: {
@@ -33,7 +34,8 @@ const slice = createSlice({
         state.user.name = action.payload.data.currentUser.name;
         state.user.email = action.payload.data.currentUser.email;
         state.user.avatarUrl = action.payload.data.currentUser.avatarUrl;
-        state.user.savedArticlesIDs = action.payload.data.currentUser.savedArticles;
+        state.user.savedArticlesIDs =
+        action.payload.data.currentUser.savedArticles;
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
       })
@@ -43,10 +45,17 @@ const slice = createSlice({
         state.user.name = action.payload.data.currentUser.name;
         state.user.email = action.payload.data.currentUser.email;
         state.user.avatarUrl = action.payload.data.currentUser.avatarUrl;
-        state.user.savedArticlesIDs = action.payload.data.currentUser.savedArticles;
+        state.user.savedArticlesIDs =
+          action.payload.data.currentUser.savedArticles;
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;
+      })
+      .addCase(addToSaved.fulfilled, (state, action) => {
+        state.user.savedArticlesIDs = action.payload.data.savedArticles;
+      })
+      .addCase(removeFromSaved.fulfilled, (state, action) => {
+        state.user.savedArticlesIDs = action.payload.data.savedArticles;
       })
       .addCase(refreshThunk.pending, (state) => {
         state.isRefreshing = true;
