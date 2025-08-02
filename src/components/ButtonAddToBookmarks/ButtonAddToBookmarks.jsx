@@ -6,13 +6,11 @@ import { removeFromSaved, addToSaved } from "../../redux/user/operations.js";
 import { useNavigate } from "react-router-dom";
 import { ModalErrorSave } from "../../components/ModalErrorSave/ModalErrorSave.jsx";
 import { useState } from "react";
-import { refreshThunk } from "../../redux/auth/operations.js";
 
 export default function ButtonOfToBookmarks({ articleId, ownerId }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [buttonRefresh, setButtonRefresh] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   // const isLoggedIn = true;
@@ -27,11 +25,9 @@ export default function ButtonOfToBookmarks({ articleId, ownerId }) {
   };
   const handleRemoveBookmarkClick = () => {
     dispatch(removeFromSaved(articleId));
-    dispatch(refreshThunk());
   };
   const handleAddBookmarkClick = () => {
     dispatch(addToSaved(articleId));
-    dispatch(refreshThunk());
   };
   const handleOpenModalClick = () => {
     setShowLoginModal(true);
