@@ -57,7 +57,7 @@ export const addToSaved = createAsyncThunk(
   "user/addToSaved",
   async (articleId, thunkAPI) => {
     try {
-      const { data } = await goitAPI.post(`/bookmarks/add/${articleId}`);
+      const { data } = await goitAPI.patch(`/bookmarks/add/${articleId}`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -69,7 +69,7 @@ export const removeFromSaved = createAsyncThunk(
   "user/removeFromSaved",
   async (articleId, thunkAPI) => {
     try {
-      const { data } = await goitAPI.delete(`/bookmarks/remove/${articleId}`);
+      const { data } = await goitAPI.patch(`/bookmarks/remove/${articleId}`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
