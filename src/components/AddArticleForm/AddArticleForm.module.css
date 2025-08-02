@@ -160,7 +160,8 @@ input:focus {
     grid-template-columns: auto 1fr;
     grid-template-areas:
       "image input"
-      "textarea textarea";
+      "textarea textarea"
+      "button button";
   }
 
   .imageUpload {
@@ -182,6 +183,11 @@ input:focus {
   .textareaText {
     grid-area: textarea;
     margin-top: 0px;
+  }
+
+  .submitBtn {
+    grid-area: button;
+    width: 100%; 
   }
 }
 /* Styles for Desktop devices */

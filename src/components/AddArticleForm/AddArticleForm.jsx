@@ -21,7 +21,7 @@ const validationSchema = Yup.object({
     .max(4000, 'Article must be at most 4000 characters')
     .required('Article is required'),
 
-  image: Yup.mixed()
+  img: Yup.mixed()
     .required('Image is required')
     .test('fileSize', 'Image must be less than 1MB', value => {
       return value && value.size <= MAX_FILE_SIZE;
@@ -36,7 +36,7 @@ const AddArticleForm = ({ initialData = null }) => {
   const initialValues = {
     title: initialData?.title || '',
     article: initialData?.article || '',
-    image: initialData?.image || null,
+    img: initialData?.img || null,
   };
 
   const handleSubmit = async (values, actions) => {
@@ -44,10 +44,11 @@ const AddArticleForm = ({ initialData = null }) => {
       const formData = new FormData();
       formData.append('title', values.title);
       formData.append('article', values.article);
+      formData.append('ownerId.$oid', '6881563901add19ee16fd018');
 
       if (isEdit) {
-        if (values.image && typeof values.image !== 'string') {
-          formData.append('image', values.image);
+        if (values.img && typeof values.img !== 'string') {
+          formData.append('image', values.img);
         }
 
         const result = await dispatch(
@@ -57,8 +58,8 @@ const AddArticleForm = ({ initialData = null }) => {
         toast.success('Article successfully updated');
         navigate(`/articles/${result._id}`);
       } else {
-        formData.append('image', values.image);
         formData.append('date', new Date().toISOString());
+        formData.append('image', values.img);
 
         const result = await dispatch(createArticle(formData)).unwrap();
 
@@ -120,25 +121,25 @@ const AddArticleForm = ({ initialData = null }) => {
             </div>
 
             <div className={styles.imageUpload}>
-              <label htmlFor="image" className={styles.imageLabel}>
+              <label htmlFor="img" className={styles.imageLabel}>
                 <input
                   type="file"
-                  id="image"
-                  name="image"
+                  id="img"
+                  name="img"
                   accept="image/*"
                   className={styles.hiddenInput}
                   onChange={(event) => {
                     const file = event.currentTarget.files[0];
-                    setFieldValue('image', file);
+                    setFieldValue('img', file);
                   }}
                 />
                 <div className={styles.imagePreview}>
-                  {values.image ? (
+                  {values.img ? (
                     <img
                       src={
-                        typeof values.image === 'string'
-                          ? values.image
-                          : URL.createObjectURL(values.image)
+                        typeof values.img === 'string'
+                          ? values.img
+                          : URL.createObjectURL(values.img)
                       }
                       alt="Preview"
                       className={styles.previewImage}
@@ -150,8 +151,8 @@ const AddArticleForm = ({ initialData = null }) => {
                   )}
                 </div>
               </label>
-              {touched.image && errors.image && (
-                <div className={styles.error}>{errors.image}</div>
+              {touched.img && errors.img && (
+                <div className={styles.error}>{errors.img}</div>
               )}
             </div>
 
@@ -170,7 +171,6 @@ const AddArticleForm = ({ initialData = null }) => {
 };
 
 export default AddArticleForm;
-
 
 
 
