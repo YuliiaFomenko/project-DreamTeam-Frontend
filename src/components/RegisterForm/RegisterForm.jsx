@@ -11,10 +11,12 @@ const validationSchema = Yup.object({
     .email("Invalid email address")
     .required("Email is required"),
   password: Yup.string()
-    .required("Password is required"),
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters long"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Repeat your password"),
+    .required("Repeat your password")
+    .min(8, "Password must be at least 8 characters long"),
   name: Yup.string()
     .required("Name is required"),
   

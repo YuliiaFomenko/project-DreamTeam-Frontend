@@ -29,22 +29,22 @@ const slice = createSlice({
         state.registrationStatus = action.payload.status;
       })
       .addCase(logInThunk.fulfilled, (state, action) => {
-        state.user.id = action.payload.currentUser._id;
-        state.user.name = action.payload.currentUser.name;
-        state.user.email = action.payload.currentUser.email;
-        state.user.avatarUrl = action.payload.currentUser.avatarUrl;
-        state.user.savedArticlesIDs = action.payload.currentUser.savedArticles;
-        state.token = action.payload.accessToken;
+        state.user.id = action.payload.data.currentUser._id;
+        state.user.name = action.payload.data.currentUser.name;
+        state.user.email = action.payload.data.currentUser.email;
+        state.user.avatarUrl = action.payload.data.currentUser.avatarUrl;
+        state.user.savedArticlesIDs = action.payload.data.currentUser.savedArticles;
+        state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
       })
       .addCase(logOutThunk.fulfilled, () => initialState)
       .addCase(refreshThunk.fulfilled, (state, action) => {
-        state.user.id = action.payload.currentUser._id;
-        state.user.name = action.payload.currentUser.name;
-        state.user.email = action.payload.currentUser.email;
-        state.user.avatarUrl = action.payload.currentUser.avatarUrl;
-        state.user.savedArticlesIDs = action.payload.currentUser.savedArticles;
-        state.token = action.payload.accessToken;
+        state.user.id = action.payload.data.currentUser._id;
+        state.user.name = action.payload.data.currentUser.name;
+        state.user.email = action.payload.data.currentUser.email;
+        state.user.avatarUrl = action.payload.data.currentUser.avatarUrl;
+        state.user.savedArticlesIDs = action.payload.data.currentUser.savedArticles;
+        state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })

@@ -18,7 +18,7 @@ export const registerThunk = createAsyncThunk(
   async (body, thunkAPI) => {
     try {
       const response = await goitAPI.post("/auth/register", body);
-      return response;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
