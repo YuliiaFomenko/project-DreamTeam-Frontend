@@ -1,10 +1,10 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {RingLoader} from 'react-spinners';
-import {selectArticlesIsLoading} from "../../redux/articles/selectors.js";
+import { selectIsAnyLoading } from '../../redux/globalSelectors/globalSelectors.js';
 
 const Loader = () => {
-    const isLoading = useSelector(selectArticlesIsLoading);
+    const isLoading = useSelector(selectIsAnyLoading);
     const lightGreen = getComputedStyle(document.documentElement).getPropertyValue('--green').trim();
 
     const width = window.innerWidth;
