@@ -10,8 +10,8 @@ const ArticlesPage = () => {
       <div>ArticlesPage</div>
       <button
         onClick={() => {
-          dispatch(refreshThunk());
-          //dispatch(addToSaved("68498236a100312bea078fea"));
+          //dispatch(refreshThunk());
+          dispatch(addToSaved("68498236a100312bea078fea"));
         }}
       >
         Click Me
