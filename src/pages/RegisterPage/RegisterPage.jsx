@@ -1,23 +1,20 @@
-import React from 'react'
-import { RegisterForm } from '../../components/RegisterForm/RegisterForm'
-import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { selectIsLoggedIn } from '../../redux/auth/selectors'
+import React, { useEffect } from 'react';
+import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/'); // або на потрібну сторінку
+      navigate('/photo');
     }
   }, [isLoggedIn, navigate]);
 
-  return (
-    <RegisterForm></RegisterForm>
-  )
-}
+  return <RegisterForm />;
+};
 
-export default LoginPage
+export default RegisterPage;
