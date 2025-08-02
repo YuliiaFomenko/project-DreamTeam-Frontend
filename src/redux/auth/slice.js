@@ -35,7 +35,7 @@ const slice = createSlice({
         state.user.email = action.payload.data.currentUser.email;
         state.user.avatarUrl = action.payload.data.currentUser.avatarUrl;
         state.user.savedArticlesIDs =
-          action.payload.data.currentUser.savedArticles;
+        action.payload.data.currentUser.savedArticles;
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
       })
