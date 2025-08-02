@@ -44,7 +44,6 @@ const AddArticleForm = ({ initialData = null }) => {
       const formData = new FormData();
       formData.append('title', values.title);
       formData.append('article', values.article);
-      formData.append('ownerId.$oid', '6881563901add19ee16fd018');
 
       if (isEdit) {
         if (values.img && typeof values.img !== 'string') {
