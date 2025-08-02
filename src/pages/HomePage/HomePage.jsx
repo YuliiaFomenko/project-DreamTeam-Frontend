@@ -1,13 +1,14 @@
-import React from 'react'
-import Creators from '../../components/Creators/Creators';
-
+import React from "react";
+import Hero from "../../components/Hero/Hero";
+import About from "../../components/About/About";
 
 const HomePage = () => {
   return (
-     <main>   
-      <Creators />
+    <main>
+      <Hero />
+      <About />
     </main>
-  )
-}
+  );
+};
 
 export default HomePage;

@@ -1,0 +1,121 @@
+.formAuthWrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.formAuth {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 330px;
+    gap: 20px;
+    border-radius: 32px;
+    padding: 48px 32px;
+    background: #d1e0d8;
+    margin: 0;
+    position: static;
+}
+
+.descriptionAuth {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+}
+.advertisementRegister{
+    text-align: center;
+}
+
+.fieldAuth {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputAuth {
+    border: 1.5px solid #9f9f9f;
+    border-radius: 16px;
+    padding: 8px;
+    background: #f7fffb;
+    width: 100%;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(100, 145, 121, 0.08);
+}
+
+.errorAuth {
+    color: #e74c3c;
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+
+.buttonAuth {
+    border-radius: 64px;
+    padding: 8px 0;
+    width: 100%;
+    font-weight: 700;
+    font-size: 16px;
+    background: #649179;
+    color: #f7fffb;
+    border: none;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.descriptionRegister {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.55;
+
+}
+
+.spanRegister {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.55;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+}
+
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputAuth {
+  width: 100%;
+  padding-right: 40px; /* space for the eye button */
+  box-sizing: border-box;
+  /* Add your other input styles here */
+}
+
+.eyeButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+    .formAuth {
+        width: 522px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .formAuth {
+        width: 392px;
+    }
+}
