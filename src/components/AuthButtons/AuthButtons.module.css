@@ -64,7 +64,7 @@
   .authHeader .register {
     display: flex;
   }
-  .authMobile .register {
+  .authMobile li:last-child {
     display: none;
   }
 }

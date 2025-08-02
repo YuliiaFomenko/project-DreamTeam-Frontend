@@ -34,7 +34,6 @@
 }
 .grid li {
   width: 100%;
-  background-color: red;
 }
 @media (min-width: 768px) {
   .link {

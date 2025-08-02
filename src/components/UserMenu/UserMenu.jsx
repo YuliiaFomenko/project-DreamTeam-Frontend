@@ -1,11 +1,10 @@
 import s from "./UserMenu.module.css";
 import clsx from "clsx";
-import userLogo from "../../assets/img/header/user-logo.jpg";
 import sprite from "../../assets/img/sprite.svg";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
 
-const UserMenu = ({ className }) => {
+const UserMenu = ({ className, logoutClickHandle }) => {
   const user = useSelector(selectUser);
   return (
     <div
@@ -27,7 +26,11 @@ const UserMenu = ({ className }) => {
           <p className={s.userName}>{user.name}</p>
         </div>
         <span className={s.spacer}></span>
-        <button className={s.logout} aria-label="Log out">
+        <button
+          className={s.logout}
+          aria-label="Log out"
+          onClick={() => logoutClickHandle()}
+        >
           <svg width="24" height="24" fill="none" stroke="var(--green-darker)">
             <use href={`${sprite}#icon-log-out`} />
           </svg>

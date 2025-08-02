@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectPopularArticles } from "../../redux/articles/selectors";
 import { useEffect } from "react";
 import { fetchPopular } from "../../redux/articles/operations";
+import ArticlesItem from "../ArticlesItem/ArticlesItem";
 
 const PopularArticles = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const PopularArticles = () => {
   const articles = useSelector(selectPopularArticles);
 
   return (
-    <div className={s.popularArticles}>
+    <div className={s.popularArticles} id="popular-articles">
       <div className="container">
         <div className={s.top}>
           <h2 className={s.title}>Popular Articles</h2>
@@ -28,10 +29,7 @@ const PopularArticles = () => {
         </div>
         <ul className={s.grid}>
           {articles.slice(0, 4).map((article) => (
-            <li className={s.item} key={article._id}>
-              {article.title}
-              {article._id}
-            </li>
+            <ArticlesItem key={article._id} {...article} />
           ))}
         </ul>
       </div>
