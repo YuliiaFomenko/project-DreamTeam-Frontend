@@ -19,11 +19,21 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  pendingRegistration: null,
 };
 
 const slice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    // нові reducers
+    setPendingRegistration(state, action) {
+      state.pendingRegistration = action.payload;
+    },
+    clearPendingRegistration(state) {
+      state.pendingRegistration = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerThunk.fulfilled, (state, action) => {
@@ -34,8 +44,7 @@ const slice = createSlice({
         state.user.name = action.payload.data.currentUser.name;
         state.user.email = action.payload.data.currentUser.email;
         state.user.avatarUrl = action.payload.data.currentUser.avatarUrl;
-        state.user.savedArticlesIDs =
-        action.payload.data.currentUser.savedArticles;
+        state.user.savedArticlesIDs = action.payload.data.currentUser.savedArticles;
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
       })
@@ -45,8 +54,7 @@ const slice = createSlice({
         state.user.name = action.payload.data.currentUser.name;
         state.user.email = action.payload.data.currentUser.email;
         state.user.avatarUrl = action.payload.data.currentUser.avatarUrl;
-        state.user.savedArticlesIDs =
-          action.payload.data.currentUser.savedArticles;
+        state.user.savedArticlesIDs = action.payload.data.currentUser.savedArticles;
         state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;
@@ -66,4 +74,6 @@ const slice = createSlice({
   },
 });
 
+// експорт нових action'ів
+export const { setPendingRegistration, clearPendingRegistration } = slice.actions;
 export const authReducer = slice.reducer;

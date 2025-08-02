@@ -12,7 +12,7 @@ const RegisterPage = lazy(() =>
   import("../../pages/RegisterPage/RegisterPage.jsx")
 );
 const UploadPhoto = lazy(() =>
-  import("../../components/UploadPhoto/UploadPhoto.jsx")
+  import("../../pages/UploadPhoto/UploadPhotoPage.jsx")
 );
 const ArticlesPage = lazy(() =>
   import("../../pages/ArticlesPage/ArticlesPage.jsx")

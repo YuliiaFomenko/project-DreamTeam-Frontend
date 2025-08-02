@@ -9,11 +9,11 @@ const Layout = () => {
   return (
     <div className="app-wrapper">
       <Header />
-      <Suspense fallback={<Loader />}>
         <div className="content">
-          <Outlet />
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
         </div>
-      </Suspense>
       <Footer />
       <Toaster position="top-right" reverseOrder={false} />
     </div>
