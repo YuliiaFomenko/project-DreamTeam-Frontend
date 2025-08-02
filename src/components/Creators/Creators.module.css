@@ -56,12 +56,9 @@
 }
 
 .link {
-<<<<<<< HEAD
   display: inline-flex;
   align-items: center;
   gap: 12px;
-=======
->>>>>>> main
   color: var(--green-darker);
   font-size: 16px;
   font-family: var(--font-family);
@@ -70,7 +67,6 @@
   transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
-<<<<<<< HEAD
 .icon {
   stroke: currentColor;
   fill: none;
@@ -86,8 +82,6 @@
   transform: translateX(3px);
 }
 
-=======
->>>>>>> main
 .link:hover,
 .link:focus-visible {
   text-decoration: none;
