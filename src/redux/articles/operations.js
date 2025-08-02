@@ -3,9 +3,9 @@ import { goitAPI } from "../auth/operations";
 
 export const fetchArticles = createAsyncThunk(
   "articles/fetchArticles",
-  async (_, thunkAPI) => {
+  async (page, thunkAPI) => {
     try {
-      const { data } = await goitAPI.get("/articles");
+      const { data } = await goitAPI.get(`/articles?page=${page}&perPage=12`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -15,11 +15,23 @@ export const fetchArticles = createAsyncThunk(
 
 export const fetchPopular = createAsyncThunk(
   "articles/fetchPopular",
-  async (_, thunkAPI) => {
+  async (page, thunkAPI) => {
     try {
       const { data } = await goitAPI.get(
-        "/articles?sortBy=rate&sortOrder=desc&minRate=1"
+        `/articles?sortBy=rate&sortOrder=desc&minRate=1&page=${page}&perPage=12`
       );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchRandom = createAsyncThunk(
+  "articles/fetchRandom",
+  async (_, thunkAPI) => {
+    try {
+      const { data } = await goitAPI.get("/articles/random");
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
