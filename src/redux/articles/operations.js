@@ -27,6 +27,18 @@ export const fetchPopular = createAsyncThunk(
   }
 );
 
+export const fetchRandom = createAsyncThunk(
+  "articles/fetchRandom",
+  async (_, thunkAPI) => {
+    try {
+      const { data } = await goitAPI.get("/articles/random");
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const fetchArticleById = createAsyncThunk(
   "articles/fetchArticleById",
   async (articleId, thunkAPI) => {
