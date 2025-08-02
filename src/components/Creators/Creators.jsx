@@ -25,7 +25,7 @@ const Creators = () => {
       <div className="container">
         <div className={css.titleline}>
           <h2 className={css.title}>Top Creators</h2>
-          <Link to="/creators" className={css.link} data-testid="creators-link">
+          <Link to="/authors" className={css.link} data-testid="creators-link">
             Go to all Creators
             <svg className={css.icon} width="25" height="25">
               <use href="/src/assets/img/sprite.svg#icon-arrows-right" />
