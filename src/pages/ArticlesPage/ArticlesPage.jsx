@@ -10,6 +10,7 @@ import {
   selectPopularArticles,
 } from "../../redux/articles/selectors";
 import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
+import { logOutThunk } from "../../redux/auth/operations";
 
 const ArticlesPage = () => {
   const dispatch = useDispatch();
@@ -35,12 +36,19 @@ const ArticlesPage = () => {
   return (
     <div className="container">
       <h1 className={s.articles}>Articles</h1>
+      <button
+        onClick={() => {
+          dispatch(logOutThunk());
+        }}
+      >
+        logOut
+      </button>
       <div className={s.articles_box}>
         <p className={s.totalArticles}>{articlesP.totalItems} articles</p>
         <CustomSelect value={filter} onChange={setFilter} />
       </div>
       <ArticlesList
-        filteredArticles={filter === "popular" ? popularArticles : articles}
+        filteredArticles={filter === "Popular" ? popularArticles : articles}
       />
       <LoadMoreBtn handleLoadMore={handleLoadMore} />
     </div>

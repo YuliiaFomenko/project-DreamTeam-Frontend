@@ -21,10 +21,10 @@ const CustomSelect = ({ value, onChange }) => {
 
       {isOpen && (
         <ul className={s.dropdown}>
-          <li className={s.dropdownLi} onClick={() => handleSelect("all")}>
+          <li className={s.dropdownLi} onClick={() => handleSelect("All")}>
             All
           </li>
-          <li className={s.dropdownLi} onClick={() => handleSelect("popular")}>
+          <li className={s.dropdownLi} onClick={() => handleSelect("Popular")}>
             Popular
           </li>
         </ul>
