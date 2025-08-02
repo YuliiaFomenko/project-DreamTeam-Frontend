@@ -40,7 +40,7 @@ const Creators = () => {
           {Array.isArray(creators?.data) && creators.data.length > 0 ? (
             creators.data.slice(0, 6).map((creator) => (
               <li key={creator._id || creator.id} className={css.card} data-testid="creator-card">
-                <Link to={`/creators/${creator._id || creator.id}`}>
+                <Link to={`/authors/${creator._id || creator.id}`}>
                   <img
                     className={css.img}
                     src={creator.avatarUrl}

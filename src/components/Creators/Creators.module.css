@@ -51,6 +51,27 @@
   padding: 0 4px;
 }
 
+.link {
+  color: var(--green-darker);
+  font-size: 16px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  word-wrap: break-word;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  text-decoration: none;
+  color: var(--green);
+  outline: none;
+}
+
+.link:active {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
 /* MOBILE: до 392px — 1 колонка */
 @media screen and (max-width: 392px) {
   .list {
