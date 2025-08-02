@@ -7,11 +7,23 @@ export const goitAPI = axios.create({
 }); //створення індивідуального екземпляра axios, який вже налаштований з baseURL
 
 function setAuthHeader(token) {
-  goitAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
+  //goitAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
+  goitAPI.interceptors.request.use(
+    (config) => {
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 }
 
 const clearAuthHeader = () => {
-  goitAPI.defaults.headers.common.Authorization = "";
+  //goitAPI.defaults.headers.common.Authorization = "";
+  delete goitAPI.defaults.headers.common["Authorization"];
 };
 
 export const registerThunk = createAsyncThunk(
@@ -25,7 +37,7 @@ export const registerThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-);    
+);
 
 export const logInThunk = createAsyncThunk(
   "auth/login",
