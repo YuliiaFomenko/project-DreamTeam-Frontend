@@ -72,22 +72,17 @@ export const UploadPhoto = ({ onClose }) => {
    }
  };
 
- // Перевірка на наявність даних для реєстрації
- if (!pendingRegistration) {
-   return (
-     <div className={css.formAuth}>
-       <h1 className={css.title}>Помилка</h1>
-       <p>Немає даних для реєстрації. Поверніться до форми реєстрації.</p>
-       <button onClick={() => navigate('/register')}>
-         Повернутися до реєстрації
-       </button>
-     </div>
-   );
- }
 
- return (
+
+  return (
+   <div className={css.formAuthWrapper}>
+    
    <div className={css.formAuth}>
-     <button className={css.close} onClick={handleClose}></button>
+     <button className={css.close} onClick={handleSkip} disabled={loading}>
+       <svg width="24" height="24" stroke="black" fill="none" strokeWidth="1px">
+         <use href="/src/assets/img/sprite.svg#icon-close"></use>
+       </svg>
+     </button>
      <h1 className={css.title}>Upload your photo</h1>
      <div className={css.photoCircle} onClick={handleCircleClick}>
        {preview ? (
@@ -121,9 +116,7 @@ export const UploadPhoto = ({ onClose }) => {
      >
        {loading ? "Registering..." : "Save"}
      </button>
-     <button onClick={handleSkip} disabled={loading} className={css.skipButton}>
-       Skip
-     </button>
+   </div>
    </div>
  );
 };
