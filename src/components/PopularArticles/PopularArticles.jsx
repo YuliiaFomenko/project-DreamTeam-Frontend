@@ -13,7 +13,6 @@ const PopularArticles = () => {
     dispatch(fetchPopular());
   }, [dispatch]);
   const articles = useSelector(selectPopularArticles);
-  console.log(articles);
 
   return (
     <div className={s.popularArticles}>
@@ -29,7 +28,10 @@ const PopularArticles = () => {
         </div>
         <ul className={s.grid}>
           {articles.slice(0, 4).map((article) => (
-            <li key={article._id}></li>
+            <li className={s.item} key={article._id}>
+              {article.title}
+              {article._id}
+            </li>
           ))}
         </ul>
       </div>

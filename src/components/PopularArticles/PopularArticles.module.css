@@ -26,9 +26,43 @@
 .link svg {
   transform: rotate(45deg);
 }
-
+.grid {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.grid li {
+  width: 100%;
+  background-color: red;
+}
+@media (min-width: 768px) {
+  .link {
+    display: none;
+  }
+  .grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .grid li {
+    width: calc((100% - 24px) / 2);
+  }
+}
 @media (min-width: 1440px) {
   .title {
     font-size: 40px;
+  }
+  .link {
+    display: flex;
+  }
+  .top {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .grid li {
+    width: calc((100% - 48px) / 3);
+  }
+  .grid li:last-child {
+    display: none;
   }
 }

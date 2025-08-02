@@ -2,8 +2,11 @@ import s from "./UserMenu.module.css";
 import clsx from "clsx";
 import userLogo from "../../assets/img/header/user-logo.jpg";
 import sprite from "../../assets/img/sprite.svg";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors";
 
 const UserMenu = ({ className }) => {
+  const user = useSelector(selectUser);
   return (
     <div
       className={clsx(
@@ -15,14 +18,13 @@ const UserMenu = ({ className }) => {
       <div className={s.userInfo}>
         <div className={s.user}>
           <img
-            src={userLogo}
-            srcSet={`${userLogo} 1x, ${userLogo} 2x`}
+            src={user.avatarUrl}
             alt="User Logo"
             className={s.userLogo}
             width="32"
             height="32"
           />
-          <p className={s.userName}>Naomi</p>
+          <p className={s.userName}>{user.name}</p>
         </div>
         <span className={s.spacer}></span>
         <button className={s.logout} aria-label="Log out">
