@@ -89,6 +89,12 @@ const slice = createSlice({
           hasNextPage: action.payload.data.hasNextPage,
         };
       })
+      .addCase(addToSaved.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(removeFromSaved.fulfilled, (state) => {
+        state.isLoading = false;
+      })
       .addCase(createArticle.fulfilled, (state, action) => {
         state.ownArticles.unshift(action.payload);
       })
