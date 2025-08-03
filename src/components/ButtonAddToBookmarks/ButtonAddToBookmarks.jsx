@@ -14,24 +14,24 @@ export default function ButtonOfToBookmarks({ articleId, ownerId }) {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  // const isLoggedIn = true;
   const user = useSelector(selectUser);
   const bookmarked = user.savedArticlesIDs.includes(articleId);
-  // const bookmarked = false; // For testing purposes, assuming the article is not bookmarked
   const ownArticle = user.id === ownerId;
-  // const ownArticle = true; // For testing purposes, assuming the user owns the article
 
   const handleEditClick = () => {
     navigate(`/create/${articleId}`);
   };
-  const handleRemoveBookmarkClick = () => {
-    dispatch(refreshThunk());
-    dispatch(removeFromSaved(articleId));
-  };
-  const handleAddBookmarkClick = () => {
-    dispatch(refreshThunk());
+
+  const handleAddBookmarkClick = async () => {
+    await dispatch(refreshThunk());
     dispatch(addToSaved(articleId));
   };
+
+  const handleRemoveBookmarkClick = async () => {
+    await dispatch(refreshThunk());
+    dispatch(removeFromSaved(articleId));
+  };
+
   const handleOpenModalClick = () => {
     setShowLoginModal(true);
   };
