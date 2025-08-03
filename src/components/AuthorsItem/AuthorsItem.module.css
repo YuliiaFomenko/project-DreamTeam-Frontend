@@ -1,0 +1,19 @@
+.cardAuthor {
+  transition: transform 0.4s;
+}
+
+.avatardAuthor {
+  border-radius: 50%;
+}
+
+.name {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  color: #070721;
+}
+.cardAuthor:hover,
+.cardAuthor:focus {
+  transform: scale(1.05);
+}
