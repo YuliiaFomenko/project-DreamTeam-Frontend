@@ -115,6 +115,7 @@ const slice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchUserInfo.pending,
+          fetchTopAuthors.pending,
           fetchSavedArticles.pending,
           fetchOwnArticles.pending,
           addToSaved.pending,
@@ -131,6 +132,7 @@ const slice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchUserInfo.rejected,
+          fetchTopAuthors.rejected,
           fetchSavedArticles.rejected,
           fetchOwnArticles.rejected,
           addToSaved.rejected,
