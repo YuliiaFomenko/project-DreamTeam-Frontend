@@ -1,78 +1,76 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import css from './Creators.module.css';
+import sprite from '../../assets/img/sprite.svg';
 
+import { fetchTopAuthors } from '../../redux/user/operations';
+import {
+  selectTopAuthors,
+  selectUserIsLoading,
 
-const creators = [
-  {
-    id: 1,
-    name: 'Naomi',
-    img1x: 'https://placehold.co/200x200?text=Naomi',
-    img2x: 'https://placehold.co/400x400?text=Naomi',
-  },
-  {
-    id: 2,
-    name: 'Andrii',
-    img1x: 'https://placehold.co/200x200?text=Andrii',
-    img2x: 'https://placehold.co/400x400?text=Andrii',
-  },
-  {
-    id: 3,
-    name: 'Emma',
-    img1x: 'https://placehold.co/200x200?text=Emma',
-    img2x: 'https://placehold.co/400x400?text=Emma',
-  },
-  {
-    id: 4,
-    name: 'Max',
-    img1x: 'https://placehold.co/200x200?text=Max',
-    img2x: 'https://placehold.co/400x400?text=Max',
-  },
-  {
-    id: 5,
-    name: 'Tony',
-    img1x: 'https://placehold.co/200x200?text=Tony',
-    img2x: 'https://placehold.co/400x400?text=Tony',
-  },
-  {
-    id: 6,
-    name: 'Tailor',
-    img1x: 'https://placehold.co/200x200?text=Tailor',
-    img2x: 'https://placehold.co/400x400?text=Tailor',
-  },
-];
+} from '../../redux/user/selectors';
 
 
 const Creators = () => {
-  return (
-    <section className={css.section}>
-      <div className='container'>
-          <div className={css.titleline}>
-            <h2 className={css.title}>Top Creators</h2>
-              <Link to="/creators" className={css.link}>
-                          Go to all Creators
-              </Link>
-          </div>
+  const dispatch = useDispatch();
+  const creators = useSelector(selectTopAuthors);
+  const isLoading = useSelector(selectUserIsLoading);
 
-  <ul className={css.list}>
-    {creators.map((creator) => (
-      <li key={creator.id} className={css.card}>
-        <Link to={`/creators/${creator.id}`}>
-          <img
-            className={css.img}
-            src={creator.img1x}
-            srcSet={`${creator.img1x} 1x, ${creator.img2x} 2x`}
-            alt={creator.name}
-          />
-          <span className={css.name}>{creator.name}</span>
-        </Link>
-      </li>
-    ))}
-  </ul>
-  </div>
-</section>
+
+  useEffect(() => {
+    if (!creators || creators.length === 0) {
+      dispatch(fetchTopAuthors(1));
+    }
+  }, [dispatch, creators]);
+
+  return (
+    <section className={css.section} data-testid="creators-section">
+      <div className="container">
+        <div className={css.titleline}>
+          <h2 className={css.title}>Top Creators</h2>
+          <Link to="/authors" className={css.link} data-testid="creators-link">
+            Go to all Creators
+            <svg className={css.icon} width="25" height="25">
+              <use href={`${sprite}#icon-arrows-right`} />
+            </svg>
+          </Link>
+        </div>
+
+
+
+        <ul className={css.list}>
+          {Array.isArray(creators) && creators.length > 0 ? (
+            creators.slice(0, 6).map((creator) => {
+              const creatorId = creator._id || creator.id;
+
+
+              return (
+                <li key={creatorId} className={css.card} data-testid="creator-card">
+                  <Link to={`/authors/${creatorId}`}>
+                    <img
+                      className={css.img}
+                      src={creator.avatarUrl}
+                      alt={creator.name}
+                    />
+                    <span className={css.name}>
+
+                      {creator.name.split(' ')[0]}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })
+          ) : (
+            !isLoading && <p className={css.error}>No creators found.</p>
+          )}
+        </ul>
+      </div>
+    </section>
   );
 };
 
-
 export default Creators;
+
+
