@@ -3,6 +3,7 @@
   height: 74px;
   display: flex;
   position: sticky;
+  z-index: 999;
   top: 0;
 }
 .headerContainer {

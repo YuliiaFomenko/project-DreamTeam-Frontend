@@ -1,5 +1,3 @@
-
-
 .backdrop {
   position: fixed;
   top: 0;
@@ -10,17 +8,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 99999999;
 }
 
 .modal {
   position: relative;
-  background-color:  #d1e0d8;
+  background-color: #d1e0d8;
   border-radius: 32px;
   padding: 56px 32px 32px 32px;
   text-align: center;
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
-   max-width: 297px; 
+  max-width: 297px;
   width: 100%;
   box-sizing: content-box;
 }
@@ -28,7 +26,6 @@
   padding: 56px 16px 32px 16px !important;
   max-width: 330px;
 }
-
 
 .closeBtn {
   position: absolute;
@@ -41,19 +38,18 @@
 }
 
 @media only screen and (min-width: 768px) {
- .modal {
-  max-width: 435px;
- }
- .compact {
-  padding: 56px 32px 32px 32px !important;
-  max-width: 356px;
-}
+  .modal {
+    max-width: 435px;
+  }
+  .compact {
+    padding: 56px 32px 32px 32px !important;
+    max-width: 356px;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
   .modal {
-  max-width: 356px;
-  padding-bottom: 32px;
- }
-  
+    max-width: 356px;
+    padding-bottom: 32px;
+  }
 }

@@ -1,0 +1,66 @@
+/* .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border: 1px solid #374f42;
+  border-radius: 64px;
+  min-width: 40px;
+  height: 40px;
+  background: #d1e0d8;
+}
+
+.icon {
+  stroke: #374f42;
+  fill: #d1e0d8;
+}
+
+.active {
+  background: #649179;
+  border: 1px solid #649179;
+}
+
+.active .icon {
+  stroke: #ffffff;
+  fill: #649179;
+} */
+
+.bookmark {
+  margin: 0 auto;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--green-darker);
+  border-radius: 50%;
+  fill: var(--light-green);
+  stroke: var(--green-darker);
+  background-color: var(--light-green);
+}
+.bookmarked {
+  margin: 0 auto;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--green);
+  border-radius: 50%;
+  fill: var(--green);
+  stroke: var(--white);
+  background-color: var(--green);
+}
+.edit {
+  margin: 0 auto;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--green-darker);
+  border-radius: 50%;
+  fill: transparent;
+  stroke: var(--green-darker);
+  background-color: var(--light-green);
+}
