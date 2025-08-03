@@ -9,7 +9,7 @@
 .title {
   font-weight: 700;
   font-size: 32px;
-  line-height: 100%;
+  line-height: 40px;
   letter-spacing: 0em;
   color: #000;
 }
@@ -22,9 +22,26 @@
   line-height: 100%;
   letter-spacing: 0em;
   color: var(--green-darker);
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+.link:hover,
+.link:focus {
+  text-decoration: none;
+  color: var(--green);
+  outline: none;
 }
 .link svg {
-  transform: rotate(45deg);
+  stroke: currentColor;
+  fill: none;
+  width: 25px;
+  height: 25px;
+  transform: rotate(315deg);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+.link:hover svg,
+.link:focus svg {
+  transform: translateX(3px);
 }
 .grid {
   margin-top: 16px;
@@ -36,8 +53,9 @@
   width: 100%;
 }
 @media (min-width: 768px) {
-  .link {
-    display: none;
+  .top {
+    flex-direction: row;
+    justify-content: space-between;
   }
   .grid {
     flex-direction: row;
@@ -50,13 +68,6 @@
 @media (min-width: 1440px) {
   .title {
     font-size: 40px;
-  }
-  .link {
-    display: flex;
-  }
-  .top {
-    flex-direction: row;
-    justify-content: space-between;
   }
   .grid li {
     width: calc((100% - 48px) / 3);

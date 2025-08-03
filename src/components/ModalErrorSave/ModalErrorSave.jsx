@@ -1,12 +1,12 @@
-import { ModalBase } from '../ModalBase/ModalBase';
-import styles from './ModalErrorSave.module.css';
-import { useNavigate } from 'react-router-dom';
+import { ModalBase } from "../ModalBase/ModalBase";
+import styles from "./ModalErrorSave.module.css";
+import { useNavigate } from "react-router-dom";
 
-export const ModalErrorSave = ({ onClose }) => {
+export const ModalErrorSave = ({ onClose, isOpen }) => {
   const navigate = useNavigate();
 
   return (
-    <ModalBase onClose={onClose}>
+    <ModalBase onClose={onClose} isOpen={isOpen}>
       <h2 className={styles.title}>Error while saving</h2>
       <p className={styles.text}>
         To save this article, you need to authorize first
@@ -15,7 +15,7 @@ export const ModalErrorSave = ({ onClose }) => {
         <button
           className={styles.loginBtn}
           onClick={() => {
-            navigate('/login');
+            navigate("/login");
             onClose();
           }}
         >
@@ -24,7 +24,7 @@ export const ModalErrorSave = ({ onClose }) => {
         <button
           className={styles.registerBtn}
           onClick={() => {
-            navigate('/register');
+            navigate("/register");
             onClose();
           }}
         >
