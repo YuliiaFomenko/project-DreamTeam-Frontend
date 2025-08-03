@@ -22,7 +22,7 @@ const Header = () => {
   useEffect(() => {
     setDrawerOpen(false);
   }, [location]);
-  useBodyLock(isDrawerOpen);
+  useBodyLock(isDrawerOpen || isSignOutModalOpen);
 
   return (
     <header className={s.header}>
@@ -76,14 +76,13 @@ const Header = () => {
         closeDrawer={() => setDrawerOpen(false)}
         logoutClickHandle={() => setSignOutModalOpen(true)}
       />
-      {isSignOutModalOpen && (
-        <ModalSignOutConfirm
-          onClose={() => setSignOutModalOpen(false)}
-          onLogout={() => dispatch(logOutThunk())}
-          isOpen={isDrawerOpen}
-          closeDrawer={() => setDrawerOpen(false)}
-        />
-      )}
+
+      <ModalSignOutConfirm
+        onClose={() => setSignOutModalOpen(false)}
+        onLogout={() => dispatch(logOutThunk())}
+        isOpen={isSignOutModalOpen}
+        closeDrawer={() => setSignOutModalOpen(false)}
+      />
     </header>
   );
 };

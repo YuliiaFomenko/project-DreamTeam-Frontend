@@ -22,15 +22,19 @@ const PopularArticles = () => {
           <h2 className={s.title}>Popular Articles</h2>
           <Link className={s.link} to="/articles">
             Go to all Articles
-            <svg width="32" height="32" stroke="var(--green-darker)">
-              <use href={`${sprite}#icon-arrows-up`} />
+            <svg width="25" height="25" stroke="var(--green-darker)">
+              <use href={`${sprite}#icon-arrows-right`} />
             </svg>
           </Link>
         </div>
         <ul className={s.grid}>
-          {articles.slice(0, 4).map((article) => (
-            <ArticlesItem key={article._id} {...article} />
-          ))}
+          {articles &&
+            articles.length > 0 &&
+            articles
+              .slice(0, 4)
+              .map((article) => (
+                <ArticlesItem key={article._id} {...article} />
+              ))}
         </ul>
       </div>
     </div>

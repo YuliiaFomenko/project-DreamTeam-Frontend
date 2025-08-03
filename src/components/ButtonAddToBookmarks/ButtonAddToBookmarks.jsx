@@ -6,6 +6,7 @@ import { removeFromSaved, addToSaved } from "../../redux/user/operations.js";
 import { useNavigate } from "react-router-dom";
 import { ModalErrorSave } from "../../components/ModalErrorSave/ModalErrorSave.jsx";
 import { useState } from "react";
+import { useBodyLock } from "../../hooks/useBodyLock/useBodyLock.js";
 
 export default function ButtonOfToBookmarks({ articleId, ownerId }) {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ export default function ButtonOfToBookmarks({ articleId, ownerId }) {
   const handleOpenModalClick = () => {
     setShowLoginModal(true);
   };
+  useBodyLock(showLoginModal);
+
   return (
     <>
       {!isLoggedIn && (
@@ -62,9 +65,10 @@ export default function ButtonOfToBookmarks({ articleId, ownerId }) {
           </svg>
         </button>
       )}
-      {showLoginModal && (
-        <ModalErrorSave onClose={() => setShowLoginModal(false)} />
-      )}
+      <ModalErrorSave
+        onClose={() => setShowLoginModal(false)}
+        isOpen={showLoginModal}
+      />
     </>
   );
 }
