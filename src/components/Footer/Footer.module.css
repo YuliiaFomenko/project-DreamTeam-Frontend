@@ -1,6 +1,7 @@
 .footer {
   background: var(--light-green);
-  padding: 32px 0 16px 0;
+  padding: 32px 0 16px;
+  margin-top: 36px;
 }
 
 .inner {
@@ -12,15 +13,14 @@
 }
 
 .logo {
-  fill: currentColor;
-  /* font-size: 32px;
-  font-weight: 700;
-  font-family: var(--font-family);
-  color: var(--green);
-  transition: filter 0.3s ease, transform 0.2s ease; */
+  fill: var(--green-darker);
+  transition: filter 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
-/* .logo:hover,
+.logo:hover,
 .logo:focus-visible {
   opacity: 0.9;
   filter: brightness(1.1);
@@ -29,26 +29,19 @@
 
 .logo:active {
   transform: scale(0.98);
-} */
-
-.copyright {
-  font-size: 14px;
-  color: var(--gray);
 }
 
 .nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   padding: 0;
   margin: 0;
   list-style: none;
   font-size: 16px;
   font-family: var(--font-family);
   font-weight: 700;
-  word-wrap: break-word;
-  color: var(--green);
 }
 
 .nav li a {
@@ -71,17 +64,19 @@
   transition: opacity 0.3s ease;
 }
 
+.copyright {
+  font-size: 14px;
+  color: var(--gray);
+  font-family: var(--font-family);
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
   .inner {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    text-align: left;
-  }
-
-  .logo {
-    font-size: 24px;
-    fill: currentColor;
+    text-align: center;
   }
 
   .nav {
@@ -92,19 +87,21 @@
   .nav li a {
     font-size: 16px;
   }
+
+  .logo {
+    font-size: 28px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
   .inner {
     flex-direction: row;
-    /* max-width: 1440px; */
+    justify-content: space-between;
+    align-items: center;
+    min-height: 64px;
+    max-width: 1280px;
     margin: 0 auto;
     /* padding: 0 32px; */
-  }
-
-  .logo {
-    font-size: 28px;
-    fill: currentColor;
   }
 
   .nav {
@@ -113,5 +110,14 @@
 
   .nav li a {
     font-size: 18px;
+  }
+
+  .logo {
+    font-size: 32px;
+  }
+
+  .logo svg {
+    display: block;
+    height: 32px;
   }
 }
