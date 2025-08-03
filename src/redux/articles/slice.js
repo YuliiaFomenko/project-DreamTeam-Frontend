@@ -94,6 +94,8 @@ const slice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchArticles.pending,
+          fetchPopular.pending,
+          fetchRandom.pending,
           fetchArticleById.pending,
           createArticle.pending,
           updateArticle.pending,
@@ -107,6 +109,8 @@ const slice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchArticles.rejected,
+          fetchPopular.rejected,
+          fetchRandom.rejected,
           fetchArticleById.rejected,
           createArticle.rejected,
           updateArticle.rejected,
