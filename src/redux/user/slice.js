@@ -55,6 +55,7 @@ const slice = createSlice({
       .addCase(fetchUserInfo.fulfilled, (state, action) => {
         const user = action.payload.data;
         state.users[user._id] = user;
+        state.isLoading = false;
       })
       .addCase(fetchTopAuthors.fulfilled, (state, action) => {
         state.topAuthors = action.payload.data.data;
@@ -66,6 +67,7 @@ const slice = createSlice({
           hasPreviousPage: action.payload.data.hasPreviousPage,
           hasNextPage: action.payload.data.hasNextPage,
         };
+        state.isLoading = false;
       })
       .addCase(fetchSavedArticles.fulfilled, (state, action) => {
         state.savedArticles = action.payload.data.data;
@@ -77,6 +79,7 @@ const slice = createSlice({
           hasPreviousPage: action.payload.data.hasPreviousPage,
           hasNextPage: action.payload.data.hasNextPage,
         };
+        state.isLoading = false;
       })
       .addCase(fetchOwnArticles.fulfilled, (state, action) => {
         state.ownArticles = action.payload.data.data;
@@ -88,6 +91,7 @@ const slice = createSlice({
           hasPreviousPage: action.payload.data.hasPreviousPage,
           hasNextPage: action.payload.data.hasNextPage,
         };
+        state.isLoading = false;
       })
       .addCase(addToSaved.fulfilled, (state) => {
         state.isLoading = false;
@@ -97,6 +101,7 @@ const slice = createSlice({
       })
       .addCase(createArticle.fulfilled, (state, action) => {
         state.ownArticles.unshift(action.payload);
+        state.isLoading = false;
       })
       .addCase(updateArticle.fulfilled, (state, action) => {
         const updatedArticle = action.payload;
@@ -106,11 +111,13 @@ const slice = createSlice({
         if (index !== -1) {
           state.ownArticles[index] = updatedArticle;
         }
+        state.isLoading = false;
       })
       .addCase(deleteArticle.fulfilled, (state, action) => {
         state.ownArticles = state.ownArticles.filter(
           (article) => article.id !== action.payload
         );
+        state.isLoading = false;
       })
       .addMatcher(
         isAnyOf(
@@ -144,21 +151,6 @@ const slice = createSlice({
         (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
-        }
-      )
-      .addMatcher(
-        isAnyOf(
-          fetchUserInfo.fulfilled,
-          fetchSavedArticles.fulfilled,
-          fetchOwnArticles.fulfilled,
-          addToSaved.fulfilled,
-          removeFromSaved.fulfilled,
-          createArticle.fulfilled,
-          updateArticle.fulfilled,
-          deleteArticle.fulfilled
-        ),
-        (state) => {
-          state.isLoading = false;
         }
       );
   },
