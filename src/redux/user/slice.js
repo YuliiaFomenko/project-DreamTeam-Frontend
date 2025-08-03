@@ -89,6 +89,12 @@ const slice = createSlice({
           hasNextPage: action.payload.data.hasNextPage,
         };
       })
+      .addCase(addToSaved.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(removeFromSaved.fulfilled, (state) => {
+        state.isLoading = false;
+      })
       .addCase(createArticle.fulfilled, (state, action) => {
         state.ownArticles.unshift(action.payload);
       })
@@ -109,6 +115,7 @@ const slice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchUserInfo.pending,
+          fetchTopAuthors.pending,
           fetchSavedArticles.pending,
           fetchOwnArticles.pending,
           addToSaved.pending,
@@ -125,6 +132,7 @@ const slice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchUserInfo.rejected,
+          fetchTopAuthors.rejected,
           fetchSavedArticles.rejected,
           fetchOwnArticles.rejected,
           addToSaved.rejected,

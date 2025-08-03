@@ -1,37 +1,37 @@
 @font-face {
-  font-family: 'Manrope';
-  src: url(../fonts/Manrope-VariableFont_wght.ttf) format('truetype');
+  font-family: "Manrope";
+  src: url(../fonts/Manrope-VariableFont_wght.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'DM Sans';
-  src: url(../fonts/DMSans-VariableFont_opsz_wght.ttf) format('truetype');
+  font-family: "DM Sans";
+  src: url(../fonts/DMSans-VariableFont_opsz_wght.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'Noto Sans';
-  src: url(../fonts/NotoSans-VariableFont_wdth_wght.ttf) format('truetype');
+  font-family: "Noto Sans";
+  src: url(../fonts/NotoSans-VariableFont_wdth_wght.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'Merienda';
-  src: url(../fonts/Merienda-VariableFont_wght.ttf) format('truetype');
+  font-family: "Merienda";
+  src: url(../fonts/Merienda-VariableFont_wght.ttf) format("truetype");
 }
 
 :root {
   --font-family: "Manrope", sans-serif;
   --second-family: "DM Sans", sans-serif;
   --third-family: "Noto Sans", sans-serif;
-  --harmony: 'Merienda', sans-serif;
-	--green: #649179;
-	--black: #070721;
-	--light-green: #d1e0d8;
-	--red: #ad6a6c;
-	--purple: #7678ed;
-	--white: #f7fffb;
-	--green-darker: #374f42;
-	--gray: #595d62;
-	--light-gray: #9f9f9f;
+  --harmony: "Merienda", sans-serif;
+  --green: #649179;
+  --black: #070721;
+  --light-green: #d1e0d8;
+  --red: #ad6a6c;
+  --purple: #7678ed;
+  --white: #f7fffb;
+  --green-darker: #374f42;
+  --gray: #595d62;
+  --light-gray: #9f9f9f;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -43,7 +43,10 @@
 * {
   box-sizing: border-box;
 }
-
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 74px;
+}
 body {
   margin: 0;
   padding: 0;
@@ -51,7 +54,19 @@ body {
   line-height: 1.5;
   color: var(--black);
   background-color: var(--white);
+  height: 100%;
 }
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
 .body-lock {
   position: fixed;
   top: 0;

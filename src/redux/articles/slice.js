@@ -5,6 +5,7 @@ import {
   fetchArticleById,
   fetchArticles,
   fetchPopular,
+  fetchRandom,
   updateArticle,
 } from "./operations";
 import { isAnyOf } from "@reduxjs/toolkit";
@@ -28,6 +29,7 @@ const initialState = {
     hasPreviousPage: false,
     hasNextPage: false,
   },
+  randomArticles: [],
   selectedArticle: null,
   isLoading: false,
   error: null,
@@ -60,6 +62,9 @@ const slice = createSlice({
           hasNextPage: action.payload.data.hasNextPage,
         };
       })
+      .addCase(fetchRandom.fulfilled, (state, action) => {
+        state.randomArticles = action.payload.data;
+      })
       .addCase(fetchArticleById.fulfilled, (state, action) => {
         state.selectedArticle = action.payload.data;
       })
@@ -89,6 +94,8 @@ const slice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchArticles.pending,
+          fetchPopular.pending,
+          fetchRandom.pending,
           fetchArticleById.pending,
           createArticle.pending,
           updateArticle.pending,
@@ -102,6 +109,8 @@ const slice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchArticles.rejected,
+          fetchPopular.rejected,
+          fetchRandom.rejected,
           fetchArticleById.rejected,
           createArticle.rejected,
           updateArticle.rejected,

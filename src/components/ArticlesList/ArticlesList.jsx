@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
+import ArticlesItem from "../ArticlesItem/ArticlesItem";
+import s from "./ArticlesList.module.css";
 
-const ArticlesList = () => {
+const ArticlesList = ({ filteredArticles, isPublic }) => {
   return (
-    <div>ArticlesList</div>
-  )
-}
+    <div>
+      <ul className={s.articlesList}>
+        {filteredArticles.map((item) => {
+          return <ArticlesItem isPublic={isPublic} key={item._id} {...item} />;
+        })}
+      </ul>
+    </div>
+  );
+};
 
-export default ArticlesList
+export default ArticlesList;

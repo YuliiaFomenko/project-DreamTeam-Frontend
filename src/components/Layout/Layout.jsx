@@ -7,14 +7,16 @@ import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
   return (
-    <>
+    <div className="app-wrapper">
       <Header />
-      <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense>
+        <div className="content">
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        </div>
       <Footer />
       <Toaster position="top-right" reverseOrder={false} />
-    </>
+    </div>
   );
 };
 

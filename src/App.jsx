@@ -5,6 +5,7 @@ import { refreshThunk } from "./redux/auth/operations";
 import Routes from "./components/Routes/RouterSet.jsx";
 import Loader from "./components/Loader/Loader.jsx";
 
+
 const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -13,6 +14,6 @@ const App = () => {
     dispatch(refreshThunk());
   }, [dispatch]);
 
-  return isRefreshing ? <Loader />: <Routes />};
+  return isRefreshing ? <Loader />: <Routes></Routes>
+};
 export default App;
-

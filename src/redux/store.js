@@ -5,6 +5,7 @@ import { authReducer } from "./auth/slice";
 import { userReducer } from "./user/slice";
 import { articlesReducer } from "./articles/slice";
 
+
 const persistConfig = {
   key: "root-auth",
   version: 1,
@@ -18,7 +19,7 @@ export const store = configureStore({
   reducer: {
     auth: persistedReducer,
     user: userReducer,
-    articles: articlesReducer
+    articles: articlesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

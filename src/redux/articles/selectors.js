@@ -6,6 +6,8 @@ export const selectPopularArticles = (state) => state.articles.popularArticles;
 export const selectPopularArticlesPagination = (state) =>
   state.articles.popularArticlesPagination;
 
+export const selectRandomArticles = (state) => state.articles.randomArticles;
+
 export const selectArticleById = (state) => state.articles.selectedArticle;
 
 export const selectArticlesIsLoading = (state) => state.articles.isLoading;
