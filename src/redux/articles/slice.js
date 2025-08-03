@@ -50,6 +50,7 @@ const slice = createSlice({
           hasPreviousPage: action.payload.data.hasPreviousPage,
           hasNextPage: action.payload.data.hasNextPage,
         };
+        state.isLoading = false;
       })
       .addCase(fetchPopular.fulfilled, (state, action) => {
         state.popularArticles = action.payload.data.data;
@@ -61,15 +62,19 @@ const slice = createSlice({
           hasPreviousPage: action.payload.data.hasPreviousPage,
           hasNextPage: action.payload.data.hasNextPage,
         };
+        state.isLoading = false;
       })
       .addCase(fetchRandom.fulfilled, (state, action) => {
         state.randomArticles = action.payload.data;
+        state.isLoading = false;
       })
       .addCase(fetchArticleById.fulfilled, (state, action) => {
         state.selectedArticle = action.payload.data;
+        state.isLoading = false;
       })
       .addCase(createArticle.fulfilled, (state, action) => {
         state.articles.unshift(action.payload);
+        state.isLoading = false;
       })
       .addCase(updateArticle.fulfilled, (state, action) => {
         const updatedArticle = action.payload;
@@ -82,6 +87,7 @@ const slice = createSlice({
         if (state.selectedArticle?.id === updatedArticle.id) {
           state.selectedArticle = updatedArticle;
         }
+        state.isLoading = false;
       })
       .addCase(deleteArticle.fulfilled, (state, action) => {
         state.articles = state.articles.filter(
@@ -90,6 +96,7 @@ const slice = createSlice({
         if (state.selectedArticle?.id === action.payload) {
           state.selectedArticle = null;
         }
+        state.isLoading = false;
       })
       .addMatcher(
         isAnyOf(
@@ -119,18 +126,6 @@ const slice = createSlice({
         (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
-        }
-      )
-      .addMatcher(
-        isAnyOf(
-          fetchArticles.fulfilled,
-          fetchArticleById.fulfilled,
-          createArticle.fulfilled,
-          updateArticle.fulfilled,
-          deleteArticle.fulfilled
-        ),
-        (state) => {
-          state.isLoading = false;
         }
       );
   },
