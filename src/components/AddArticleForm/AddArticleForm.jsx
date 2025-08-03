@@ -57,7 +57,7 @@ const AddArticleForm = ({ initialData = null }) => {
         toast.success('Article successfully updated');
         navigate(`/articles/${result._id}`);
       } else {
-        formData.append('date', new Date().toISOString());
+        formData.append('date', new Date().toISOString().split('T')[0]);
         formData.append('image', values.img);
 
         const result = await dispatch(createArticle(formData)).unwrap();
