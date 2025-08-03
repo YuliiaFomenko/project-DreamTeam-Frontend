@@ -47,15 +47,19 @@
   height: 57px;
   letter-spacing: 0em;
   text-align: center;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 .articlesButton:hover {
   background-color: var(--green-darker);
+}
+.articlesButton:focus {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
 }
 .registerButton {
   padding: 16px;
   border-radius: 64px;
   border: 1px solid var(--green-darker);
+  background-color: transparent;
   color: var(--green-darker);
   font-weight: 700;
   font-size: 18px;
@@ -63,11 +67,14 @@
   height: 57px;
   letter-spacing: 0em;
   text-align: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 .registerButton:hover {
-  background-color: var(--green);
-  color: var(--white);
+  background-color: #fff;
+}
+.registerButton:focus {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  background-color: #fff;
 }
 @media (min-width: 393px) {
   .hero {

@@ -3,10 +3,11 @@
   font-weight: 700;
   font-size: 40px;
   color: #000;
+  margin-bottom: 16px;
 }
 
 .page {
   background: #f7fffb;
   margin: 0 auto;
-  margin-top: 48px;
+  padding-top: 48px;
 }

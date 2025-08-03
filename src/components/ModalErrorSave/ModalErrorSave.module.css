@@ -1,23 +1,20 @@
 .title {
-
-font-weight: 700;
-font-size: 32px;
-text-align: center;
-color: #070721;
-margin-bottom: 20px;
-display: inline-block;
-
+  font-weight: 700;
+  font-size: 32px;
+  text-align: center;
+  color: #070721;
+  margin-bottom: 20px;
+  display: inline-block;
 }
 
 .text {
-   display: inline-block;
+  display: inline-block;
   font-weight: 400;
- font-size: 16px;
- line-height: 155%;
- text-align: center;
- color: #070721;
- margin-bottom: 20px;
-
+  font-size: 16px;
+  line-height: 155%;
+  text-align: center;
+  color: #070721;
+  margin-bottom: 20px;
 }
 
 .buttonGroup {
@@ -35,7 +32,7 @@ display: inline-block;
   font-weight: 700;
   cursor: pointer;
   font-size: 16px;
- transition: all 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .registerBtn {
@@ -47,45 +44,45 @@ display: inline-block;
   font-weight: 700;
   cursor: pointer;
   font-size: 16px;
-  transition: all 0.3s ease;
-  
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-.registerBtn:hover, .registerBtn:focus{
- box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
-background: #649179;
+.registerBtn:hover {
+  background: var(--green-darker);
+}
+.registerBtn:focus {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
 }
 .registerBtn:active {
-  background-color: #374f42;
+  background-color: var(--green-darker);
 }
-.loginBtn:hover, .loginBtn:focus {
- box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
-background: #f7fffb;
-
-} 
-.loginBtn:active  {
+.loginBtn:hover {
   background-color: #f7fffb;
- }
- .loginBtn:focus,
+}
+.loginBtn:focus {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  background-color: var(--white);
+}
+.loginBtn:active {
+  background-color: var(--white);
+}
+.loginBtn:focus,
 .registerBtn:focus {
   outline: none;
 }
 
 @media only screen and (min-width: 768px) {
- .buttonGroup{
-   flex-direction: row;
-   gap: 27px;
-   
+  .buttonGroup {
+    flex-direction: row;
+    gap: 27px;
   }
   .loginBtn,
   .registerBtn {
     width: 100%;
   }
-  .text{
+  .text {
     max-width: 250px;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  
 }
-

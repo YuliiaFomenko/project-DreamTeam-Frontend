@@ -10,7 +10,7 @@ import {
   selectPopularArticles,
 } from "../../redux/articles/selectors";
 import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
-import { logOutThunk } from "../../redux/auth/operations";
+import clsx from "clsx";
 
 const ArticlesPage = () => {
   const dispatch = useDispatch();
@@ -34,15 +34,8 @@ const ArticlesPage = () => {
   };
 
   return (
-    <div className="container">
+    <div className={clsx("container", s.articlesContainer)}>
       <h1 className={s.articles}>Articles</h1>
-      <button
-        onClick={() => {
-          dispatch(logOutThunk());
-        }}
-      >
-        logOut
-      </button>
       <div className={s.articles_box}>
         <p className={s.totalArticles}>{articlesP.totalItems} articles</p>
         <CustomSelect value={filter} onChange={setFilter} />
