@@ -8,31 +8,35 @@ import AuthorsList from '../../components/AuthorsList/AuthorsList';
 import { fetchTopAuthors } from '../../redux/user/operations';
 import Loader from '../../components/Loader/Loader';
 import LoadMore from '../../components/LoadMore/LoadMoreBtn';
-
+// let listAuthors = [];
 const AuthorsPage = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const [allAuthors, setAuthors] = useState([]);
+  // const [allAuthors, setAuthors] = useState([]);
   let loading = useSelector(selectUserIsLoading);
   const error = useSelector(selectUserError);
   const pagination = useSelector(selectTopAuthorsPagination);
   const authors = useSelector(selectTopAuthors);
   
- 
-
   const handleNextPage = () => {
-    setPage(page + 1);
     // setAuthors(prev => [...prev, ...authors]);
-  };
-    const handleAddPage = () => {
-    setAuthors(prev => [...prev, ...authors]);
+    setPage(page + 1);
+    // handleAddPage();
   };
 
+  // const handleAddPage = () => {
+  //   setAuthors(prev => [...prev, ...authors]);
+  // };
+  
   useEffect(() => {
     dispatch(fetchTopAuthors(page));
   }, [dispatch, page]);
-  console.log(loading)
+  
   loading = false;
+  // console.log(allAuthors);
+  // console.log(authors);
+  // listAuthors = [...listAuthors, ...authors];
+
   return (
     <section className={clsx("container", css.page)}>
       <h2 className={css.authors}>Authors</h2>
@@ -40,9 +44,8 @@ const AuthorsPage = () => {
       {error && <div className={css.loading}><h2>Sorry. Server is dead...</h2><Loader color='red' loading={loading} /></div>}
       
       <AuthorsList
-        authors={authors}
-        allAuthors={allAuthors}
-        handlePage={handleAddPage}
+        listAuthors={authors}
+        // handleAddPage={handleAddPage}
       />
       {(pagination.hasNextPage && !loading) &&
       <LoadMore

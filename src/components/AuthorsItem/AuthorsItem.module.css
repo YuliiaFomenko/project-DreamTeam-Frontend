@@ -1,8 +1,8 @@
-.cardAutor {
+.cardAuthor {
   transition: transform 0.4s;
 }
 
-.avatardAutor {
+.avatardAuthor {
   border-radius: 50%;
 }
 
@@ -13,7 +13,7 @@
   text-align: center;
   color: #070721;
 }
-.cardAutor:hover,
-.cardAutor:focus {
+.cardAuthor:hover,
+.cardAuthor:focus {
   transform: scale(1.05);
 }
