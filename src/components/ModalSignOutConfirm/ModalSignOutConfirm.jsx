@@ -9,7 +9,11 @@ export const ModalSignOutConfirm = ({
   closeDrawer,
 }) => {
   return (
-    <ModalBase onClose={onClose} className={modalBaseStyles.compact}>
+    <ModalBase
+      onClose={onClose}
+      isOpen={isOpen}
+      className={modalBaseStyles.compact}
+    >
       <h2 className={styles.title}>Are you sure?</h2>
       <p className={styles.text}>We will miss you!</p>
       <div className={styles.buttonGroup}>
