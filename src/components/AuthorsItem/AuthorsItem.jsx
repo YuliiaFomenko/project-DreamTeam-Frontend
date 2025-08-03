@@ -10,8 +10,8 @@ const AuthorsItem = ({author}) => {
     return (
     <div className={css.item}>
       <Link to={`/authors/${author.card._id}`}>
-      <div>
-        <img src={author.card.avatarUrl} alt={author.card.name} className={css.cardAutor} />
+      <div className={css.cardAutor} >
+        <img src={author.card.avatarUrl} alt={author.card.name} className={css.avatardAutor} />
         <p className={css.name}> {author.card.name.split(' ')[0]} </p>
       </div>
       </Link>

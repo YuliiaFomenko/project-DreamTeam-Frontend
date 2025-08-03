@@ -1,5 +1,9 @@
+.load {
+  display: flex;
+  justify-content: center;
+}
+
 .loadMore {
-  margin: 0 auto;
   width: 340px;
   height: 57px;
   background: #649179;
@@ -14,20 +18,8 @@
   margin-top: 24px;
   margin-bottom: 48px;
 }
-
-/* Styles for Tablet devices */
-/* @media only screen and (min-width: 768px) {
-  .loadMore {
-    margin: 0 auto;
-    width: 340px;
-    margin-top: 24px;
-    margin-bottom: 48px;
-  }
-} */
-/* Styles for Desktop devices */
 @media only screen and (min-width: 1440px) {
   .loadMore {
-    /* margin: 0 auto; */
     width: 390px;
   }
 }

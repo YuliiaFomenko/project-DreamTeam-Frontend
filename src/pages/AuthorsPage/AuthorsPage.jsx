@@ -7,40 +7,45 @@ import { selectUserError, selectUserIsLoading, selectTopAuthorsPagination, selec
 import AuthorsList from '../../components/AuthorsList/AuthorsList';
 import { fetchTopAuthors } from '../../redux/user/operations';
 import Loader from '../../components/Loader/Loader';
-import LoadMoreBtn from '../../components/LoadMore/LoadMoreBtn';
+import LoadMore from '../../components/LoadMore/LoadMoreBtn';
 
 const AuthorsPage = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  // const [allAuthors, setAuthors] = useState([]);
-  const loading = useSelector(selectUserIsLoading);
+  const [allAuthors, setAuthors] = useState([]);
+  let loading = useSelector(selectUserIsLoading);
   const error = useSelector(selectUserError);
   const pagination = useSelector(selectTopAuthorsPagination);
   const authors = useSelector(selectTopAuthors);
+  
+ 
 
   const handleNextPage = () => {
-      setPage(page + 1);
-    };
+    setPage(page + 1);
+    // setAuthors(prev => [...prev, ...authors]);
+  };
+    const handleAddPage = () => {
+    setAuthors(prev => [...prev, ...authors]);
+  };
 
   useEffect(() => {
     dispatch(fetchTopAuthors(page));
   }, [dispatch, page]);
-
-  // setAuthors(prev => [...prev, ...authors]);
-
-
-  // console.log(pagination);
-  // console.log(authors)
+  console.log(loading)
+  loading = false;
   return (
     <section className={clsx("container", css.page)}>
       <h2 className={css.authors}>Authors</h2>
       {loading && <div className={css.loading}><h3>Please wait. Loading...</h3><Loader color='blue' loading={loading}/></div>}
-      {error && <div className={css.loading}><h2>Sorry. Server is dead...</h2><Loader color='red' loading={loading}/></div>}
+      {error && <div className={css.loading}><h2>Sorry. Server is dead...</h2><Loader color='red' loading={loading} /></div>}
+      
       <AuthorsList
-        authors={ authors}
+        authors={authors}
+        allAuthors={allAuthors}
+        handlePage={handleAddPage}
       />
       {(pagination.hasNextPage && !loading) &&
-      <LoadMoreBtn
+      <LoadMore
         nextPage={handleNextPage}
       />}
    
@@ -49,8 +54,3 @@ const AuthorsPage = () => {
 };
 
 export default AuthorsPage;
-
-// git switch main
-// git pull
-// git switch назва вашої гілки
-// git merge main
