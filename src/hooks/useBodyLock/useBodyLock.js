@@ -18,7 +18,7 @@ export const useBodyLock = (isLocked) => {
       }
     };
 
-    if (isLocked && window.innerWidth < 1440) {
+    if (isLocked) {
       addLock();
       window.addEventListener("resize", handleResize);
     }

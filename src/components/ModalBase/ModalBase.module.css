@@ -9,8 +9,16 @@
   justify-content: center;
   align-items: center;
   z-index: 99999999;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-
+.backdrop.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
 .modal {
   position: relative;
   background-color: #d1e0d8;
@@ -21,6 +29,11 @@
   max-width: 297px;
   width: 100%;
   box-sizing: content-box;
+  transform: scale(0.95);
+  transition: transform 0.5s ease;
+}
+.modal.open {
+  transform: scale(1);
 }
 .compact {
   padding: 56px 16px 32px 16px !important;
