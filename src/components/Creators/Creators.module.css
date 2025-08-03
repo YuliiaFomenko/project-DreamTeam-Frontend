@@ -5,157 +5,22 @@
 .titleline {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   margin-bottom: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .titleline {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .title {
   color: var(--black);
   font-size: 32px;
-  font-family: var(--font-family);
-  font-weight: 700;
-  word-wrap: break-word;
-}
-
-.list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  padding: 0;
-  margin: 0 auto;
-  list-style: none;
-  max-width: 100%;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 8px;
-  min-height: 240px; /* ← або конкретна висота, щоб усі картки були рівні */
-}
-
-.name {
-  color: var(--black);
-  font-size: 24px;
-  font-family: var(--font-family);
-  font-weight: 700;
-  word-wrap: break-word;
-  min-height: 58px; /* ← резерв на 2 рядки */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 4px;
-}
-
-.link {
-  color: var(--green-darker);
-  font-size: 16px;
-  font-family: var(--font-family);
-  font-weight: 700;
-  word-wrap: break-word;
-  transition: color 0.3s ease, text-decoration 0.3s ease;
-}
-
-.link:hover,
-.link:focus-visible {
-  text-decoration: none;
-  color: var(--green);
-  outline: none;
-}
-
-.link:active {
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-}
-
-/* MOBILE: до 392px — 1 колонка */
-@media screen and (max-width: 392px) {
-  .list {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card {
-    width: 100%;
-    max-width: 240px;
-  }
-
-  .img {
-    width: 120px;
-    height: 120px;
-  }
-
-  .name {
-    text-align: center;
-  }
-}
-
-/* МОБІЛЬНИЙ: від 393px — 2 колонки */
-@media screen and (min-width: 393px) {
-  .card {
-    flex: 1 1 calc(50% - 16px);
-    max-width: calc(50% - 16px);
-  }
-
-  .img {
-    width: 148px;
-    height: 148px;
-  }
-}
-
-/* ПЛАНШЕТ: від 768px — 3 колонки */
-@media screen and (min-width: 768px) {
-  .card {
-    flex: 1 1 calc(33.333% - 16px);
-    max-width: calc(33.333% - 16px);
-  }
-
-  .img {
-    width: 160px;
-    height: auto;
-  }
-
-  .titleline {
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: center;
-  }
-}
-
-/*  ДЕСКТОП: від 1440px — 6 колонок */
-@media screen and (min-width: 1440px) {
-  .card {
-    flex: 1 1 calc(16.666% - 16px);
-    max-width: calc(16.666% - 16px);
-  }
-
-  .link {
-    align-self: center;
-  }
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 8px;
-}
-
-.img {
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-  overflow: hidden;
-}
-
-.name {
-  color: var(--black);
-  font-size: 24px;
+  line-height: 40px;
   font-family: var(--font-family);
   font-weight: 700;
   word-wrap: break-word;
@@ -173,6 +38,18 @@
   transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
+.link:hover,
+.link:focus-visible {
+  text-decoration: none;
+  color: var(--green);
+  outline: none;
+}
+
+.link:active {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
 .icon {
   stroke: currentColor;
   fill: none;
@@ -188,14 +65,92 @@
   transform: translateX(3px);
 }
 
-.link:hover,
-.link:focus-visible {
-  text-decoration: none;
-  color: var(--green);
-  outline: none;
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  max-width: 1280px;
 }
 
-.link:active {
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  width: auto;
+  flex: 0 0 auto;
+  min-height: 240px;
+  padding: 12px;
+}
+
+.img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  overflow: hidden;
+}
+
+.name {
+  color: var(--black);
+  font-size: 24px;
+  line-height: 28px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  word-wrap: break-word;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  text-align: center;
+}
+
+/* MOBILE: до 392px — 1 колонка */
+@media screen and (max-width: 392px) {
+  .list {
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 240px;
+  }
+
+  .img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .name {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+/* МОБІЛЬНИЙ: від 393px — 2 колонки */
+@media screen and (min-width: 393px) and (max-width: 767px) {
+  .card {
+    width: calc(50% - 10px);
+  }
+
+  .img {
+    width: 148px;
+    height: 148px;
+  }
+}
+
+/* ПЛАНШЕТ: від 768px — 3 колонки */
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .card {
+    width: calc(33.333% - 13.33px);
+  }
 }
