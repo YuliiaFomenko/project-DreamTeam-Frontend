@@ -1,4 +1,10 @@
 /* Styles for Mobile devices */
+
+.lock-scroll {
+  overflow: hidden !important;
+  height: 100vh;
+}
+
 .container {
   margin: 0 auto;
   padding: 48px 0;
@@ -73,6 +79,18 @@
   align-items: flex-start
 }
 
+.recommendationItemText{
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.recommendationItemAuthor{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 155%;
+  margin-top: 8px;
+}
+
 .btnOpen{
   border: 1px solid var(--green-darker);
   background-color: transparent;
@@ -108,6 +126,16 @@
   font-size: 18px;
   color: var(--white);
   gap: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.buttonSave:hover{
+  background-color: var(--green-darker);
+}
+
+.buttonSave:focus{
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  border: #fff;
 }
 
 .icon {
