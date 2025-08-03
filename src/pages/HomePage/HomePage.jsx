@@ -8,8 +8,8 @@ const HomePage = () => {
     <main>
       <Hero />
       <About />
-      <Creators />
       <PopularArticles />
+      <Creators />
     </main>
   );
 };
