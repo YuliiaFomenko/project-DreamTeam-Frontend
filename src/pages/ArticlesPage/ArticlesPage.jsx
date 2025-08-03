@@ -10,39 +10,46 @@ import {
   selectPopularArticles,
 } from "../../redux/articles/selectors";
 import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
-import { logOutThunk } from "../../redux/auth/operations";
 
 const ArticlesPage = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState("All");
   const [page, setPage] = useState(1);
+  const [pagePopular, setPagePopular] = useState(1);
 
   const articles = useSelector(selectAllArticles);
   const popularArticles = useSelector(selectPopularArticles);
 
   const articlesP = useSelector(selectArticlesPagination);
 
-  console.log(articles);
+  useEffect(() => {
+    setPage(1);
+    setPagePopular(1);
+  }, [filter]);
 
   useEffect(() => {
-    dispatch(fetchArticles(page));
-    dispatch(fetchPopular());
-  }, [dispatch, page]);
+    if (filter === "All") {
+      dispatch(fetchArticles(page));
+    }
+  }, [dispatch, filter, page]);
+
+  useEffect(() => {
+    if (filter === "Popular") {
+      dispatch(fetchPopular(pagePopular));
+    }
+  }, [dispatch, filter, pagePopular]);
 
   const handleLoadMore = () => {
-    setPage(page + 1);
+    if (filter === "All") {
+      setPage((prev) => prev + 1);
+    } else {
+      setPagePopular((prev) => prev + 1);
+    }
   };
 
   return (
     <div className="container">
       <h1 className={s.articles}>Articles</h1>
-      <button
-        onClick={() => {
-          dispatch(logOutThunk());
-        }}
-      >
-        logOut
-      </button>
       <div className={s.articles_box}>
         <p className={s.totalArticles}>{articlesP.totalItems} articles</p>
         <CustomSelect value={filter} onChange={setFilter} />
