@@ -1,21 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import s from "./Header.module.css";
 import Navigation from "../Navigation/Navigation";
 import clsx from "clsx";
 import UserMenu from "../UserMenu/UserMenu";
 import AuthButtons from "../AuthButtons/AuthButtons";
 import MobileMenu from "../MobileMenu/MobileMenu";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { ModalSignOutConfirm } from "../ModalSignOutConfirm/ModalSignOutConfirm";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useBodyLock } from "../../hooks/useBodyLock/useBodyLock";
 import sprite from "../../assets/img/sprite.svg";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { logOutThunk } from "../../redux/auth/operations";
 
 const Header = () => {
+  const [isSignOutModalOpen, setSignOutModalOpen] = useState(false);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const dispatch = useDispatch();
+  const location = useLocation();
   const isLogged = useSelector(selectIsLoggedIn);
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, [location]);
   useBodyLock(isDrawerOpen);
-  
+
   return (
     <header className={s.header}>
       <div className={clsx("container", s.headerContainer)}>
@@ -32,7 +40,10 @@ const Header = () => {
         <div className={s.headerNavigationWrapper}>
           <Navigation />
           {isLogged ? (
-            <UserMenu className="header" />
+            <UserMenu
+              className="header"
+              logoutClickHandle={() => setSignOutModalOpen(true)}
+            />
           ) : (
             <AuthButtons className="header" />
           )}
@@ -60,7 +71,19 @@ const Header = () => {
           )}
         </div>
       </div>
-      <MobileMenu isOpen={isDrawerOpen} />
+      <MobileMenu
+        isOpen={isDrawerOpen}
+        closeDrawer={() => setDrawerOpen(false)}
+        logoutClickHandle={() => setSignOutModalOpen(true)}
+      />
+      {isSignOutModalOpen && (
+        <ModalSignOutConfirm
+          onClose={() => setSignOutModalOpen(false)}
+          onLogout={() => dispatch(logOutThunk())}
+          isOpen={isDrawerOpen}
+          closeDrawer={() => setDrawerOpen(false)}
+        />
+      )}
     </header>
   );
 };

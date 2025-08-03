@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { registerThunk } from "../../redux/auth/operations";
+import { registerThunk, logInThunk } from "../../redux/auth/operations";
+import { setPendingRegistration } from "../../redux/auth/slice";
 import {Link} from "react-router-dom"
 import { Formik, Form, Field, ErrorMessage } from "formik"; 
 import * as Yup from "yup";
 import css from "./RegisterForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -24,22 +26,21 @@ const validationSchema = Yup.object({
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const toggleShowPassword = () => setShowPassword((prev) => !prev);
   const toggleShowConfirmPassword = () => setShowConfirmPassword((prev) => !prev);
 
+const handleSubmit = async (values, { resetForm }) => {
+  const { email, password, name } = values;
+   const registrationData = { email, password, name };
+  dispatch(setPendingRegistration(registrationData));
+  resetForm();
+  navigate('/photo');
+  console.log('Registration values:', JSON.stringify(values, null, 2));
+};
 
-  const handleSubmit = (values, { resetForm }) => {
-    const { email, password, name } = values;
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('name', name);
-    // if (values.avatar) formData.append('avatar', values.avatar);
-    dispatch(registerThunk(formData));
-    resetForm();
-  };
 
   return (
     <div className={css.formAuthWrapper}>

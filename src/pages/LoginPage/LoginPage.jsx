@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom'
 import { selectIsLoggedIn } from '../../redux/auth/selectors'
 
 const LoginPage = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const navigate = useNavigate();
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn, navigate]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     navigate('/');
+  //   }
+  // }, [isLoggedIn, navigate]);
 
   return (
     <LoginForm></LoginForm>
