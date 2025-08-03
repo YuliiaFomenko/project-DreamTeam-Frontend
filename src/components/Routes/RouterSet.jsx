@@ -45,26 +45,16 @@ const RouterSet = () => {
             }
           />
           <Route
-            path="register"
+            path="create/:articleId"
             element={
-              <RestrictedRoute component={<RegisterPage />} redirectTo="/" />
+              <PrivateRoute>
+                <CreateArticlePage />
+              </PrivateRoute>
             }
           />
-          <Route
-            path="login"
-            element={
-              <RestrictedRoute component={<LoginPage />} redirectTo="/" />
-            }
-          />
-          <Route
-            path="photo"
-            element={
-              <RestrictedRoute
-                component={<UploadPhoto />}
-                redirectTo="/login"
-              />
-            }
-          />
+          <Route path="register" element={<RestrictedRoute component={<RegisterPage />} redirectTo="/" />} />
+          <Route path="login" element={<RestrictedRoute component={<LoginPage />} redirectTo="/" />} />
+          <Route path="photo" element={<RestrictedRoute component={<UploadPhoto />} redirectTo="/login" />} />
           <Route path="articles" element={<ArticlesPage />} />
           <Route path="articles/:id" element={<ArticlePage />} />
           <Route path="authors" element={<AuthorsPage />} />
