@@ -138,18 +138,22 @@ const handleSubmit = async (values, { resetForm }) => {
               </div>
             )}
           </Field>
-          <ErrorMessage name="confirmPassword" component="div" className={css.errorAuth} />
-        </div>
-
-        <button type="submit" className={css.buttonAuth}>
-          Register
-        </button>
-        <h3 className={css.descriptionRegister}>
+            <ErrorMessage name="confirmPassword" component="div" className={css.errorAuth} />
+            <button type="submit" className={css.buttonAuth}>
+          Create account
+            </button>
+            <div className={css.descriptionRegister}>
+                <h3 className={css.descriptionRegister}>
           Already have an account?{" "}
           <Link to="/login" className={css.spanRegister}>
             Log in
           </Link>
         </h3>
+            </div>
+        
+        </div>
+
+        
       </Form>
       
      
