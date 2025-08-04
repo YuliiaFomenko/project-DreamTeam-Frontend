@@ -23,6 +23,7 @@ const Navigation = () => {
       </NavLink>
       <NavLink
         to="/authors"
+        end
         className={({ isActive }) => clsx(s.link, isActive && s.active)}
       >
         Creators

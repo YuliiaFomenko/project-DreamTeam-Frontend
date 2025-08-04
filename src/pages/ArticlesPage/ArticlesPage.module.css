@@ -1,9 +1,12 @@
+.articlesContainer {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
 .articles {
   font-family: "Manrope", sans-serif;
   font-weight: 700;
   font-size: 40px;
   color: #000;
-  margin-top: 48px;
   margin-bottom: 16px;
 }
 

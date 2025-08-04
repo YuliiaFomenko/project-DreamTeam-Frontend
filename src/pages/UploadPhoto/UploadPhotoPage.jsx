@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { UploadPhoto } from '../../components/UploadPhoto/UploadPhoto';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { selectPendingRegistration } from '../../redux/auth/selectors';
-import Loader from '../../components/Loader/Loader'; // ваш компонент Loader
+import { useEffect } from "react";
+import { UploadPhoto } from "../../components/UploadPhoto/UploadPhoto";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { selectPendingRegistration } from "../../redux/auth/selectors";
+import Loader from "../../components/Loader/Loader";
 
 const UploadPhotoPage = () => {
   const pendingRegistration = useSelector(selectPendingRegistration);
@@ -11,16 +11,16 @@ const UploadPhotoPage = () => {
 
   useEffect(() => {
     if (!pendingRegistration) {
-      navigate('/register');
+      navigate("/register");
     }
   }, [pendingRegistration, navigate]);
 
   const handleClose = () => {
-    navigate('/');
+    navigate("/");
   };
 
   if (!pendingRegistration) {
-    return <Loader />; 
+    return <Loader />;
   }
 
   return <UploadPhoto onClose={handleClose} />;

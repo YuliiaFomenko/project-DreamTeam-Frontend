@@ -26,8 +26,8 @@
   margin-bottom: 32px;
 }
 
-.text{
-    margin-bottom: 24px;
+.text {
+  margin-bottom: 24px;
 }
 
 .text p {
@@ -37,7 +37,7 @@
   line-height: 155%;
 }
 
-.interestedContainer{
+.interestedContainer {
   background-color: var(--light-green);
   border-radius: 32px;
   padding: 32px 16px 40px 16px;
@@ -46,29 +46,29 @@
   margin-bottom: 24px;
 }
 
-.author{
+.author {
   font-size: 16px;
   margin-bottom: 15px;
 }
 
-.date{
+.date {
   font-size: 16px;
   margin-bottom: 15px;
 }
 
-.recommendationTitle{
+.recommendationTitle {
   font-weight: 700;
   font-size: 24px;
   margin-bottom: 15px;
 }
 
-.recommendationList{
+.recommendationList {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.recommendationItem{
+.recommendationItem {
   border-radius: 32px;
   padding: 16px;
   width: 100%;
@@ -76,33 +76,33 @@
   background-color: var(--white);
   display: flex;
   justify-content: space-between;
-  align-items: flex-start
+  align-items: flex-start;
 }
 
-.recommendationItemText{
+.recommendationItemText {
   font-weight: 700;
   font-size: 16px;
 }
 
-.recommendationItemAuthor{
+.recommendationItemAuthor {
   font-weight: 400;
   font-size: 16px;
   line-height: 155%;
   margin-top: 8px;
 }
 
-.btnOpen{
+.btnOpen {
   border: 1px solid var(--green-darker);
   background-color: transparent;
   border-radius: 64px;
   width: 40px;
   height: 40px;
-   display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.arrow{
+.arrow {
   fill: transparent;
   stroke-width: 1px;
   stroke: var(--black);
@@ -112,7 +112,7 @@
   transform-origin: center;
 }
 
-.buttonSave{
+.buttonSave {
   border-radius: 64px;
   padding: 16px;
   width: 100%;
@@ -126,14 +126,14 @@
   font-size: 18px;
   color: var(--white);
   gap: 16px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.buttonSave:hover{
+.buttonSave:hover {
   background-color: var(--green-darker);
 }
 
-.buttonSave:focus{
+.buttonSave:focus {
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
   border: #fff;
 }
@@ -146,7 +146,6 @@
   height: 25px;
 }
 
-
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
   .title {
@@ -157,10 +156,9 @@
     height: 358px;
   }
 
-  .interestedContainer{
+  .interestedContainer {
     padding: 32px 32px 40px 32px;
   }
-
 }
 /* Styles for Desktop devices */
 @media only screen and (min-width: 1440px) {

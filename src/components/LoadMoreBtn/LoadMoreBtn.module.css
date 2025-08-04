@@ -14,13 +14,18 @@
   width: 361px;
   height: 57px;
   background: #649179;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-
+.loadMoreButton:hover {
+  background-color: var(--green-darker);
+}
+.loadMoreButton:focus {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+}
 .loadMoreBtn_box {
   display: flex;
   justify-content: center;
-  padding-top: 24px;
-  padding-bottom: 48px;
+  margin-top: 24px;
 }
 
 @media only screen and (min-width: 768px) {
