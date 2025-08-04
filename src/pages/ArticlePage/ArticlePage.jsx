@@ -1,37 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
 
-import { fetchArticleById, fetchRandom } from '../../redux/articles/operations';
-import { addToSaved, fetchUserInfo } from '../../redux/user/operations';
-import { selectArticleById, selectArticlesIsLoading, selectRandomArticles } from '../../redux/articles/selectors';
-import { selectUserInfo, selectUserIsLoading } from '../../redux/user/selectors';
+import { fetchArticleById, fetchRandom } from "../../redux/articles/operations";
+import { addToSaved, fetchUserInfo } from "../../redux/user/operations";
+import {
+  selectArticleById,
+  selectArticlesIsLoading,
+  selectRandomArticles,
+} from "../../redux/articles/selectors";
+import {
+  selectUserInfo,
+  selectUserIsLoading,
+} from "../../redux/user/selectors";
 
-import styles from './ArticlePage.module.css';
-import Loader from '../../components/Loader/Loader';
-import sprite from '../../assets/img/sprite.svg';
-import { selectIsLoggedIn } from '../../redux/auth/selectors';
-import { ModalErrorSave } from '../../components/ModalErrorSave/ModalErrorSave';
-import { useBodyLock } from '../../hooks/useBodyLock/useBodyLock';
+import styles from "./ArticlePage.module.css";
+import Loader from "../../components/Loader/Loader";
+import sprite from "../../assets/img/sprite.svg";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { ModalErrorSave } from "../../components/ModalErrorSave/ModalErrorSave";
+import { useBodyLock } from "../../hooks/useBodyLock/useBodyLock";
 
 const ArticlePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const article = useSelector(state => selectArticleById(state, id));
+  const article = useSelector((state) => selectArticleById(state, id));
   const isArticleLoading = useSelector(selectArticlesIsLoading);
 
   const userId =
-    typeof article?.ownerId === 'object' && article.ownerId?.$oid
+    typeof article?.ownerId === "object" && article.ownerId?.$oid
       ? article.ownerId.$oid
       : article?.ownerId;
 
-  const author = useSelector(state => selectUserInfo(state, userId));
+  const author = useSelector((state) => selectUserInfo(state, userId));
   const isAuthorLoading = useSelector(selectUserIsLoading);
 
   const randomArticles = useSelector(selectRandomArticles);
-  const allAuthors = useSelector(state => state.user.users); 
+  const allAuthors = useSelector((state) => state.user.users);
 
   const [isModalOpen, setModalOpen] = useState(false);
   useBodyLock(isModalOpen);
@@ -53,9 +60,9 @@ const ArticlePage = () => {
 
   useEffect(() => {
     if (randomArticles.length > 0) {
-      randomArticles.forEach(articleItem => {
+      randomArticles.forEach((articleItem) => {
         const ownerId =
-          typeof articleItem?.ownerId === 'object' && articleItem.ownerId?.$oid
+          typeof articleItem?.ownerId === "object" && articleItem.ownerId?.$oid
             ? articleItem.ownerId.$oid
             : articleItem?.ownerId;
         if (ownerId && !allAuthors?.[ownerId]) {
@@ -69,12 +76,12 @@ const ArticlePage = () => {
   if (!article) return <p className={styles.error}>Article not found</p>;
 
   const formattedDate = article.date
-    ? new Date(article.date).toLocaleDateString('uk-UA', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
+    ? new Date(article.date).toLocaleDateString("uk-UA", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
       })
-    : '';
+    : "";
 
   const handleSaveClick = () => {
     if (!isLogged) {
@@ -85,7 +92,7 @@ const ArticlePage = () => {
     dispatch(addToSaved(article._id))
       .unwrap()
       .catch((err) => {
-        if (err?.includes('401')) {
+        if (err?.includes("401")) {
           setModalOpen(true);
         }
       });
@@ -124,11 +131,13 @@ const ArticlePage = () => {
               )}
 
               <div className={styles.recommendation}>
-                <h3 className={styles.recommendationTitle}>You can also interested</h3>
+                <h3 className={styles.recommendationTitle}>
+                  You can also interested
+                </h3>
                 <ul className={styles.recommendationList}>
-                  {randomArticles.map(item => {
+                  {randomArticles.map((item) => {
                     const itemUserId =
-                      typeof item?.ownerId === 'object' && item.ownerId?.$oid
+                      typeof item?.ownerId === "object" && item.ownerId?.$oid
                         ? item.ownerId.$oid
                         : item.ownerId;
 
@@ -138,7 +147,11 @@ const ArticlePage = () => {
                       <li key={item._id} className={styles.recommendationItem}>
                         <span className={styles.recommendationItemText}>
                           {item.title}
-                          {authorInfo?.name && <div className={styles.recommendationItemAuthor}>{authorInfo.name}</div>}
+                          {authorInfo?.name && (
+                            <div className={styles.recommendationItemAuthor}>
+                              {authorInfo.name}
+                            </div>
+                          )}
                         </span>
                         <button
                           className={styles.btnOpen}
@@ -173,5 +186,3 @@ const ArticlePage = () => {
 };
 
 export default ArticlePage;
-
-

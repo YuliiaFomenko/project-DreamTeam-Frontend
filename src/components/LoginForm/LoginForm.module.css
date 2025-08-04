@@ -1,114 +1,118 @@
 .formAuthWrapper {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: inherit; /* якщо потрібно */
+  min-height: calc(100vh - 74px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: inherit;
 }
 
 .formAuth {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 20px;
-    width: 330px;
-    border-radius: 32px;
-    padding: 48px 32px;
-    background: #d1e0d8;
-    margin: 0; /* прибрати auto та інше */
-    position: static; /* прибрати absolute */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  width: 330px;
+  border-radius: 32px;
+  padding: 48px 32px;
+  background: #d1e0d8;
+  margin: 0;
+  position: static;
 }
 
-.descriptionAuth{
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
-    font-size: 12px;
+.descriptionAuth {
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
 }
 .fieldAuth {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 .inputAuth {
-    border: 1.5px solid #9f9f9f;
-    border-radius: 16px;
-    padding: 8px;
-    background: #f7fffb;
-    width: 100%;
-    font-size: 16px;
-    box-shadow: 0 2px 8px rgba(100, 145, 121, 0.08);
+  border: 1.5px solid #9f9f9f;
+  border-radius: 16px;
+  padding: 8px;
+  background: #f7fffb;
+  width: 100%;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(100, 145, 121, 0.08);
 }
 .errorAuth {
-    color: #d32f2f;
-    font-size: 14px;
+  color: #d32f2f;
+  font-size: 14px;
 }
-.eyeButton{
-    display: none;
+.eyeButton {
+  display: none;
 }
 .buttonAuth {
-    border-radius: 64px;
-    padding: 8px 0;
-    width: 100%;
-    font-weight: 700;
-    font-size: 16px;
-    background: #649179;
-    color: #f7fffb;
-    border: none;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    cursor: pointer;
+  border-radius: 64px;
+  padding: 8px 0;
+  width: 100%;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #649179;
+  color: #f7fffb;
+  border: none;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.buttonAuth:hover {
+  background-color: var(--green-darker);
+}
+.buttonAuth:focus {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
 }
 .passwordWrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .inputAuth {
-    width: 100%;
-    padding-right: 40px;
-    /* space for the eye button */
-    box-sizing: border-box;
-    /* Add your other input styles here */
+  width: 100%;
+  padding-right: 40px;
+  box-sizing: border-box;
 }
 
 .eyeButton {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
-.descriptionRegister{
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.55;
-
+.descriptionRegister {
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
 }
-.spanRegister{
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.55;
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-skip-ink: none;
+.spanRegister {
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
 }
-@media only screen and (min-width: 768px){
-    .formAuth {
-        width: 522px;
-    }
+@media only screen and (min-width: 768px) {
+  .formAuth {
+    width: 522px;
+  }
 }
 @media only screen and (min-width: 1440px) {
-    .formAuth {
-        width: 392px;
-    }
+  .formAuth {
+    width: 392px;
+  }
 }
