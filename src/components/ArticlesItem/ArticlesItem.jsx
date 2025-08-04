@@ -6,17 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInfo } from "../../redux/user/operations";
 import { selectUserInfo } from "../../redux/user/selectors";
 
-const ArticlesItem = ({ ownerId, _id, title, article, img, isPublic }) => {
+const ArticlesItem = ({ ownerId, _id, title, article, img }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUserInfo(ownerId));
-  }, [dispatch]);
+  }, [ownerId, dispatch]);
 
   const user = useSelector((state) => selectUserInfo(state, ownerId));
 
   return (
-    <li className={s.item}>
+    <div className={s.item}>
       <div className={s.img_box}>
         {img && <img src={img} alt={title} className={s.img_real} />}
       </div>
@@ -29,13 +29,9 @@ const ArticlesItem = ({ ownerId, _id, title, article, img, isPublic }) => {
         <Link to={`/articles/${_id}`} className={s.learn_more_link}>
           Learn more
         </Link>
-        <ButtonAddToBookmarks
-          articleId={_id}
-          ownerId={ownerId}
-          isPublic={isPublic}
-        />
+        <ButtonAddToBookmarks articleId={_id} ownerId={ownerId} />
       </div>
-    </li>
+    </div>
   );
 };
 

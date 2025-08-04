@@ -2,12 +2,16 @@ import React from "react";
 import ArticlesItem from "../ArticlesItem/ArticlesItem";
 import s from "./ArticlesList.module.css";
 
-const ArticlesList = ({ filteredArticles, isPublic }) => {
+const ArticlesList = ({ filteredArticles }) => {
   return (
     <div>
       <ul className={s.articlesList}>
         {filteredArticles.map((item) => {
-          return <ArticlesItem isPublic={isPublic} key={item._id} {...item} />;
+          return (
+            <li key={item._id}>
+              <ArticlesItem {...item} />
+            </li>
+          );
         })}
       </ul>
     </div>
