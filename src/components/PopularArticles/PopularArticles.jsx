@@ -30,11 +30,11 @@ const PopularArticles = () => {
         <ul className={s.grid}>
           {articles &&
             articles.length > 0 &&
-            articles
-              .slice(0, 4)
-              .map((article) => (
-                <ArticlesItem key={article._id} {...article} />
-              ))}
+            articles.slice(0, 4).map((article) => (
+              <li key={article._id}>
+                <ArticlesItem {...article} />
+              </li>
+            ))}
         </ul>
       </div>
     </div>
