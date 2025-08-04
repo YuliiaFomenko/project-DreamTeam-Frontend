@@ -91,10 +91,6 @@ const ArticlePage = () => {
       });
   };
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
   return (
     <div className="container">
       <div className={styles.container}>
@@ -106,9 +102,11 @@ const ArticlePage = () => {
 
         <div className={styles.contentWrap}>
           <div className={styles.text}>
-            {article.article
-              .split('/n')
-              .map((paragraph, idx) => <p key={idx}>{paragraph.trim()}</p>)}
+            {typeof article.article === 'string'
+  ? article.article
+      .split('\n')
+      .map((paragraph, idx) => <p key={idx}>{paragraph.trim()}</p>)
+  : null}
           </div>
 
           <div>
@@ -166,7 +164,10 @@ const ArticlePage = () => {
           </div>
         </div>
       </div>
-      {isModalOpen && <ModalErrorSave onClose={handleCloseModal} />}
+      <ModalErrorSave
+        onClose={() => setModalOpen(false)}
+        isOpen={isModalOpen}
+      />
     </div>
   );
 };

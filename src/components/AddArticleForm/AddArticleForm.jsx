@@ -1,3 +1,4 @@
+import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -22,9 +23,14 @@ const validationSchema = Yup.object({
     .required('Article is required'),
 
   img: Yup.mixed()
-    .required('Image is required')
+    .test('fileOrUrl', 'Image is required', value => {
+      return value instanceof File || typeof value === 'string';
+    })
     .test('fileSize', 'Image must be less than 1MB', value => {
-      return value && value.size <= MAX_FILE_SIZE;
+      if (value instanceof File) {
+        return value.size <= MAX_FILE_SIZE;
+      }
+      return true;
     }),
 });
 
@@ -45,26 +51,31 @@ const AddArticleForm = ({ initialData = null }) => {
       formData.append('title', values.title);
       formData.append('article', values.article);
 
-      if (isEdit) {
-        if (values.img && typeof values.img !== 'string') {
-          formData.append('image', values.img);
-        }
+      let fileToSend = values.img;
 
+      if (typeof values.img === 'string') {
+        const response = await fetch(values.img);
+        const blob = await response.blob();
+        fileToSend = new File([blob], 'image.jpg', { type: blob.type });
+      }
+
+      formData.append('img', fileToSend);
+
+      if (isEdit) {
         const result = await dispatch(
           updateArticle({ articleId: initialData._id, formData })
         ).unwrap();
 
         toast.success('Article successfully updated');
-        navigate(`/articles/${result._id}`);
+        navigate(`/articles/${result.data._id}`);
       } else {
         formData.append('date', new Date().toISOString().split('T')[0]);
-        formData.append('image', values.img);
 
         const result = await dispatch(createArticle(formData)).unwrap();
 
         toast.success('Article successfully created');
         actions.resetForm();
-        navigate(`/articles/${result._id}`);
+        navigate(`/articles/${result.data._id}`);
       }
     } catch (error) {
       toast.error(`Error: ${error}`);
@@ -78,11 +89,13 @@ const AddArticleForm = ({ initialData = null }) => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
         enableReinitialize
-        validateOnChange={false}
-        validateOnBlur={false}
+        validateOnChange={true}
+        validateOnBlur={true}
       >
         {({ setFieldValue, isSubmitting, values, touched, errors }) => (
           <Form className={styles.form}>
+
+            {/* TITLE */}
             <div className={styles.inputTitle}>
               <label htmlFor="title" className={styles.label}>Title</label>
               <Field
@@ -90,9 +103,9 @@ const AddArticleForm = ({ initialData = null }) => {
                 id="title"
                 name="title"
                 placeholder="Enter the title"
-                className={styles.input}
+                className={`${styles.input} ${errors.title && touched.title ? styles.inputError : ''}`}
               />
-              {touched.title && errors.title && (
+              {errors.title && touched.title && (
                 <div className={styles.error}>{errors.title}</div>
               )}
             </div>
@@ -105,7 +118,7 @@ const AddArticleForm = ({ initialData = null }) => {
                     {...field}
                     id="article"
                     placeholder="Enter article text"
-                    className={styles.textarea}
+                    className={`${styles.textarea} ${errors.article && touched.article ? styles.textareaError : ''}`}
                     rows={1}
                     onInput={(e) => {
                       e.target.style.height = 'auto';
@@ -114,7 +127,7 @@ const AddArticleForm = ({ initialData = null }) => {
                   />
                 )}
               </Field>
-              {touched.article && errors.article && (
+              {errors.article && touched.article && (
                 <div className={styles.error}>{errors.article}</div>
               )}
             </div>
@@ -150,7 +163,7 @@ const AddArticleForm = ({ initialData = null }) => {
                   )}
                 </div>
               </label>
-              {touched.img && errors.img && (
+              {errors.img && touched.img && (
                 <div className={styles.error}>{errors.img}</div>
               )}
             </div>
@@ -170,6 +183,7 @@ const AddArticleForm = ({ initialData = null }) => {
 };
 
 export default AddArticleForm;
+
 
 
 
