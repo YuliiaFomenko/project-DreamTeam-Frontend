@@ -1,11 +1,11 @@
 .cardItem {
   border-radius: 32px;
-  width: 172px;
+  width: calc((100% - 16px) / 2);
   padding: 12px;
 }
 .list {
   padding: 0;
-  width: 361px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   gap: 16px;
@@ -15,7 +15,7 @@
 }
 @media only screen and (min-width: 768px) {
   .cardItem {
-    width: 286px;
+    width: calc((100% - 24px) / 2);
   }
   .list {
     padding-left: 54px;
@@ -27,11 +27,11 @@
 /* Styles for Desktop devices */
 @media only screen and (min-width: 1440px) {
   .cardItem {
-    width: 286px;
+    width: calc((100% - 24px * 3) / 4);
   }
   .list {
     padding: 0;
-    width: 1225px;
+    width: 100%;
     gap: 24px;
   }
 }
