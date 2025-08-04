@@ -3,6 +3,7 @@ import clsx from "clsx";
 import sprite from "../../assets/img/sprite.svg";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
+import { Link } from "react-router-dom";
 
 const UserMenu = ({ className, logoutClickHandle }) => {
   const user = useSelector(selectUser);
@@ -13,7 +14,9 @@ const UserMenu = ({ className, logoutClickHandle }) => {
         className === "header" ? s.menuHeader : s.menuMobile
       )}
     >
-      <button className={s.createArticle}>Create an article</button>
+      <Link to="/create" className={s.createArticle}>
+        Create an article
+      </Link>
       <div className={s.userInfo}>
         <div className={s.user}>
           <img

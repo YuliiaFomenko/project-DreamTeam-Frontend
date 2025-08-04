@@ -1,0 +1,37 @@
+.cardItem {
+  border-radius: 32px;
+  width: 172px;
+  padding: 12px;
+}
+.list {
+  padding: 0;
+  width: 361px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #f7fffb;
+  justify-content: space-between;
+}
+@media only screen and (min-width: 768px) {
+  .cardItem {
+    width: 286px;
+  }
+  .list {
+    padding-left: 54px;
+    padding-right: 54px;
+    width: 704px;
+    gap: 24px;
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .cardItem {
+    width: 286px;
+  }
+  .list {
+    padding: 0;
+    width: 1225px;
+    gap: 24px;
+  }
+}
