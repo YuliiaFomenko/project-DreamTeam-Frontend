@@ -92,10 +92,9 @@ const AddArticleForm = ({ initialData = null }) => {
         validateOnChange={true}
         validateOnBlur={true}
       >
-        {({ setFieldValue, isSubmitting, values, touched, errors }) => (
+        {({ setFieldValue, isSubmitting, values, touched, errors, isValid }) => (
           <Form className={styles.form}>
 
-            {/* TITLE */}
             <div className={styles.inputTitle}>
               <label htmlFor="title" className={styles.label}>Title</label>
               <Field
@@ -171,7 +170,8 @@ const AddArticleForm = ({ initialData = null }) => {
             <button
               type="submit"
               className={styles.submitBtn}
-              disabled={isSubmitting}
+              disabled={!isValid || isSubmitting}
+
             >
               {isEdit ? 'Publish' : 'Publish Article'}
             </button>

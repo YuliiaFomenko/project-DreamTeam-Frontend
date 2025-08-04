@@ -111,7 +111,7 @@ const ArticlePage = () => {
           <div className={styles.text}>
             {typeof article.article === 'string'
   ? article.article
-      .split('\n')
+      .split('/n')
       .map((paragraph, idx) => <p key={idx}>{paragraph.trim()}</p>)
   : null}
           </div>
