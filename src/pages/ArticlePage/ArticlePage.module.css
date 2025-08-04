@@ -1,10 +1,5 @@
 /* Styles for Mobile devices */
 
-.lock-scroll {
-  overflow: hidden !important;
-  height: 100vh;
-}
-
 .container {
   margin: 0 auto;
   padding: 48px 0;
@@ -129,13 +124,19 @@
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.buttonSave:disabled {
+  cursor: not-allowed;
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  background: var(--green);
+  opacity: 0.3;
+}
+
 .buttonSave:hover {
   background-color: var(--green-darker);
 }
 
 .buttonSave:focus {
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
-  border: #fff;
 }
 
 .icon {
@@ -164,7 +165,7 @@
 @media only screen and (min-width: 1440px) {
   .contentWrap {
     display: grid;
-    grid-template-columns: 1fr 393px; /* або інша ширина правого блоку */
+    grid-template-columns: 1fr 393px; 
     gap: 24px;
     align-items: start;
   }
