@@ -6,6 +6,7 @@ import { removeFromSaved, addToSaved } from "../../redux/user/operations.js";
 import { useNavigate } from "react-router-dom";
 import { ModalErrorSave } from "../../components/ModalErrorSave/ModalErrorSave.jsx";
 import { useState } from "react";
+import { refreshThunk } from "../../redux/auth/operations.js";
 import { useBodyLock } from "../../hooks/useBodyLock/useBodyLock.js";
 
 export default function ButtonOfToBookmarks({ articleId, ownerId }) {
@@ -14,22 +15,24 @@ export default function ButtonOfToBookmarks({ articleId, ownerId }) {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  // const isLoggedIn = true;
   const user = useSelector(selectUser);
   const bookmarked = user.savedArticlesIDs.includes(articleId);
-  // const bookmarked = false; // For testing purposes, assuming the article is not bookmarked
   const ownArticle = user.id === ownerId;
-  // const ownArticle = true; // For testing purposes, assuming the user owns the article
 
   const handleEditClick = () => {
-    navigate(`/articles/${articleId}`);
+    navigate(`/create/${articleId}`);
   };
-  const handleRemoveBookmarkClick = () => {
-    dispatch(removeFromSaved(articleId));
-  };
-  const handleAddBookmarkClick = () => {
+
+  const handleAddBookmarkClick = async () => {
+    await dispatch(refreshThunk());
     dispatch(addToSaved(articleId));
   };
+
+  const handleRemoveBookmarkClick = async () => {
+    await dispatch(refreshThunk());
+    dispatch(removeFromSaved(articleId));
+  };
+
   const handleOpenModalClick = () => {
     setShowLoginModal(true);
   };
