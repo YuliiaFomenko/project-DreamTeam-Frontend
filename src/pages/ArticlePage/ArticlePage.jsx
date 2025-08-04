@@ -42,6 +42,8 @@ const ArticlePage = () => {
   const ownerId = article?.ownerId;
   const author = useSelector((state) => selectUserInfo(state, ownerId));
 
+  const ownArticle = user.id === ownerId;
+
   useEffect(() => {
     dispatch(fetchArticleById(id));
   }, [dispatch, id]);
@@ -90,6 +92,10 @@ const ArticlePage = () => {
         }
       });
   };
+
+  const handleEditClick = () => {
+    navigate(`/create/${article._id}`);
+  }
 
   return (
     <div className="container">
@@ -163,16 +169,30 @@ const ArticlePage = () => {
               </div>
             </div>
 
-            <button
-              className={styles.buttonSave}
-              disabled={bookmarked}
-              onClick={handleSaveClick}
-            >
-              {bookmarked ? "Saved" : "Save"}
-              <svg className={styles.icon}>
-                <use href={`${sprite}#icon-bookmark-alternative`} />
-              </svg>
-            </button>
+            {!ownArticle && (
+  <button
+    className={styles.buttonSave}
+    disabled={bookmarked}
+    onClick={handleSaveClick}
+  >
+    {bookmarked ? "Saved" : "Save"}
+    <svg className={styles.icon}>
+      <use href={`${sprite}#icon-bookmark-alternative`} />
+    </svg>
+  </button>
+)}
+{ownArticle && (
+  <button
+    className={styles.buttonEdit}
+    onClick={handleEditClick}
+  >
+    Edit
+    <svg className={styles.icon}>
+      <use href={`${sprite}#icon-bookmark`} />
+    </svg>
+  </button>
+)}
+            
           </div>
         </div>
       </div>
