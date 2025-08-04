@@ -118,9 +118,11 @@ const ArticlePage = () => {
           <div>
             <div className={styles.interestedContainer}>
               
+                {author?.name && (
                 <p className={styles.author}>
-                  <strong>Author:</strong> <u>{author.name}</u>
+                <strong>Author:</strong> <u>{author.name}</u>
                 </p>
+                )}
               
 
               {formattedDate && (
