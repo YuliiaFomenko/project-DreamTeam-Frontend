@@ -17,7 +17,7 @@ import {
 import styles from "./ArticlePage.module.css";
 import Loader from "../../components/Loader/Loader";
 import sprite from "../../assets/img/sprite.svg";
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 import { ModalErrorSave } from "../../components/ModalErrorSave/ModalErrorSave";
 import { useBodyLock } from "../../hooks/useBodyLock/useBodyLock";
 
@@ -43,6 +43,8 @@ const ArticlePage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   useBodyLock(isModalOpen);
   const isLogged = useSelector(selectIsLoggedIn);
+  const user = useSelector(selectUser);
+  const bookmarked = user.savedArticlesIDs.includes(id);
 
   useEffect(() => {
     dispatch(fetchArticleById(id));
@@ -168,8 +170,8 @@ const ArticlePage = () => {
               </div>
             </div>
 
-            <button className={styles.buttonSave} onClick={handleSaveClick}>
-              Save
+            <button className={styles.buttonSave} disabled={bookmarked} onClick={handleSaveClick}>
+              {bookmarked ? 'Saved' : 'Save'}
               <svg className={styles.icon}>
                 <use href={`${sprite}#icon-bookmark-alternative`} />
               </svg>
