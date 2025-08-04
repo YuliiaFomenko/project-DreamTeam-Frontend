@@ -6,16 +6,13 @@ const ArticlesList = ({ filteredArticles }) => {
   return (
     <div>
       <ul className={s.articlesList}>
-        {filteredArticles.map((item) => {
-          return (
-            <li key={item._id}>
-              <ArticlesItem {...item} />
-            </li>
-          );
-        })}
+        {filteredArticles.map((item) => (
+          <li key={item._id}>
+            <ArticlesItem {...item} />
+          </li>
+        ))}
       </ul>
     </div>
   );
 };
-
 export default ArticlesList;

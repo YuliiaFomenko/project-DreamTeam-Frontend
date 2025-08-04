@@ -8,7 +8,7 @@ const CustomSelect = ({ value, onChange }) => {
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
   const handleSelect = (option) => {
-    onChange(option);
+    if (option !== value) onChange(option);
     setIsOpen(false);
   };
 
