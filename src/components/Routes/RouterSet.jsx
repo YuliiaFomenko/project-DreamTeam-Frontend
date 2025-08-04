@@ -23,7 +23,7 @@ const ArticlePage = lazy(() =>
 const AuthorsPage = lazy(() =>
   import("../../pages/AuthorsPage/AuthorsPage.jsx")
 );
-const AuthorsProfilePage = lazy(() =>
+const AuthorProfilePage = lazy(() =>
   import("../../pages/AuthorProfilePage/AuthorProfilePage.jsx")
 );
 const CreateArticlePage = lazy(() =>
@@ -58,7 +58,7 @@ const RouterSet = () => {
           <Route path="articles" element={<ArticlesPage />} />
           <Route path="articles/:id" element={<ArticlePage />} />
           <Route path="authors" element={<AuthorsPage />} />
-          <Route path="authors/:id" element={<AuthorsProfilePage />} />
+          <Route path="authors/:id" element={<AuthorProfilePage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
