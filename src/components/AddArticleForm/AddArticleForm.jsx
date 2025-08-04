@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -8,6 +8,9 @@ import { toast } from 'react-hot-toast';
 import { createArticle, updateArticle } from '../../redux/articles/operations';
 import styles from './AddArticleForm.module.css';
 import sprite from '../../assets/img/sprite.svg';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../redux/auth/selectors';
+
 
 const MAX_FILE_SIZE = 1024 * 1024;
 
@@ -38,6 +41,13 @@ const AddArticleForm = ({ initialData = null }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isEdit = Boolean(initialData);
+  const user = useSelector(selectUser);
+
+useEffect(() => {
+  if (initialData && user?.id !== initialData.ownerId) {
+    navigate('/not-found', { replace: true });
+  }
+}, [initialData, user, navigate]);
 
   const initialValues = {
     title: initialData?.title || '',
