@@ -1,5 +1,13 @@
 .container{
   padding-top: 46px;
+  padding-bottom: 46px;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 40px;
+  color: #000;
 }
 
 .header {
@@ -10,8 +18,8 @@
 }
 
 .img{
-  width: 137px;
-  height: 137px;
+  width: 124px;
+  height: 124px;
   object-fit: cover;
   border-radius: 50%;
   display: flex;
@@ -27,17 +35,16 @@
 
 .name {
   font-family: var(--font-family);
-font-weight: 700;
-font-size: 32px;
-text-align: center;
-color: var(--black);
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--black);
 }
 
 .total {
   font-family: var(--font-family);
-font-weight: 700;
-font-size: 18px;
-color: #000;
+  font-weight: 700;
+  font-size: 18px;
+  color: #000;
 }
 
 .tabs {
@@ -52,17 +59,24 @@ color: #000;
   border: none;
 
   cursor: pointer;
-  
+
   padding: 0px 0px 4px 0px;
   border-bottom: 2px solid transparent;
   transition: all 0.2s ease-in-out;
 
   font-family: var(--font-family);
-font-weight: 700;
-font-size: 16px;
-color: var(--green-darker);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--green-darker);
 }
 
 .active {
-border-bottom: 1px solid var(--green-darker);
+  border-bottom: 1px solid var(--green-darker);
+}
+
+@media only screen and (min-width: 768px) {
+  .img {
+    width: 137px;
+    height: 137px;
+  }
 }
