@@ -53,7 +53,8 @@ export const UploadPhoto = ({ onClose }) => {
        navigate('/');
      }
    } catch (error) {
-      console.error("Registration failed:", error?.message || JSON.stringify(error, null, 2));
+     console.error("Registration failed:", error?.message || JSON.stringify(error, null, 2));
+     navigate('/register');
    } finally {
      setLoading(false);
    }
