@@ -7,7 +7,8 @@ import { selectUserError, selectUserIsLoading, selectTopAuthorsPagination, selec
 import AuthorsList from '../../components/AuthorsList/AuthorsList';
 import { fetchTopAuthors } from '../../redux/user/operations';
 import Loader from '../../components/Loader/Loader';
-import LoadMore from '../../components/LoadMore/LoadMoreBtn';
+import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn';
+import { BarLoader } from "react-spinners";
 
 const AuthorsPage = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,7 @@ const AuthorsPage = () => {
   const pagination = useSelector(selectTopAuthorsPagination);
   const authors = useSelector(selectTopAuthors);
   
-  const handleNextPage = () => {
-    // setAuthors(prev => [...prev, ...authors]);
+  const handleLoadMore = () => {
     setPage(page + 1);
   };
 
@@ -39,46 +39,31 @@ const AuthorsPage = () => {
     }
   }, [authors, page, allAuthors]);
 
-  // useEffect(() => {
-  //   const incoming = authors;
-  //   if (!incoming || incoming.length === 0) return;
-
-  //   const hitsIDs = new Set(hits.map((item) => item._id));
-  //   const isDuplicating = incoming.some((item) => hitsIDs.has(item._id));
-
-  //   // If it's the first page OR all articles are new → replace/append
-  //   if (!isDuplicating) {
-  //     setHits((prev) => {
-  //       return page === 1 ? incoming : [...prev, ...incoming];
-  //     });
-  //   }
-  // }, [articles, popular, filter]);
-
   const listAuthors = useRef(null);
     useEffect(() => {
       if (listAuthors.current && allAuthors.length > 20) {
         listAuthors.current.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
       }
     }, [allAuthors]);
-  
-  loading = false;
 
   return (
     <section className={clsx("container", css.page)} ref={listAuthors}>
       <h2 className={css.authors}>Authors</h2>
-      {loading && <div className={css.loading}><h3>Please wait. Loading...</h3><Loader color='blue' loading={loading}/></div>}
-      {error && <div className={css.loading}><h2>Sorry. Server is dead...</h2><Loader color='red' loading={loading} /></div>}
+      {loading && <div className={css.loading}><Loader/></div>}
+      {error && <div className={css.loading}><Loader /></div>}
       
       <AuthorsList
         listAuthors={allAuthors}
       />
-      {(pagination.hasNextPage && !loading) &&
-      <LoadMore
-        nextPage={handleNextPage}
-      />}
-   
+       {
+      (pagination.hasNextPage && !loading) &&
+      <LoadMoreBtn
+        handleLoadMore={handleLoadMore}
+      />
+      }
     </section>
   )
 };
-
+// https://github.com/YuliiaFomenko/project-DreamTeam-Frontend/pull/9
+// https://github.com/YuliiaFomenko/project-DreamTeam-Frontend/pull/43
 export default AuthorsPage;

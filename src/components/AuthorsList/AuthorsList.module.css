@@ -10,8 +10,8 @@
   flex-direction: row;
   gap: 16px;
   flex-wrap: wrap;
-  background: #f7fffb;
-  justify-content: space-between;
+  background-color: var(--white);
+  justify-content: start;
 }
 @media only screen and (min-width: 768px) {
   .cardItem {
