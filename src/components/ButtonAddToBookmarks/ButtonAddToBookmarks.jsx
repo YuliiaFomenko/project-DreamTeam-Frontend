@@ -6,7 +6,7 @@ import { removeFromSaved, addToSaved } from "../../redux/user/operations.js";
 import { useNavigate } from "react-router-dom";
 import { ModalErrorSave } from "../../components/ModalErrorSave/ModalErrorSave.jsx";
 import { useState } from "react";
-import { refreshThunk } from "../../redux/auth/operations.js";
+
 import { useBodyLock } from "../../hooks/useBodyLock/useBodyLock.js";
 
 export default function ButtonOfToBookmarks({ articleId, ownerId }) {
@@ -24,12 +24,12 @@ export default function ButtonOfToBookmarks({ articleId, ownerId }) {
   };
 
   const handleAddBookmarkClick = async () => {
-    await dispatch(refreshThunk());
+    
     dispatch(addToSaved(articleId));
   };
 
   const handleRemoveBookmarkClick = async () => {
-    await dispatch(refreshThunk());
+   
     dispatch(removeFromSaved(articleId));
   };
 
