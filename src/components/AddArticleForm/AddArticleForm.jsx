@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -48,6 +48,15 @@ useEffect(() => {
     navigate('/not-found', { replace: true });
   }
 }, [initialData, user, navigate]);
+
+const textareaRef = useRef(null);
+
+useEffect(() => {
+  if (textareaRef.current) {
+    textareaRef.current.style.height = 'auto';
+    textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+  }
+}, [initialData?.article]);
 
   const initialValues = {
     title: initialData?.title || '',
@@ -124,16 +133,17 @@ useEffect(() => {
               <Field name="article">
                 {({ field }) => (
                   <textarea
-                    {...field}
-                    id="article"
-                    placeholder="Enter article text"
-                    className={`${styles.textarea} ${errors.article && touched.article ? styles.textareaError : ''}`}
-                    rows={1}
-                    onInput={(e) => {
-                      e.target.style.height = 'auto';
-                      e.target.style.height = e.target.scrollHeight + 'px';
-                    }}
-                  />
+                  {...field}
+                  id="article"
+                  placeholder="Enter article text"
+                  ref={textareaRef}
+                  className={`${styles.textarea} ${errors.article && touched.article ? styles.textareaError : ''}`}
+                  rows={1}
+                  onInput={(e) => {
+                    e.target.style.height = 'auto';
+                    e.target.style.height = e.target.scrollHeight + 'px';
+                  }}
+                />
                 )}
               </Field>
               {errors.article && touched.article && (

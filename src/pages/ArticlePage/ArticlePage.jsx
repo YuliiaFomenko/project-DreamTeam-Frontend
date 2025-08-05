@@ -147,12 +147,12 @@ const handleDeleteClick = async () => {
         <div className={styles.contentWrap}>
           <div className={styles.text}>
             {typeof article.article === "string"
-              ? article.article
-                  .split("/n")
-                  .map((paragraph, idx) => (
-                    <p key={idx}>{paragraph.trim()}</p>
-                  ))
-              : null}
+            ? article.article
+            .split(/\n|\/n/) 
+            .map((paragraph, idx) => (
+            <p key={idx}>{paragraph.trim()}</p>
+          ))
+          : null}
           </div>
 
           <div>
