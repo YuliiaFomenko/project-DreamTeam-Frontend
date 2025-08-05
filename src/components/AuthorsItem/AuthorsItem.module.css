@@ -9,11 +9,11 @@
 }
 
 .name {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-family);
   font-weight: 700;
   font-size: 24px;
   text-align: center;
-  color: #070721;
+  color: var(--black);
 }
 .cardAuthor:hover,
 .cardAuthor:focus {

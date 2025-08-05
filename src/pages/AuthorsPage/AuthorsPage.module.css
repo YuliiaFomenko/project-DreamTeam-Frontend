@@ -1,5 +1,5 @@
 .authors {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-family);
   font-weight: 700;
   font-size: 40px;
   color: #000;
@@ -7,7 +7,7 @@
 }
 
 .page {
-  background: #f7fffb;
+  background-color: var(--white);
   margin: 0 auto;
   padding-top: 48px;
 }
