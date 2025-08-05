@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { toast } from "react-hot-toast";
 export const goitAPI = axios.create({
   baseURL: "https://project-dreamteam-backend.onrender.com",
   withCredentials: true,
@@ -13,7 +13,6 @@ function setAuthHeader(token) {
 const clearAuthHeader = () => {
   goitAPI.defaults.headers.common["Authorization"] = "";
 };
-
 export const registerThunk = createAsyncThunk(
   "auth/register",
   async (body, thunkAPI) => {
@@ -21,7 +20,13 @@ export const registerThunk = createAsyncThunk(
       const response = await goitAPI.post("/auth/register", body);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const message =
+        error.response?.data?.data?.errorMessage || // <- пріоритет
+        error.response?.data?.message || // резервний
+        "Помилка під час реєстрації"; // дефолт
+
+      toast.error(message);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -34,7 +39,10 @@ export const logInThunk = createAsyncThunk(
       setAuthHeader(response.data.data.accessToken);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const message =
+        error.response?.data?.message || "Невірний email або пароль";
+      toast.error(message);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
