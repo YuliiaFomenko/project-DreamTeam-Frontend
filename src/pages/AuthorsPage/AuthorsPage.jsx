@@ -11,10 +11,14 @@ import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn';
 import { BarLoader } from "react-spinners";
 
 const AuthorsPage = () => {
+    const override = {
+    display: "block",
+    margin: "40px auto",
+  };
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [allAuthors, setAuthors] = useState([]);
-  let loading = useSelector(selectUserIsLoading);
+  const isLoading = useSelector(selectUserIsLoading);
   const error = useSelector(selectUserError);
   const pagination = useSelector(selectTopAuthorsPagination);
   const authors = useSelector(selectTopAuthors);
@@ -49,21 +53,24 @@ const AuthorsPage = () => {
   return (
     <section className={clsx("container", css.page)} ref={listAuthors}>
       <h2 className={css.authors}>Authors</h2>
-      {loading && <div className={css.loading}><Loader/></div>}
+      {isLoading && !pagination.hasNextPage && <div className={css.loading}><Loader/></div>}
       {error && <div className={css.loading}><Loader /></div>}
       
       <AuthorsList
         listAuthors={allAuthors}
       />
-       {
-      (pagination.hasNextPage && !loading) &&
-      <LoadMoreBtn
-        handleLoadMore={handleLoadMore}
-      />
-      }
+
+      {pagination.hasNextPage &&
+
+      (isLoading ? (
+        <BarLoader cssOverride={override} color={"#374f42"} />
+      ) : (
+        <LoadMoreBtn handleLoadMore={handleLoadMore} />
+      ))}
+
+
     </section>
   )
 };
-// https://github.com/YuliiaFomenko/project-DreamTeam-Frontend/pull/9
-// https://github.com/YuliiaFomenko/project-DreamTeam-Frontend/pull/43
+
 export default AuthorsPage;
