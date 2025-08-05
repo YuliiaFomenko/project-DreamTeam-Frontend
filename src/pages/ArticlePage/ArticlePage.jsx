@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
 import {
+  deleteArticle,
   fetchArticleById,
   fetchRandom,
 } from "../../redux/articles/operations";
-import { addToSaved, fetchUserInfo } from "../../redux/user/operations";
+import { addToSaved, fetchUserInfo, removeFromSaved } from "../../redux/user/operations";
 import {
   selectArticleById,
   selectArticlesIsLoading,
@@ -22,6 +23,7 @@ import sprite from "../../assets/img/sprite.svg";
 import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 import { ModalErrorSave } from "../../components/ModalErrorSave/ModalErrorSave";
 import { useBodyLock } from "../../hooks/useBodyLock/useBodyLock";
+import toast from "react-hot-toast";
 
 const ArticlePage = () => {
   const dispatch = useDispatch();
@@ -50,7 +52,7 @@ const ArticlePage = () => {
 
   useEffect(() => {
     dispatch(fetchRandom());
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (ownerId) {
@@ -58,14 +60,21 @@ const ArticlePage = () => {
     }
   }, [dispatch, ownerId]);
 
+ const fetchedAuthorIds = useRef(new Set());
+
   useEffect(() => {
-    randomArticles.forEach((articleItem) => {
-      const itemOwnerId = articleItem?.ownerId;
-      if (itemOwnerId && !allAuthors?.[itemOwnerId]) {
-        dispatch(fetchUserInfo(itemOwnerId));
+    randomArticles.forEach(({ ownerId }) => {
+      if (
+        ownerId &&
+        !allAuthors?.[ownerId] &&
+        !fetchedAuthorIds.current.has(ownerId)
+      ) {
+
+        dispatch(fetchUserInfo(ownerId));
+        fetchedAuthorIds.current.add(ownerId);
       }
     });
-  }, [randomArticles, dispatch, allAuthors]);
+  }, [randomArticles, allAuthors, dispatch]);
 
   if (isArticleLoading) return <Loader />;
   if (!article) return <p className={styles.error}>Article not found</p>;
@@ -93,9 +102,34 @@ const ArticlePage = () => {
       });
   };
 
+  const handleUnsaveClick = () => {
+    if (!isLogged) {
+      setModalOpen(true);
+      return;
+    }
+
+    dispatch(removeFromSaved(article._id))
+      .unwrap()
+      .catch((err) => {
+        if (err?.includes("401")) {
+          setModalOpen(true);
+        }
+      });
+  };
+
   const handleEditClick = () => {
     navigate(`/create/${article._id}`);
   }
+
+const handleDeleteClick = async () => {
+  try {
+    await dispatch(deleteArticle(article._id)).unwrap();
+    toast.success('Article deleted successfully');
+    navigate(`/authors/${user.id}`);
+  } catch {
+    toast.error('Failed to delete the article');
+  }
+};
 
   return (
     <div className="container">
@@ -169,20 +203,27 @@ const ArticlePage = () => {
               </div>
             </div>
 
-            {!ownArticle && (
+           {!ownArticle && !bookmarked && (
   <button
     className={styles.buttonSave}
-    disabled={bookmarked}
     onClick={handleSaveClick}
-  >
-    {bookmarked ? "Saved" : "Save"}
+  >Save
     <svg className={styles.icon}>
       <use href={`${sprite}#icon-bookmark-alternative`} />
     </svg>
   </button>
 )}
-{ownArticle && (
+{!ownArticle && bookmarked && (
   <button
+    className={styles.buttonSave}
+    onClick={handleUnsaveClick}
+  >Unsave
+    <svg className={styles.icon}>
+      <use href={`${sprite}#icon-bookmark-alternative`} />
+    </svg>
+  </button>
+)}
+{ownArticle && (<div className={styles.buttons}> <button
     className={styles.buttonEdit}
     onClick={handleEditClick}
   >
@@ -191,6 +232,12 @@ const ArticlePage = () => {
       <use href={`${sprite}#icon-bookmark`} />
     </svg>
   </button>
+  <button
+    className={styles.buttonDelete}
+    onClick={handleDeleteClick}
+  >Delete
+  </button></div>
+ 
 )}
             
           </div>
