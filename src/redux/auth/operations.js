@@ -40,7 +40,10 @@ export const logInThunk = createAsyncThunk(
       return response.data;
     } catch (error) {
       const message =
-        error.response?.data?.message || "Невірний email або пароль";
+        error.response?.data?.data?.errorMessage ||
+        error.response?.data?.message ||
+        "Невірний email або пароль";
+
       toast.error(message);
       return thunkAPI.rejectWithValue(message);
     }
