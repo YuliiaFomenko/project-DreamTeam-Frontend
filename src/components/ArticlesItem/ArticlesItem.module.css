@@ -25,6 +25,7 @@
   justify-content: center;
   width: 100%;
   min-height: 171px;
+  overflow: hidden;
 }
 
 .article_author {
