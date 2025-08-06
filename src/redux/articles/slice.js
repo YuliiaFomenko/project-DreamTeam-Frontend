@@ -79,21 +79,21 @@ const slice = createSlice({
       .addCase(updateArticle.fulfilled, (state, action) => {
         const updatedArticle = action.payload;
         const index = state.articles.findIndex(
-          (article) => article.id === updatedArticle.id
+          (article) => article._id === updatedArticle.id
         );
         if (index !== -1) {
           state.articles[index] = updatedArticle;
         }
-        if (state.selectedArticle?.id === updatedArticle.id) {
+        if (state.selectedArticle?._id === updatedArticle.id) {
           state.selectedArticle = updatedArticle;
         }
         state.isLoading = false;
       })
       .addCase(deleteArticle.fulfilled, (state, action) => {
         state.articles = state.articles.filter(
-          (article) => article.id !== action.payload
+          (article) => {article._id !== action.payload}
         );
-        if (state.selectedArticle?.id === action.payload) {
+        if (state.selectedArticle?._id === action.payload) {
           state.selectedArticle = null;
         }
         state.isLoading = false;

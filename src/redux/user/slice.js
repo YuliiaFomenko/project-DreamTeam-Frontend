@@ -93,10 +93,12 @@ const slice = createSlice({
         };
         state.isLoading = false;
       })
-      .addCase(addToSaved.fulfilled, (state) => {
+      .addCase(addToSaved.fulfilled, (state, action) => {
+        state.savedArticles.push(action.payload.article);
         state.isLoading = false;
       })
-      .addCase(removeFromSaved.fulfilled, (state) => {
+      .addCase(removeFromSaved.fulfilled, (state, action) => {
+        state.savedArticles = state.savedArticles.filter((article) => article._id !== action.payload.articleId);
         state.isLoading = false;
       })
       .addCase(createArticle.fulfilled, (state, action) => {
@@ -106,7 +108,7 @@ const slice = createSlice({
       .addCase(updateArticle.fulfilled, (state, action) => {
         const updatedArticle = action.payload;
         const index = state.ownArticles.findIndex(
-          (article) => article.id === updatedArticle.id
+          (article) => article._id === updatedArticle.id
         );
         if (index !== -1) {
           state.ownArticles[index] = updatedArticle;
@@ -115,7 +117,8 @@ const slice = createSlice({
       })
       .addCase(deleteArticle.fulfilled, (state, action) => {
         state.ownArticles = state.ownArticles.filter(
-          (article) => article.id !== action.payload
+          (article) =>
+            article._id !== action.payload
         );
         state.isLoading = false;
       })

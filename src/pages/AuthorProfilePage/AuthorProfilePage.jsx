@@ -90,9 +90,11 @@ const AuthorProfilePage = () => {
 
     if (!isDuplicating) {
       const updated = page === 1 ? incoming : [...currentAll, ...incoming];
+      console.log("Updated", updated, 'Incoming', incoming);
+      
       activeTab === "own" ? setAllOwnArticles(updated) : setAllSavedArticles(updated);
     }
-  }, [ownArticles, savedArticles, page, activeTab]);
+  }, [ownArticles, savedArticles, page, activeTab, allOwnArticles, allSavedArticles]);
 
   const handleTabClick = async (tab) => {
     setActiveTab(tab);
@@ -119,6 +121,8 @@ const AuthorProfilePage = () => {
   };
 
   const articles = activeTab === "saved" && isCurrentUser ? allSavedArticles : allOwnArticles;
+  console.log(activeTab);
+  
 
   const hasNextPage = activeTab === "own" ? ownArticlesPagination?.hasNextPage : savedArticlesPagination?.hasNextPage;
 

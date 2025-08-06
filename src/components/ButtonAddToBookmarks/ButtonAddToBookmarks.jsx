@@ -25,12 +25,12 @@ export default function ButtonOfToBookmarks({ articleId, ownerId }) {
 
   const handleAddBookmarkClick = async () => {
     
-    dispatch(addToSaved(articleId));
+    await dispatch(addToSaved(articleId)).unwrap();
   };
 
   const handleRemoveBookmarkClick = async () => {
    
-    dispatch(removeFromSaved(articleId));
+    await dispatch(removeFromSaved(articleId)).unwrap();
   };
 
   const handleOpenModalClick = () => {

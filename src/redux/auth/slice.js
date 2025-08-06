@@ -64,10 +64,10 @@ const slice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(addToSaved.fulfilled, (state, action) => {
-        state.user.savedArticlesIDs = action.payload.data.savedArticles;
+        state.user.savedArticlesIDs = action.payload.data.data.savedArticles;
       })
       .addCase(removeFromSaved.fulfilled, (state, action) => {
-        state.user.savedArticlesIDs = action.payload.data.savedArticles;
+        state.user.savedArticlesIDs = action.payload.data.data.savedArticles;
       })
       .addCase(logInThunk.pending, (state) => {
         state.isRefreshing = true;
