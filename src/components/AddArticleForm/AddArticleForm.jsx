@@ -26,15 +26,13 @@ const validationSchema = Yup.object({
     .required('Article is required'),
 
   img: Yup.mixed()
-    .test('fileOrUrl', 'Image is required', value => {
-      return value instanceof File || typeof value === 'string';
-    })
-    .test('fileSize', 'Image must be less than 1MB', value => {
-      if (value instanceof File) {
-        return value.size <= MAX_FILE_SIZE;
-      }
-      return true;
-    }),
+  .nullable()
+  .required('Image is required')
+  .test('fileSize', 'Image must be less than 1MB', value => {
+    if (typeof value === 'string') return true; 
+    if (value instanceof File) return value.size <= MAX_FILE_SIZE;
+    return true;
+  }),
 });
 
 const AddArticleForm = ({ initialData = null }) => {
@@ -111,7 +109,7 @@ useEffect(() => {
         validateOnChange={true}
         validateOnBlur={true}
       >
-        {({ setFieldValue, isSubmitting, values, touched, errors, isValid }) => (
+        {({ setFieldValue, setFieldTouched, isSubmitting, values, touched, errors, isValid }) => (
           <Form className={styles.form}>
 
             <div className={styles.inputTitle}>
@@ -161,7 +159,10 @@ useEffect(() => {
                   className={styles.hiddenInput}
                   onChange={(event) => {
                     const file = event.currentTarget.files[0];
+                    if (file) {
+                    setFieldTouched('img', true, false);
                     setFieldValue('img', file);
+                  }
                   }}
                 />
                 <div className={styles.imagePreview}>
