@@ -8,7 +8,7 @@ const AuthorsItem = ({ author }) => {
     <div className={css.item}>
       <Link to={`/authors/${author.card._id}`}>
       <div className={css.cardAuthor} >
-        <img src={author.card.avatarUrl} alt={author.card.name} className={css.avatardAuthor} />
+        <img src={author.card.avatarUrl} alt={author.card.name} className={css.avatarAuthor} />
         <p className={css.name}> {author.card.name.split(' ')[0]} </p>
       </div>
       </Link>

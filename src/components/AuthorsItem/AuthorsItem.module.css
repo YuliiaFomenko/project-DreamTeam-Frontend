@@ -2,7 +2,7 @@
   transition: transform 0.4s;
 }
 
-.avatardAuthor {
+.avatarAuthor {
   border-radius: 50%;
   aspect-ratio: 1/1;
   object-fit: cover;
