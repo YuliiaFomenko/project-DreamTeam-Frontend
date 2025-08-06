@@ -44,7 +44,7 @@ const AuthorsPage = () => {
   }, [authors, page, allAuthors]);
 
   const listAuthors = useRef(null);
-    useEffect(() => {
+      useEffect(() => {
       if (listAuthors.current && allAuthors.length > 20) {
         listAuthors.current.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
       }
@@ -53,24 +53,18 @@ const AuthorsPage = () => {
   return (
     <section className={clsx("container", css.page)} ref={listAuthors}>
       <h2 className={css.authors}>Authors</h2>
-      {isLoading && !pagination.hasNextPage && <div className={css.loading}><Loader/></div>}
-      {error && <div className={css.loading}><Loader /></div>}
-      
-      <AuthorsList
-        listAuthors={allAuthors}
-      />
 
-      {pagination.hasNextPage &&
-
-      (isLoading ? (
+      {error && isLoading ?
+        (<div className={css.loading}><Loader /></div>) :
+        (<AuthorsList listAuthors={allAuthors} />
+        )}
+   
+      {pagination.hasNextPage && (isLoading ? (
         <BarLoader cssOverride={override} color={"#374f42"} />
       ) : (
         <LoadMoreBtn handleLoadMore={handleLoadMore} />
       ))}
-
-
     </section>
   )
 };
-
 export default AuthorsPage;
