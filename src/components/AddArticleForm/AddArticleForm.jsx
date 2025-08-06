@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -26,15 +26,13 @@ const validationSchema = Yup.object({
     .required('Article is required'),
 
   img: Yup.mixed()
-    .test('fileOrUrl', 'Image is required', value => {
-      return value instanceof File || typeof value === 'string';
-    })
-    .test('fileSize', 'Image must be less than 1MB', value => {
-      if (value instanceof File) {
-        return value.size <= MAX_FILE_SIZE;
-      }
-      return true;
-    }),
+  .nullable()
+  .required('Image is required')
+  .test('fileSize', 'Image must be less than 1MB', value => {
+    if (typeof value === 'string') return true; 
+    if (value instanceof File) return value.size <= MAX_FILE_SIZE;
+    return true;
+  }),
 });
 
 const AddArticleForm = ({ initialData = null }) => {
@@ -48,6 +46,15 @@ useEffect(() => {
     navigate('/not-found', { replace: true });
   }
 }, [initialData, user, navigate]);
+
+const textareaRef = useRef(null);
+
+useEffect(() => {
+  if (textareaRef.current) {
+    textareaRef.current.style.height = 'auto';
+    textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+  }
+}, [initialData?.article]);
 
   const initialValues = {
     title: initialData?.title || '',
@@ -102,7 +109,7 @@ useEffect(() => {
         validateOnChange={true}
         validateOnBlur={true}
       >
-        {({ setFieldValue, isSubmitting, values, touched, errors, isValid }) => (
+        {({ setFieldValue, setFieldTouched, isSubmitting, values, touched, errors, isValid }) => (
           <Form className={styles.form}>
 
             <div className={styles.inputTitle}>
@@ -124,16 +131,17 @@ useEffect(() => {
               <Field name="article">
                 {({ field }) => (
                   <textarea
-                    {...field}
-                    id="article"
-                    placeholder="Enter article text"
-                    className={`${styles.textarea} ${errors.article && touched.article ? styles.textareaError : ''}`}
-                    rows={1}
-                    onInput={(e) => {
-                      e.target.style.height = 'auto';
-                      e.target.style.height = e.target.scrollHeight + 'px';
-                    }}
-                  />
+                  {...field}
+                  id="article"
+                  placeholder="Enter article text"
+                  ref={textareaRef}
+                  className={`${styles.textarea} ${errors.article && touched.article ? styles.textareaError : ''}`}
+                  rows={1}
+                  onInput={(e) => {
+                    e.target.style.height = 'auto';
+                    e.target.style.height = e.target.scrollHeight + 'px';
+                  }}
+                />
                 )}
               </Field>
               {errors.article && touched.article && (
@@ -151,7 +159,10 @@ useEffect(() => {
                   className={styles.hiddenInput}
                   onChange={(event) => {
                     const file = event.currentTarget.files[0];
+                    if (file) {
+                    setFieldTouched('img', true, false);
                     setFieldValue('img', file);
+                  }
                   }}
                 />
                 <div className={styles.imagePreview}>

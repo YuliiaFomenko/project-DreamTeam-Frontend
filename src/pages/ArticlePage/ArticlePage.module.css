@@ -23,6 +23,7 @@
 
 .text {
   margin-bottom: 24px;
+  overflow: hidden;
 }
 
 .text p {
