@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
 
 import { selectUser } from "../../redux/auth/selectors";
-
 import {
   selectOwnArticles,
   selectOwnArticlesPagination,
@@ -13,7 +12,11 @@ import {
   selectUserInfo,
 } from "../../redux/user/selectors";
 
-import { fetchOwnArticles, fetchSavedArticles } from "../../redux/user/operations";
+import {
+  fetchOwnArticles,
+  fetchSavedArticles,
+  fetchUserInfo,
+} from "../../redux/user/operations";
 
 import ArticlesList from "../../components/ArticlesList/ArticlesList";
 import LoadMoreBtn from "../../components/LoadMoreBtn/LoadMoreBtn";
@@ -35,9 +38,15 @@ const AuthorProfilePage = () => {
   const savedArticles = useSelector(selectSavedArticles);
   const savedArticlesPagination = useSelector(selectSavedArticlesPagination);
 
-  const defaultAvatar = "https://res.cloudinary.com/dbau4robp/image/upload/v1752140574/default-avatar_rfwfl3.png";
+  const defaultAvatar =
+    "https://res.cloudinary.com/dbau4robp/image/upload/v1752140574/default-avatar_rfwfl3.png";
 
-  const [activeTab, setActiveTab] = useState("own");
+  const initialTab =
+    isCurrentUser && sessionStorage.getItem("activeTab")
+      ? sessionStorage.getItem("activeTab")
+      : "own";
+
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [page, setPage] = useState(1);
   const [allOwnArticles, setAllOwnArticles] = useState([]);
   const [allSavedArticles, setAllSavedArticles] = useState([]);
@@ -45,29 +54,43 @@ const AuthorProfilePage = () => {
 
   const lastFetch = useRef({ tab: "", page: 0 });
 
-  // Перше завантаження — own articles
+  useEffect(() => {
+    const loadInit = async () => {
+      try {
+        await dispatch(fetchUserInfo(authorId));
+        await dispatch(fetchOwnArticles({ userId: authorId, page: 1 }));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    loadInit();
+  }, [dispatch, authorId]);
+
   useEffect(() => {
     setAllOwnArticles([]);
     setAllSavedArticles([]);
     setPage(1);
-    setActiveTab("own");
 
     const loadInitial = async () => {
       setIsLoading(true);
       try {
-        await dispatch(fetchOwnArticles({ userId: authorId, page: 1 }));
+        if (activeTab === "saved" && isCurrentUser) {
+          await dispatch(fetchSavedArticles(1));
+        } else {
+          await dispatch(fetchOwnArticles({ userId: authorId, page: 1 }));
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
     loadInitial();
-  }, [dispatch, authorId]);
+  }, [dispatch, authorId, activeTab, isCurrentUser]);
 
-  // Завантаження при зміні page
   useEffect(() => {
     if (page === 1) return;
-    if (lastFetch.current.tab === activeTab && lastFetch.current.page === page) return;
+    if (lastFetch.current.tab === activeTab && lastFetch.current.page === page)
+      return;
 
     lastFetch.current = { tab: activeTab, page };
 
@@ -78,28 +101,35 @@ const AuthorProfilePage = () => {
     }
   }, [page, activeTab, dispatch, authorId]);
 
-  // Уникнення дублікатів
   useEffect(() => {
     const incoming = activeTab === "own" ? ownArticles : savedArticles;
-    const currentAll = activeTab === "own" ? allOwnArticles : allSavedArticles;
+    const setAll =
+      activeTab === "own" ? setAllOwnArticles : setAllSavedArticles;
 
-    if (!incoming || incoming.length === 0) return;
+    if (!incoming) return;
 
-    const ids = new Set(currentAll.map((item) => item._id));
-    const isDuplicating = incoming.some((item) => ids.has(item._id));
+    setAll((prev) => {
+      if (page === 1) {
+        return Array.from(
+          new Map(incoming.map((item) => [item._id, item])).values()
+        );
+      }
 
-    if (!isDuplicating) {
-      const updated = page === 1 ? incoming : [...currentAll, ...incoming];
-      
-      activeTab === "own" ? setAllOwnArticles(updated) : setAllSavedArticles(updated);
-    }
-  }, [ownArticles, savedArticles, page, activeTab, allOwnArticles, allSavedArticles]);
+      const ids = new Set(prev.map((item) => item._id));
+      const filtered = incoming.filter((item) => !ids.has(item._id));
+
+      return filtered.length > 0 ? [...prev, ...filtered] : prev;
+    });
+  }, [ownArticles, savedArticles, page, activeTab]);
 
   const handleTabClick = async (tab) => {
     setActiveTab(tab);
+    sessionStorage.setItem("activeTab", tab);
     setPage(1);
 
-    const needsFetch = (tab === "own" && ownArticles.length === 0) || (tab === "saved" && savedArticles.length === 0);
+    const needsFetch =
+      (tab === "own" && ownArticles.length === 0) ||
+      (tab === "saved" && savedArticles.length === 0);
 
     if (needsFetch) {
       setIsLoading(true);
@@ -115,14 +145,26 @@ const AuthorProfilePage = () => {
     }
   };
 
+  const articles =
+    activeTab === "saved" && isCurrentUser ? allSavedArticles : allOwnArticles;
+
+  const hasNextPage =
+    activeTab === "own"
+      ? ownArticlesPagination?.hasNextPage
+      : savedArticlesPagination?.hasNextPage;
+
   const handleLoadMore = () => {
-    setPage((prev) => prev + 1);
+    const nextPage =
+      activeTab === "saved"
+        ? savedArticlesPagination.page + 1
+        : ownArticlesPagination.page + 1;
+
+    if (activeTab === "saved") {
+      dispatch(fetchSavedArticles(nextPage));
+    } else {
+      dispatch(fetchOwnArticles({ userId: authorId, page: nextPage }));
+    }
   };
-
-  const articles = activeTab === "saved" && isCurrentUser ? allSavedArticles : allOwnArticles;
-  
-
-  const hasNextPage = activeTab === "own" ? ownArticlesPagination?.hasNextPage : savedArticlesPagination?.hasNextPage;
 
   return (
     <>
@@ -132,16 +174,27 @@ const AuthorProfilePage = () => {
           {isCurrentUser && <h1 className={s.title}>My Profile</h1>}
 
           <div className={s.header}>
-            <img className={s.img} src={author?.avatarUrl || defaultAvatar} alt="avatar" />
+            <img
+              className={s.img}
+              src={author?.avatarUrl || defaultAvatar}
+              alt="avatar"
+            />
             <div className="wrapper">
               <h2 className={s.name}>{author?.name}</h2>
-              <p className={s.total}>{ownArticlesPagination.totalItems} articles</p>
+              <p className={s.total}>
+                {ownArticlesPagination.totalItems
+                  ? `${ownArticlesPagination.totalItems} articles`
+                  : `0 articles`}
+              </p>
             </div>
           </div>
 
           {isCurrentUser && (
             <div className={s.tabs}>
-              <button className={clsx(s.button, activeTab === "own" && s.active)} onClick={() => handleTabClick("own")}>
+              <button
+                className={clsx(s.button, activeTab === "own" && s.active)}
+                onClick={() => handleTabClick("own")}
+              >
                 My Articles
               </button>
               <button
