@@ -25,17 +25,20 @@ const ArticlesPage = () => {
   const [page, setPage] = useState(1);
   const [hits, setHits] = useState([]);
   // This prevents dispatching same filter/page combos multiple times
-  const lastFetch = useRef({ filter: "", page: 0 });
 
   const articles = useSelector(selectAllArticles);
   const articlesPagesInfo = useSelector(selectArticlesPagination);
   const popular = useSelector(selectPopularArticles);
   const popularPagesInfo = useSelector(selectPopularArticlesPagination);
   const isLoading = useSelector(selectArticlesIsLoading);
+  const [isLoad, setIsLoad] = useState(true);
 
-  const handleFilterChange = (newFilter) => {
+  useEffect(() => {
     setHits([]);
     setPage(1);
+  }, [filter]);
+
+  const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
   };
   const handleLoadMore = () => {
@@ -43,32 +46,32 @@ const ArticlesPage = () => {
   };
 
   useEffect(() => {
-    if (lastFetch.current.filter === filter && lastFetch.current.page === page)
-      return;
-    lastFetch.current = { filter, page };
     const action = filter === "All" ? fetchArticles(page) : fetchPopular(page);
-    dispatch(action);
+    const fetch = async () => {
+      await dispatch(action).unwrap();
+    };
+    fetch();
+    setIsLoad(false);
   }, [dispatch, page, filter]);
 
   useEffect(() => {
     const incoming = filter === "All" ? articles : popular;
-    if (!incoming || incoming.length === 0) return;
+    if (!incoming) return;
 
-    const hitsIDs = new Set(hits.map((item) => item._id));
-    const isDuplicating = incoming.some((item) => hitsIDs.has(item._id));
+    setHits((prev) => {
+      if (page === 1) return incoming;
 
-    // If it's the first page OR all articles are new → replace/append
-    if (!isDuplicating) {
-      setHits((prev) => {
-        return page === 1 ? incoming : [...prev, ...incoming];
-      });
-    }
-  }, [articles, popular, filter]);
+      // фільтруємо дублі
+      const prevIds = new Set(prev.map((item) => item._id));
+      const newItems = incoming.filter((item) => !prevIds.has(item._id));
+      return [...prev, ...newItems];
+    });
+  }, [articles, popular, page, filter]);
 
   const hasMorePages =
     filter === "All"
-      ? articlesPagesInfo.hasNextPage
-      : popularPagesInfo.hasNextPage;
+      ? articlesPagesInfo?.hasNextPage
+      : popularPagesInfo?.hasNextPage;
   return (
     <div className={clsx("container", s.articlesContainer)}>
       <h1 className={s.articles}>Articles</h1>
@@ -81,7 +84,7 @@ const ArticlesPage = () => {
         </p>
         <CustomSelect value={filter} onChange={handleFilterChange} />
       </div>
-      <ArticlesList filteredArticles={hits} />
+      {!isLoad && <ArticlesList filteredArticles={hits} />}
       {isLoading ? (
         <BarLoader cssOverride={override} color={"#374f42"} />
       ) : (

@@ -10,6 +10,7 @@
   fill: var(--light-green);
   stroke: var(--green-darker);
   background-color: var(--light-green);
+  position: relative;
 }
 .bookmarked {
   margin: 0 auto;
@@ -23,6 +24,7 @@
   fill: var(--green);
   stroke: var(--white);
   background-color: var(--green);
+  position: relative;
 }
 .edit {
   margin: 0 auto;

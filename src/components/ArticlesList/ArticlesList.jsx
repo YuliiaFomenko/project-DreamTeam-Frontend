@@ -6,11 +6,12 @@ const ArticlesList = ({ filteredArticles }) => {
   return (
     <div>
       <ul className={s.articlesList}>
-        {filteredArticles.map((item) => (
-          <li key={item._id}>
-            <ArticlesItem {...item} />
-          </li>
-        ))}
+        {filteredArticles.length > 0 &&
+          filteredArticles.map((item, index) => (
+            <li key={item._id || index}>
+              <ArticlesItem {...item} />
+            </li>
+          ))}
       </ul>
     </div>
   );
