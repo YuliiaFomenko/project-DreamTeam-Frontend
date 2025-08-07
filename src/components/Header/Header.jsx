@@ -25,35 +25,52 @@ const Header = () => {
   }, [location]);
   useBodyLock(isDrawerOpen || isSignOutModalOpen);
 
-  const handleLogOut = async() => {
+  const handleLogOut = async () => {
     await dispatch(logOutThunk()).unwrap();
-    navigate('/');
-  }
+    setDrawerOpen(false);
+    navigate("/");
+  };
 
   return (
     <header className={s.header}>
       <div className={clsx("container", s.headerContainer)}>
         <Link className={s.logo} to="/">
-          <svg width="165" height="46" className={s.logoImg} stroke="var(--green)">
+          <svg
+            width="165"
+            height="46"
+            className={s.logoImg}
+            stroke="var(--green)"
+          >
             <use href={`${sprite}#icon-logo`} />
           </svg>
         </Link>
         <div className={s.headerNavigationWrapper}>
           <Navigation />
           {isLogged ? (
-            <UserMenu className="header" logoutClickHandle={() => setSignOutModalOpen(true)} />
+            <UserMenu
+              className="header"
+              logoutClickHandle={() => setSignOutModalOpen(true)}
+            />
           ) : (
             <AuthButtons className="header" />
           )}
           {!isDrawerOpen && (
-            <button className={s.burger} onClick={() => setDrawerOpen(true)} aria-label="Burger Menu">
+            <button
+              className={s.burger}
+              onClick={() => setDrawerOpen(true)}
+              aria-label="Burger Menu"
+            >
               <svg width="32" height="32" stroke="var(--green-darker)">
                 <use href={`${sprite}#icon-burger-regular`} />
               </svg>
             </button>
           )}
           {isDrawerOpen && (
-            <button className={s.closeButton} onClick={() => setDrawerOpen(false)} aria-label="Close Menu">
+            <button
+              className={s.closeButton}
+              onClick={() => setDrawerOpen(false)}
+              aria-label="Close Menu"
+            >
               <svg width="32" height="30" stroke="var(--black)">
                 <use href={`${sprite}#icon-close`} />
               </svg>
