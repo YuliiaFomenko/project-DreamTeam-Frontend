@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import clsx from "clsx";
 
 import { selectUser } from "../../redux/auth/selectors";
@@ -67,18 +67,20 @@ const AuthorProfilePage = () => {
   }, [dispatch, authorId]);
 
   useEffect(() => {
-    setAllOwnArticles([]);
-    setAllSavedArticles([]);
-    setPage(1);
-
     const loadInitial = async () => {
       setIsLoading(true);
+      setAllOwnArticles([]);
+      setAllSavedArticles([]);
+      setPage(1);
+
       try {
         if (activeTab === "saved" && isCurrentUser) {
           await dispatch(fetchSavedArticles(1));
         } else {
           await dispatch(fetchOwnArticles({ userId: authorId, page: 1 }));
         }
+      } catch (err) {
+        console.error(err);
       } finally {
         setIsLoading(false);
       }
@@ -89,6 +91,7 @@ const AuthorProfilePage = () => {
 
   useEffect(() => {
     if (page === 1) return;
+
     if (lastFetch.current.tab === activeTab && lastFetch.current.page === page)
       return;
 

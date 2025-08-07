@@ -125,19 +125,6 @@ const slice = createSlice({
         );
         state.isLoading = false;
       })
-      .addCase(fetchOwnArticles.rejected, (state, action) => {
-        state.ownArticles = [];
-        state.ownArticlesPagination = {
-          page: 1,
-          perPage: 12,
-          totalItems: 0,
-          totalPages: 1,
-          hasPreviousPage: false,
-          hasNextPage: false,
-        };
-        state.isLoading = false;
-        state.error = action.payload;
-      })
       .addMatcher(
         isAnyOf(
           fetchUserInfo.pending,
@@ -160,7 +147,7 @@ const slice = createSlice({
           fetchUserInfo.rejected,
           fetchTopAuthors.rejected,
           fetchSavedArticles.rejected,
-          // fetchOwnArticles.rejected,
+          fetchOwnArticles.rejected,
           addToSaved.rejected,
           removeFromSaved.rejected,
           createArticle.rejected,

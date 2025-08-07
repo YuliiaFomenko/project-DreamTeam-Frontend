@@ -6,12 +6,21 @@ import { removeFromSaved, addToSaved } from "../../redux/user/operations.js";
 import { useNavigate } from "react-router-dom";
 import { ModalErrorSave } from "../../components/ModalErrorSave/ModalErrorSave.jsx";
 import { useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 import { useBodyLock } from "../../hooks/useBodyLock/useBodyLock.js";
+import Loader from "../Loader/Loader.jsx";
+
+const override = {
+  position: "absolute",
+  width: "80%",
+  height: "80%",
+};
 
 export default function ButtonOfToBookmarks({ articleId, ownerId }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -24,13 +33,15 @@ export default function ButtonOfToBookmarks({ articleId, ownerId }) {
   };
 
   const handleAddBookmarkClick = async () => {
-    
+    setIsLoading(true);
     await dispatch(addToSaved(articleId)).unwrap();
+    setIsLoading(false);
   };
 
   const handleRemoveBookmarkClick = async () => {
-   
+    setIsLoading(true);
     await dispatch(removeFromSaved(articleId)).unwrap();
+    setIsLoading(false);
   };
 
   const handleOpenModalClick = () => {
@@ -49,16 +60,22 @@ export default function ButtonOfToBookmarks({ articleId, ownerId }) {
       )}
       {isLoggedIn && bookmarked && !ownArticle && (
         <button className={s.bookmarked} onClick={handleRemoveBookmarkClick}>
-          <svg width="24" height="24">
-            <use href={`${sprite}#icon-bookmark-alternative`} />
-          </svg>
+          {!isLoading && (
+            <svg width="24" height="24">
+              <use href={`${sprite}#icon-bookmark-alternative`} />
+            </svg>
+          )}
+          {isLoading && <ClipLoader cssOverride={override} color="#d1e0d8" />}
         </button>
       )}
       {isLoggedIn && !bookmarked && !ownArticle && (
         <button className={s.bookmark} onClick={handleAddBookmarkClick}>
-          <svg width="24" height="24">
-            <use href={`${sprite}#icon-bookmark-alternative`} />
-          </svg>
+          {!isLoading && (
+            <svg width="24" height="24">
+              <use href={`${sprite}#icon-bookmark-alternative`} />
+            </svg>
+          )}
+          {isLoading && <ClipLoader cssOverride={override} color="#374f42" />}
         </button>
       )}
       {isLoggedIn && ownArticle && (

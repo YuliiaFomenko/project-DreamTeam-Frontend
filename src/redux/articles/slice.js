@@ -73,7 +73,7 @@ const slice = createSlice({
         state.isLoading = false;
       })
       .addCase(createArticle.fulfilled, (state, action) => {
-        state.articles.unshift(action.payload);
+        state.articles.push(action.payload);
         state.isLoading = false;
       })
       .addCase(updateArticle.fulfilled, (state, action) => {
@@ -90,9 +90,9 @@ const slice = createSlice({
         state.isLoading = false;
       })
       .addCase(deleteArticle.fulfilled, (state, action) => {
-        state.articles = state.articles.filter(
-          (article) => {article._id !== action.payload}
-        );
+        state.articles = state.articles.filter((article) => {
+          article._id !== action.payload;
+        });
         if (state.selectedArticle?._id === action.payload) {
           state.selectedArticle = null;
         }
