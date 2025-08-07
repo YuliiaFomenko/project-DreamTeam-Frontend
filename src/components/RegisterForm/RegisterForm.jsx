@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { registerThunk, logInThunk } from "../../redux/auth/operations";
 import { setPendingRegistration } from "../../redux/auth/slice";
 import {Link} from "react-router-dom"
 import { Formik, Form, Field, ErrorMessage } from "formik"; 
@@ -38,7 +37,6 @@ const handleSubmit = async (values, { resetForm }) => {
   dispatch(setPendingRegistration(registrationData));
   resetForm();
   navigate('/photo');
-  console.log('Registration values:', JSON.stringify(values, null, 2));
 };
 
 
