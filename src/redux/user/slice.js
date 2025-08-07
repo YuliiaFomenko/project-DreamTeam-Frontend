@@ -70,15 +70,17 @@ const slice = createSlice({
         state.isLoading = false;
       })
       .addCase(fetchSavedArticles.fulfilled, (state, action) => {
-        state.savedArticles = action.payload.data.data;
-        state.savedArticlesPagination = {
-          page: action.payload.data.page,
-          perPage: action.payload.data.perPage,
-          totalItems: action.payload.data.totalItems,
-          totalPages: action.payload.data.totalPages,
-          hasPreviousPage: action.payload.data.hasPreviousPage,
-          hasNextPage: action.payload.data.hasNextPage,
-        };
+        const newArticles = action.payload.data.data;
+        if (action.payload.data.page === 1) {
+          state.savedArticles = newArticles;
+        } else {
+          const ids = new Set(state.savedArticles.map((a) => a._id));
+          state.savedArticles = [
+            ...state.savedArticles,
+            ...newArticles.filter((a) => !ids.has(a._id)),
+          ];
+        }
+        state.savedArticlesPagination = action.payload.data;
         state.isLoading = false;
       })
       .addCase(fetchOwnArticles.fulfilled, (state, action) => {
@@ -98,7 +100,9 @@ const slice = createSlice({
         state.isLoading = false;
       })
       .addCase(removeFromSaved.fulfilled, (state, action) => {
-        state.savedArticles = state.savedArticles.filter((article) => article._id !== action.payload.articleId);
+        state.savedArticles = state.savedArticles.filter(
+          (article) => article._id !== action.payload.articleId
+        );
         state.isLoading = false;
       })
       .addCase(createArticle.fulfilled, (state, action) => {
@@ -117,10 +121,22 @@ const slice = createSlice({
       })
       .addCase(deleteArticle.fulfilled, (state, action) => {
         state.ownArticles = state.ownArticles.filter(
-          (article) =>
-            article._id !== action.payload
+          (article) => article._id !== action.payload
         );
         state.isLoading = false;
+      })
+      .addCase(fetchOwnArticles.rejected, (state, action) => {
+        state.ownArticles = [];
+        state.ownArticlesPagination = {
+          page: 1,
+          perPage: 12,
+          totalItems: 0,
+          totalPages: 1,
+          hasPreviousPage: false,
+          hasNextPage: false,
+        };
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addMatcher(
         isAnyOf(
@@ -144,7 +160,7 @@ const slice = createSlice({
           fetchUserInfo.rejected,
           fetchTopAuthors.rejected,
           fetchSavedArticles.rejected,
-          fetchOwnArticles.rejected,
+          // fetchOwnArticles.rejected,
           addToSaved.rejected,
           removeFromSaved.rejected,
           createArticle.rejected,
