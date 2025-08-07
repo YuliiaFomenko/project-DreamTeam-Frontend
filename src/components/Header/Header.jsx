@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import s from "./Header.module.css";
 import Navigation from "../Navigation/Navigation";
 import clsx from "clsx";
@@ -17,6 +17,7 @@ const Header = () => {
   const [isSignOutModalOpen, setSignOutModalOpen] = useState(false);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
   const isLogged = useSelector(selectIsLoggedIn);
   useEffect(() => {
@@ -24,46 +25,35 @@ const Header = () => {
   }, [location]);
   useBodyLock(isDrawerOpen || isSignOutModalOpen);
 
+  const handleLogOut = async() => {
+    await dispatch(logOutThunk()).unwrap();
+    navigate('/');
+  }
+
   return (
     <header className={s.header}>
       <div className={clsx("container", s.headerContainer)}>
         <Link className={s.logo} to="/">
-          <svg
-            width="165"
-            height="46"
-            className={s.logoImg}
-            stroke="var(--green)"
-          >
+          <svg width="165" height="46" className={s.logoImg} stroke="var(--green)">
             <use href={`${sprite}#icon-logo`} />
           </svg>
         </Link>
         <div className={s.headerNavigationWrapper}>
           <Navigation />
           {isLogged ? (
-            <UserMenu
-              className="header"
-              logoutClickHandle={() => setSignOutModalOpen(true)}
-            />
+            <UserMenu className="header" logoutClickHandle={() => setSignOutModalOpen(true)} />
           ) : (
             <AuthButtons className="header" />
           )}
           {!isDrawerOpen && (
-            <button
-              className={s.burger}
-              onClick={() => setDrawerOpen(true)}
-              aria-label="Burger Menu"
-            >
+            <button className={s.burger} onClick={() => setDrawerOpen(true)} aria-label="Burger Menu">
               <svg width="32" height="32" stroke="var(--green-darker)">
                 <use href={`${sprite}#icon-burger-regular`} />
               </svg>
             </button>
           )}
           {isDrawerOpen && (
-            <button
-              className={s.closeButton}
-              onClick={() => setDrawerOpen(false)}
-              aria-label="Close Menu"
-            >
+            <button className={s.closeButton} onClick={() => setDrawerOpen(false)} aria-label="Close Menu">
               <svg width="32" height="30" stroke="var(--black)">
                 <use href={`${sprite}#icon-close`} />
               </svg>
@@ -79,7 +69,7 @@ const Header = () => {
 
       <ModalSignOutConfirm
         onClose={() => setSignOutModalOpen(false)}
-        onLogout={() => dispatch(logOutThunk())}
+        onLogout={handleLogOut}
         isOpen={isSignOutModalOpen}
         closeDrawer={() => setSignOutModalOpen(false)}
       />

@@ -37,7 +37,6 @@ export const RegisterForm = () => {
     dispatch(setPendingRegistration(registrationData));
     resetForm();
     navigate("/photo");
-    console.log("Registration values:", JSON.stringify(values, null, 2));
   };
 
   return (
